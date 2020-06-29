@@ -13,20 +13,20 @@ public class DifficultySlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        difficultySlider.maxValue = OptionsHolder.options.recordDifficulty;
-        difficultySlider.value = OptionsHolder.options.difficulty;
+        difficultySlider.maxValue = OptionsHolder.instance.save.recordDifficulty;
+        difficultySlider.value = OptionsHolder.instance.save.difficulty;
     }
 
     // Update is called once per frame
     void Update()
     {
-        sliderBackground.color = Color.Lerp(Color.green, Color.red, difficultySlider.value / OptionsHolder.options.recordDifficulty);
+        sliderBackground.color = Color.Lerp(Color.green, Color.red, difficultySlider.value / OptionsHolder.instance.save.recordDifficulty);
         difficultyText.text = difficultySlider.value.ToString("F1");
     }
 
     public void StartGame()
     {
-        OptionsHolder.options.difficulty = difficultySlider.value;
+        OptionsHolder.instance.save.difficulty = difficultySlider.value;
         SceneManager.LoadScene("sc_SampleScene");
     }
 }

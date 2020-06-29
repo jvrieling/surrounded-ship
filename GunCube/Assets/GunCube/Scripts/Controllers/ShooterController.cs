@@ -12,6 +12,7 @@ public class ShooterController : MonoBehaviour
     public float bulletVelocity = 1;
     public float bulletDamage = 1;
     public float accuracy = 0.7f;
+    public int bulletCount = 1;
 
     public int sniperUpgrades;
     public int shotgunUpgrades;
@@ -28,10 +29,24 @@ public class ShooterController : MonoBehaviour
         else if (shotTimer <= 0)
         {
             shotTimer = timeBetweenShots;
-            GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            temp.GetComponent<BulletController>().InstantiateBullet(transform.right, bulletVelocity, bulletDamage);
-            temp.GetComponent<BulletController>().tagToIgnore = transform.parent.tag;
-            temp.transform.SetParent(ManagerManager.shooterManager.bulletHolder.transform);
+
+            for (int i = 0; i < bulletCount; i++)
+            {
+                GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                temp.GetComponent<BulletController>().InstantiateBullet(transform.right, bulletVelocity, bulletDamage);
+                temp.GetComponent<BulletController>().tagToIgnore = transform.parent.tag;
+                temp.transform.SetParent(ManagerManager.shooterManager.bulletHolder.transform);
+            }
         }
+    }
+
+
+    public void InitializeData(ShooterData data)
+    {
+        accuracy = data.accuracy;
+        bulletDamage = data.bulletDamage;
+        bulletVelocity = data.bulletVelocity;
+        timeBetweenShots = data.timeBetweenShots;
+        bulletCount = data.bulletCount;
     }
 }

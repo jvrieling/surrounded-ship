@@ -21,6 +21,11 @@ public class ShooterManager : MonoBehaviour
         guns[1] = ManagerManager.instance.player.transform.GetChild(1).GetComponent<ShooterController>();
         guns[2] = ManagerManager.instance.player.transform.GetChild(2).GetComponent<ShooterController>();
         guns[3] = ManagerManager.instance.player.transform.GetChild(3).GetComponent<ShooterController>();
+
+        guns[0].InitializeData(OptionsHolder.instance.save.gun1);
+        guns[1].InitializeData(OptionsHolder.instance.save.gun2);
+        guns[2].InitializeData(OptionsHolder.instance.save.gun3);
+        guns[3].InitializeData(OptionsHolder.instance.save.gun4);
     }
 
     public void UpgradeAllGuns(Upgrade data)
