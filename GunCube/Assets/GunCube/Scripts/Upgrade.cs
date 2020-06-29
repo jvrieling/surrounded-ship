@@ -10,4 +10,6 @@ public class Upgrade : ScriptableObject
     public float accuracy;
     public float bulletDamage;
     public float bulletVelocity;
+    public float timeBetweenShots;
+    public int bulletCount;
 }

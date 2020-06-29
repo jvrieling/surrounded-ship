@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public enum UpgradeType { sniper = 1, shotgun = 2, minigun = 3 };
 public class UpgradeManager : MonoBehaviour
 {
-    public int selectedGun;
+    public int selectedGun = 1;
 
     public Upgrade sniperUpgrade;
 
@@ -16,12 +16,17 @@ public class UpgradeManager : MonoBehaviour
 
     public Text selectedGunText;
 
+    private void Start()
+    {
+        ValidateGunSelection();
+    }
+
     public void SniperUpgrade() { UpgradeGun(sniperUpgrade); }
     public void MinigunUpgrade() { UpgradeGun(minigunUpgrade); }
     public void ShotgunUpgrade() { UpgradeGun(shotgunUpgrade); }
     public void UpgradeGun(Upgrade data)
     {
-        OptionsHolder.options.UpgradeGun(selectedGun, data);
+        OptionsHolder.instance.save.UpgradeGun(selectedGun, data);
     }
 
     public void LeftSelection()
@@ -36,16 +41,16 @@ public class UpgradeManager : MonoBehaviour
     }
     private void ValidateGunSelection()
     {
-        if (selectedGun < 0)
+        if (selectedGun < 1)
         {
-            selectedGun = 3;
+            selectedGun = 4;
         }
 
-        if (selectedGun > 3)
+        if (selectedGun > 4)
         {
-            selectedGun = 0;
+            selectedGun = 1;
         }
 
-        selectedGunText.text = (selectedGun + 1).ToString();
+        selectedGunText.text = (selectedGun).ToString();
     }
 }

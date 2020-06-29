@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Options", menuName = "Options", order = 3)]
-public class SaveGame : ScriptableObject
+[System.Serializable]
+public class SaveGame
 {
+    public string name;
+
     public float difficulty;
     public float recordDifficulty;
 
@@ -15,6 +17,14 @@ public class SaveGame : ScriptableObject
     public ShooterData gun2;
     public ShooterData gun3;
     public ShooterData gun4;
+
+    public SaveGame()
+    {
+        gun1 = new ShooterData();
+        gun2 = new ShooterData();
+        gun3 = new ShooterData();
+        gun4 = new ShooterData();
+    }
 
     public void CompleteRound(float diff)
     {

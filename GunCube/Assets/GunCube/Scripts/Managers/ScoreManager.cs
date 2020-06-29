@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         spawnSpeedChangeEvent = new SpawnSpeedChangeEvent();
-        difficulty = OptionsHolder.options.difficulty;
+        difficulty = OptionsHolder.instance.save.difficulty;
     }
 
     // Update is called once per frame
@@ -50,8 +50,10 @@ public class ScoreManager : MonoBehaviour
 
         if(hp <= 0)
         {
-            OptionsHolder.options.CompleteRound(difficulty);
-            OptionsHolder.options.CheckHighScore(score);
+            OptionsHolder.instance.save.CompleteRound(difficulty);
+            OptionsHolder.instance.save.CheckHighScore(score);
+
+            OptionsHolder.instance.SaveGame();
 
             SceneManager.LoadScene("sc_MainMenu");
         }
