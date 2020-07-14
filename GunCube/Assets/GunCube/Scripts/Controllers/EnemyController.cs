@@ -38,7 +38,12 @@ public class EnemyController : MonoBehaviour
 
         moveSpeed = data.movementSpeed;
         damage = data.damage;
-        GetComponent<DestructableObject>().health = data.hp;
+        DestructableObject temp = GetComponent<DestructableObject>();
+
+        temp.health = data.hp;
+        temp.pointValue = data.pointValue;
+        temp.goldValue = data.goldValue;
+
         GetComponent<MeshRenderer>().material.color = data.color;
     }
 

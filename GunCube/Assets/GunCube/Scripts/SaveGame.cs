@@ -11,7 +11,13 @@ public class SaveGame
     public float recordDifficulty;
 
     public int score;
-    public float highScore;
+    public int highScore;
+
+    public int kills;
+    public int highKills;
+
+    public int gold;
+    public int totalGold;
 
     public ShooterData gun1;
     public ShooterData gun2;
@@ -26,10 +32,13 @@ public class SaveGame
         gun4 = new ShooterData();
     }
 
-    public void CompleteRound(float diff)
+    public void CompleteRound(float diff, int shipsSunk, int goldEarned)
     {
         difficulty = diff;
         if (diff > recordDifficulty) recordDifficulty = diff;
+        kills = shipsSunk;
+        if (kills > highKills) highKills = kills;
+        gold = goldEarned;
     }
     public void CheckHighScore(int score)
     {

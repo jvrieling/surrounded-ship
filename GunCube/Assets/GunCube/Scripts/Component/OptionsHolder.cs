@@ -6,8 +6,10 @@ using System.IO;
 
 public class OptionsHolder : MonoBehaviour
 {
+    public bool saveEnabled = true;
     public static OptionsHolder instance;
     public SaveGame save;
+    
 
     //public SaveGame optionOnAwake;
 
@@ -16,7 +18,8 @@ public class OptionsHolder : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        save = new SaveGame();
+        if (save.name != "test")
+            save = new SaveGame();
 
         DontDestroyOnLoad(gameObject);
 
@@ -28,26 +31,32 @@ public class OptionsHolder : MonoBehaviour
 
     public void SaveGame()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(gameSaveLocation);
-        bf.Serialize(file, save);
-        file.Close();
+        if (saveEnabled)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(gameSaveLocation);
+            bf.Serialize(file, save);
+            file.Close();
+        }
     }
     public void LoadGame()
     {
-        if (File.Exists(gameSaveLocation))
+        if (saveEnabled)
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(gameSaveLocation, FileMode.Open);
-            save = (SaveGame)bf.Deserialize(file);
-            file.Close();
+            if (File.Exists(gameSaveLocation))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(gameSaveLocation, FileMode.Open);
+                save = (SaveGame)bf.Deserialize(file);
+                file.Close();
 
-            Debug.Log("Game Loaded");
-            Debug.Log(save);
-        }
-        else
-        {
-            Debug.Log("No game saved!");
+                Debug.Log("Game Loaded");
+                Debug.Log(save);
+            }
+            else
+            {
+                Debug.Log("No game saved!");
+            }
         }
     }
 

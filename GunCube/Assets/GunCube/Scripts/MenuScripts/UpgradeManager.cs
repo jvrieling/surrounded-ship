@@ -15,10 +15,22 @@ public class UpgradeManager : MonoBehaviour
     public Upgrade minigunUpgrade;
 
     public Text selectedGunText;
+    public Text minigunCostText;
+    public Text sniperCostText;
+    public Text shotgunCostText;
+    public Text yourGoldText;
 
     private void Start()
     {
         ValidateGunSelection();
+        minigunCostText.text = "" + minigunUpgrade.cost;
+        sniperCostText.text = "" + sniperUpgrade.cost;
+        shotgunCostText.text = "" + shotgunUpgrade.cost;
+    }
+
+    private void Update()
+    {
+        yourGoldText.text = "" + OptionsHolder.instance.save.totalGold;
     }
 
     public void SniperUpgrade() { UpgradeGun(sniperUpgrade); }
@@ -26,7 +38,11 @@ public class UpgradeManager : MonoBehaviour
     public void ShotgunUpgrade() { UpgradeGun(shotgunUpgrade); }
     public void UpgradeGun(Upgrade data)
     {
-        OptionsHolder.instance.save.UpgradeGun(selectedGun, data);
+        if (OptionsHolder.instance.save.totalGold >= data.cost)
+        {
+            OptionsHolder.instance.save.UpgradeGun(selectedGun, data);
+            OptionsHolder.instance.save.totalGold -= data.cost;
+        }
     }
 
     public void LeftSelection()

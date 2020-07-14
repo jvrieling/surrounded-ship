@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/GunCube/Scenes/sc_Upgrades.unity
     guid: 0b67603ccc65db24da521a18357acff4
+  - enabled: 1
+    path: Assets/GunCube/Scenes/sc_EndScreen.unity
+    guid: 85dcf2a23f72d024a8d3d62bfb54410d
   m_configObjects: {}

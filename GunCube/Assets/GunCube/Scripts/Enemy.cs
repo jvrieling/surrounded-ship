@@ -12,5 +12,8 @@ public class Enemy : ScriptableObject
     public int damage = 1;
     public float hp = 3;
 
+    public int pointValue = 10;
+    public int goldValue = 1;
+
     public Color color = Color.red;
 }

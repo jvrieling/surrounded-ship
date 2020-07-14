@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0281d65c83cd0498ff1a8cf9a1ee60, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  cost: 0
+  cost: 50
   accuracy: -0.2
   bulletDamage: 0.02
   bulletVelocity: 0

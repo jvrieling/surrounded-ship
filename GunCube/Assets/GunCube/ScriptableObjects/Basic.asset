@@ -17,4 +17,6 @@ MonoBehaviour:
   movementSpeed: 1
   damage: 1
   hp: 3
+  pointValue: 1
+  goldValue: 1
   color: {r: 1, g: 0, b: 0, a: 1}
