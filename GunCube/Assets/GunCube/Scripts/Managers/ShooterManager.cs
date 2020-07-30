@@ -37,7 +37,7 @@ public class ShooterManager : MonoBehaviour
     }
     public void UpgradeGun(int index, Upgrade data)
     {
-        guns[index].accuracy += data.accuracy;
+        guns[index].inaccuracy += data.accuracy;
         guns[index].bulletDamage += data.bulletDamage;
         guns[index].bulletVelocity += data.bulletVelocity;
     }

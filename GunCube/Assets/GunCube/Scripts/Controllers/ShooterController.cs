@@ -11,12 +11,14 @@ public class ShooterController : MonoBehaviour
 
     public float bulletVelocity = 1;
     public float bulletDamage = 1;
-    public float accuracy = 0.7f;
+    public float inaccuracy = 0.01f;
     public int bulletCount = 1;
 
     public int sniperUpgrades;
     public int shotgunUpgrades;
     public int cannonUpgrades;
+
+    public ParticleSystem particle;
 
     // Update is called once per frame
     void Update()
@@ -32,9 +34,26 @@ public class ShooterController : MonoBehaviour
 
             for (int i = 0; i < bulletCount; i++)
             {
+                if (particle != null)
+                {
+                    particle.time = 0;
+                    particle.Play();
+                }
                 GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
-                temp.GetComponent<BulletController>().InstantiateBullet(transform.right, bulletVelocity, bulletDamage);
-                temp.GetComponent<BulletController>().tagToIgnore = transform.parent.tag;
+
+                float spreadFactor = inaccuracy;
+
+                Vector3 direction = transform.right;
+
+                direction.x += Random.Range(-spreadFactor, spreadFactor);
+                //direction.y += Random.Range(-spreadFactor, spreadFactor);
+                direction.z += Random.Range(-spreadFactor, spreadFactor);
+
+                direction.Normalize();
+
+
+                temp.GetComponent<BulletController>().InstantiateBullet(direction, bulletVelocity, bulletDamage);
+                temp.GetComponent<BulletController>().tagsToIgnore = new string[] { transform.parent.tag, temp.tag};
                 temp.transform.SetParent(ManagerManager.shooterManager.bulletHolder.transform);
             }
         }
@@ -43,7 +62,7 @@ public class ShooterController : MonoBehaviour
 
     public void InitializeData(ShooterData data)
     {
-        accuracy = data.accuracy;
+        inaccuracy = data.accuracy;
         bulletDamage = data.bulletDamage;
         bulletVelocity = data.bulletVelocity;
         timeBetweenShots = data.timeBetweenShots;

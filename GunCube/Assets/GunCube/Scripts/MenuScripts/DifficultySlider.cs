@@ -27,6 +27,6 @@ public class DifficultySlider : MonoBehaviour
     public void StartGame()
     {
         OptionsHolder.instance.save.difficulty = difficultySlider.value;
-        SceneManager.LoadScene("sc_SampleScene");
+        SceneManager.LoadScene("sc_Game");
     }
 }

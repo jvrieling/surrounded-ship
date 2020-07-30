@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fbc057ba5a668c43932b93f58240a01, type: 3}
-  m_Name: Speedy
+  m_Name: so_Golden
   m_EditorClassIdentifier: 
-  minDifficulty: 0.5
+  minDifficulty: 3
   maxDifficulty: 1000
-  movementSpeed: 3
+  movementSpeed: 3.5
   damage: 1
-  hp: 2
-  pointValue: 3
-  goldValue: 2
-  color: {r: 0.5447296, g: 1, b: 0, a: 1}
+  hp: 5
+  pointValue: 5
+  goldValue: 10
+  color: {r: 1, g: 0.8503312, b: 0, a: 1}

@@ -65,6 +65,10 @@ public class ScoreManager : MonoBehaviour
             SceneManager.LoadScene("sc_EndScreen");
         }
     }
+    public void AddKill()
+    {
+        kills++;
+    }
 
 }
 

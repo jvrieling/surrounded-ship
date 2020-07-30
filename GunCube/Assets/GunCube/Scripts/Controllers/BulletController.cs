@@ -11,9 +11,11 @@ public class BulletController : MonoBehaviour
 
     public float bulletDamage = 1;
 
-    public string tagToIgnore;
+    public string[] tagsToIgnore;
 
     private Rigidbody rb;
+
+    public GameObject collisionPrefab;
 
     private void Awake()
     {
@@ -26,8 +28,14 @@ public class BulletController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != tagToIgnore)
+        bool clear = false;
+        foreach(string i in tagsToIgnore)
         {
+            if (other.gameObject.tag == i) clear = true;
+        }
+        if (!clear)
+        {
+            Instantiate(collisionPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

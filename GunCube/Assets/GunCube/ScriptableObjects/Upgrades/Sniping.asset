@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniping
   m_EditorClassIdentifier: 
   cost: 50
-  accuracy: 0.06
+  accuracy: -0.06
   bulletDamage: 0.1
   bulletVelocity: 0.2
   timeBetweenShots: 0.01

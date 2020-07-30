@@ -457,17 +457,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81907180b6e17048b221887e919ac7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionOnAwake:
+  saveEnabled: 1
+  save:
     name: 
     difficulty: 0
     recordDifficulty: 0
     score: 0
     highScore: 0
+    kills: 0
+    highKills: 0
+    gold: 0
+    totalGold: 0
     gun1:
       timeBetweenShots: 0.75
       bulletVelocity: 4
       bulletDamage: 1
-      accuracy: 0.7
+      accuracy: 0.25
+      bulletCount: 1
       sniperUpgrades: 0
       shotgunUpgrades: 0
       cannonUpgrades: 0
@@ -475,7 +481,8 @@ MonoBehaviour:
       timeBetweenShots: 0.75
       bulletVelocity: 4
       bulletDamage: 1
-      accuracy: 0.7
+      accuracy: 0.25
+      bulletCount: 1
       sniperUpgrades: 0
       shotgunUpgrades: 0
       cannonUpgrades: 0
@@ -483,7 +490,8 @@ MonoBehaviour:
       timeBetweenShots: 0.75
       bulletVelocity: 4
       bulletDamage: 1
-      accuracy: 0.7
+      accuracy: 0.25
+      bulletCount: 1
       sniperUpgrades: 0
       shotgunUpgrades: 0
       cannonUpgrades: 0
@@ -491,7 +499,8 @@ MonoBehaviour:
       timeBetweenShots: 0.75
       bulletVelocity: 4
       bulletDamage: 1
-      accuracy: 0.7
+      accuracy: 0.25
+      bulletCount: 1
       sniperUpgrades: 0
       shotgunUpgrades: 0
       cannonUpgrades: 0
@@ -644,7 +653,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 0}
+  m_BackGroundColor: {r: 0.08904416, g: 0.59480476, b: 0.8207547, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

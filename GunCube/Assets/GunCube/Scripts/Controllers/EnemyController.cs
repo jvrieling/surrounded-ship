@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(DestructableObject))]
 public class EnemyController : MonoBehaviour
 {
+    private const float MOVE_SPEED_MODIFIER = 3.8f;
     public Enemy enemyData;
 
     public float moveSpeed;
@@ -13,16 +14,24 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     private Rigidbody rb;
 
+    public ParticleSystem[] wakeParticles;
+
+    public MeshRenderer[] sailsMeshRenderer;
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
+        foreach (ParticleSystem i in wakeParticles)
+        {
+            ParticleSystem.MainModule psmain = i.main;
+            psmain.startSpeed = (moveSpeed * 0.04f);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.AddForce(((player.transform.position - transform.position) * moveSpeed) * Time.deltaTime);
+        rb.AddForce(((player.transform.position - transform.position) * (moveSpeed) * MOVE_SPEED_MODIFIER) * Time.deltaTime);
     }
 
     private void OnDrawGizmosSelected()
@@ -44,7 +53,10 @@ public class EnemyController : MonoBehaviour
         temp.pointValue = data.pointValue;
         temp.goldValue = data.goldValue;
 
-        GetComponent<MeshRenderer>().material.color = data.color;
+        foreach(MeshRenderer i in sailsMeshRenderer)
+        {
+            i.material.color = data.color;
+        }
     }
 
 }

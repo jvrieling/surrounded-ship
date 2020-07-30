@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Minigun
   m_EditorClassIdentifier: 
   cost: 50
-  accuracy: -0.01
+  accuracy: 0.01
   bulletDamage: 0.1
   bulletVelocity: 0.1
   timeBetweenShots: -0.2

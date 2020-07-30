@@ -9,7 +9,7 @@ public class DestructableObject : MonoBehaviour
     public int goldValue = 0;
 
     [Tooltip("This prefab will be instantiated just before the object dies.")]
-    public GameObject deathPrefab;
+    public GameObject[] deathPrefabs;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -26,9 +26,14 @@ public class DestructableObject : MonoBehaviour
         {
             ManagerManager.scoreManager.AddScore(pointValue);
             ManagerManager.scoreManager.AddGold(goldValue);
+            if (gameObject.tag == "Enemy") ManagerManager.scoreManager.AddKill();
 
-            if (deathPrefab) Instantiate(deathPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);            
+            if (deathPrefabs.Length > 0)
+            {
+                foreach (GameObject deathPrefab in deathPrefabs)
+                    Instantiate(deathPrefab, transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
         }
     }
 }

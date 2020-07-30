@@ -18,8 +18,15 @@ public class ScoreCounter : MonoBehaviour
     void Start()
     {
         StartCoroutine(CountScores());
+        StartCoroutine(ForceMenuButton());
+        OptionsHolder.instance.save.totalGold += OptionsHolder.instance.save.gold;
     }
 
+    public IEnumerator ForceMenuButton()
+    {
+        yield return new WaitForSeconds(4);
+        menuButton.interactable = true;
+    }
     public IEnumerator CountScores()
     {
         float tempScore = 0;
@@ -54,8 +61,6 @@ public class ScoreCounter : MonoBehaviour
             goldText.text = tempScore.ToString();
             yield return new WaitForSeconds((timePerCounter * 1.2f) / INCREMENT_SEGMENTS);
         } while (tempScore < OptionsHolder.instance.save.gold);
-
-        OptionsHolder.instance.save.totalGold += OptionsHolder.instance.save.gold;
 
         menuButton.interactable = true;
     }

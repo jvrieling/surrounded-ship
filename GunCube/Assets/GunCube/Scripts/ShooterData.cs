@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class ShooterData
 {
-    public const float MIN_ACCURACY = 0.3f;
-    public const float MAX_ACCURACY = 1f;
+    public const float MIN_ACCURACY = 0f;
+    public const float MAX_ACCURACY = 0.9f;
 
     public const float MIN_SHOTTIME = 0.1f;
     public const float MAX_SHOTTIME = 2f;
@@ -23,7 +23,7 @@ public class ShooterData
 
     public float bulletVelocity = 4;
     public float bulletDamage = 1;
-    public float accuracy = 0.7f;
+    public float accuracy = 0.25f;
     public int bulletCount = 1;
 
     public int sniperUpgrades;

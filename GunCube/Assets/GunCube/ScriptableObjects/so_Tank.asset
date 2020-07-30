@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fbc057ba5a668c43932b93f58240a01, type: 3}
-  m_Name: Basic
+  m_Name: so_Tank
   m_EditorClassIdentifier: 
-  minDifficulty: 0
+  minDifficulty: 5
   maxDifficulty: 1000
-  movementSpeed: 1
+  movementSpeed: 0.4
   damage: 1
-  hp: 3
-  pointValue: 1
-  goldValue: 1
-  color: {r: 1, g: 0, b: 0, a: 1}
+  hp: 15
+  pointValue: 10
+  goldValue: 3
+  color: {r: 0.5943396, g: 0.19727817, b: 0.11494303, a: 1}
