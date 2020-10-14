@@ -13,7 +13,7 @@ public class Float : MonoBehaviour
 
     bool hasLanded = false;
 
-    //[FMODUnity.EventRef]
+    [FMODUnity.EventRef]
     public string splashSound = "";
     public float spashSize = 0;
 
@@ -45,7 +45,7 @@ public class Float : MonoBehaviour
         }
         if (!hasLanded)
         {
-            //if (splashSound != "") FMODUnity.RuntimeManager.PlayOneShot(splashSound);
+            if (splashSound != "") FMODUnity.RuntimeManager.PlayOneShot(splashSound);
         }
     }
 }
