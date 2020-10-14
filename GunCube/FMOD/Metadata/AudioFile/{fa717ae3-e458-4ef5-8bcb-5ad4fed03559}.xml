@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{fa717ae3-e458-4ef5-8bcb-5ad4fed03559}">
+		<property name="assetPath">
+			<value>Cannon_Hit-02.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.3497732426303855</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e8df4878-622c-485c-875f-4d7ffe2da9ad}</destination>
+		</relationship>
+	</object>
+</objects>

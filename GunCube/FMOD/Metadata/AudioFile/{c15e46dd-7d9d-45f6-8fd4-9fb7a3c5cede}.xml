@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{c15e46dd-7d9d-45f6-8fd4-9fb7a3c5cede}">
+		<property name="assetPath">
+			<value>Heavy_Cannon-01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.3017006802721087</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e8df4878-622c-485c-875f-4d7ffe2da9ad}</destination>
+		</relationship>
+	</object>
+</objects>

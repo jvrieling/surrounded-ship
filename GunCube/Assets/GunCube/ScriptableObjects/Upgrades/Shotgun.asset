@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   cost: 50
-  accuracy: 0.1
-  bulletDamage: 0.02
+  accuracy: 0.08
+  bulletDamage: 0.01
   bulletVelocity: 0
-  timeBetweenShots: 0.03
+  timeBetweenShots: 0.05
   bulletCount: 1
