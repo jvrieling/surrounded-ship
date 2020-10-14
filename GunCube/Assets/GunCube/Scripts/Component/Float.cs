@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Float : MonoBehaviour
 {
     public float floatPower = 0.2f;
@@ -9,6 +10,12 @@ public class Float : MonoBehaviour
     public bool sinkAfterTimer = false;
 
     public float sinkTimer = 5;
+
+    bool hasLanded = false;
+
+    //[FMODUnity.EventRef]
+    public string splashSound = "";
+    public float spashSize = 0;
 
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -35,6 +42,10 @@ public class Float : MonoBehaviour
         if(other.gameObject.tag == "Water")
         {
             rb.AddForce(new Vector3(0, floatPower, 0));
+        }
+        if (!hasLanded)
+        {
+            //if (splashSound != "") FMODUnity.RuntimeManager.PlayOneShot(splashSound);
         }
     }
 }
