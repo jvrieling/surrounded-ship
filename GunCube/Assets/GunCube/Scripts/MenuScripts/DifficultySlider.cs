@@ -15,6 +15,8 @@ public class DifficultySlider : MonoBehaviour
     {
         difficultySlider.maxValue = OptionsHolder.instance.save.recordDifficulty;
         difficultySlider.value = OptionsHolder.instance.save.difficulty;
+
+        BGMManager.instance.StartMusic();
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class DifficultySlider : MonoBehaviour
     public void StartGame()
     {
         OptionsHolder.instance.save.difficulty = difficultySlider.value;
+        BGMManager.instance.SetMusicLevel(1);
         SceneManager.LoadScene("sc_Game");
     }
 }

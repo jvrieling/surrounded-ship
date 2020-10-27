@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{665e5481-a600-484a-8f82-4304eb733b44}">
+		<property name="color">
+			<value>Blue Light 1</value>
+		</property>
 		<property name="name">
 			<value>CannonHit</value>
 		</property>
@@ -8,7 +11,7 @@
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{027a957a-32f7-4c25-ba6a-78b97726ab46}</destination>
+			<destination>{8e1216cf-021c-49c6-b4cc-e96090e0acf9}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{086cb8e7-f316-4f5e-bd25-03cc2a90d8b3}</destination>

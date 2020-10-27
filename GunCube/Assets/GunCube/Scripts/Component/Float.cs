@@ -11,7 +11,7 @@ public class Float : MonoBehaviour
 
     public float sinkTimer = 5;
 
-    bool hasLanded = false;
+    public bool hasLanded = false;
 
     [FMODUnity.EventRef]
     public string splashSound = "";
@@ -42,10 +42,13 @@ public class Float : MonoBehaviour
         if(other.gameObject.tag == "Water")
         {
             rb.AddForce(new Vector3(0, floatPower, 0));
+
+            if (!hasLanded)
+            {
+                hasLanded = true;
+                if (splashSound != "") FMODUnity.RuntimeManager.PlayOneShot(splashSound);
+            }
         }
-        if (!hasLanded)
-        {
-            if (splashSound != "") FMODUnity.RuntimeManager.PlayOneShot(splashSound);
-        }
+        
     }
 }

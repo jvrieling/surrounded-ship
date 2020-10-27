@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class DestructableObject : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class DestructableObject : MonoBehaviour
 
     [Tooltip("This prefab will be instantiated just before the object dies.")]
     public GameObject[] deathPrefabs;
+
+    [EventRef]
+    public string deathSound;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -32,6 +36,11 @@ public class DestructableObject : MonoBehaviour
             {
                 foreach (GameObject deathPrefab in deathPrefabs)
                     Instantiate(deathPrefab, transform.position, Quaternion.identity);
+            }
+
+            if(deathSound != "")
+            {
+                RuntimeManager.PlayOneShot(deathSound);
             }
             Destroy(gameObject);
         }

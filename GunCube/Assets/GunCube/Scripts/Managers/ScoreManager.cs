@@ -62,6 +62,8 @@ public class ScoreManager : MonoBehaviour
 
             OptionsHolder.instance.SaveGame();
 
+            BGMManager.instance.StopMusic();
+
             SceneManager.LoadScene("sc_EndScreen");
         }
     }
