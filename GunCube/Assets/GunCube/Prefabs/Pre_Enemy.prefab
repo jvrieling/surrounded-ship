@@ -5551,6 +5551,7 @@ MonoBehaviour:
   deathPrefabs:
   - {fileID: 5252471172706030333, guid: 466ee65db52396c488e8dd6dcacef446, type: 3}
   - {fileID: 4818044098261871544, guid: 385faa34d59402e40bdde8adf376dcd7, type: 3}
+  deathSound: event:/Foley/ShipDestroy
 --- !u!33 &3963200828118234468
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5642,6 +5643,9 @@ MonoBehaviour:
   floatPower: 11
   sinkAfterTimer: 0
   sinkTimer: 5
+  hasLanded: 0
+  splashSound: 
+  spashSize: 0
 --- !u!1 &2399974414398856936
 GameObject:
   m_ObjectHideFlags: 0

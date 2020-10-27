@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class ScoreCounter : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class ScoreCounter : MonoBehaviour
 
     public float timePerCounter = 1.5f;
 
+    [EventRef]
+    public string coinStashSound;
+
     void Start()
     {
         StartCoroutine(CountScores());
         StartCoroutine(ForceMenuButton());
-        OptionsHolder.instance.save.totalGold += OptionsHolder.instance.save.gold;
     }
 
     public IEnumerator ForceMenuButton()
@@ -57,6 +60,7 @@ public class ScoreCounter : MonoBehaviour
         tempScore = 0;
         do
         {
+            RuntimeManager.PlayOneShot(coinStashSound);
             tempScore = Mathf.Clamp(tempScore += Mathf.RoundToInt(OptionsHolder.instance.save.gold / 10), 0, OptionsHolder.instance.save.gold);
             goldText.text = tempScore.ToString();
             yield return new WaitForSeconds((timePerCounter * 1.2f) / INCREMENT_SEGMENTS);

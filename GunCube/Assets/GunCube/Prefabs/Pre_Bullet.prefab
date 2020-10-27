@@ -55,6 +55,7 @@ MonoBehaviour:
   tagsToIgnore: []
   collisionPrefab: {fileID: 6700990201692220316, guid: beb7cc1655553dc48859a4ab5c30d2af,
     type: 3}
+  hitSound: event:/Foley/CannonHit
 --- !u!114 &6092564924338950680
 MonoBehaviour:
   m_ObjectHideFlags: 0

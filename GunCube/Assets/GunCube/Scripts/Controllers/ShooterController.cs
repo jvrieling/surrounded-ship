@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class ShooterController : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class ShooterController : MonoBehaviour
     public int cannonUpgrades;
 
     public ParticleSystem particle;
+
+    [EventRef]
+    public string shootSound;
 
     // Update is called once per frame
     void Update()
@@ -39,6 +43,9 @@ public class ShooterController : MonoBehaviour
                     particle.time = 0;
                     particle.Play();
                 }
+
+                RuntimeManager.PlayOneShot(shootSound);
+
                 GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
 
                 float spreadFactor = inaccuracy;

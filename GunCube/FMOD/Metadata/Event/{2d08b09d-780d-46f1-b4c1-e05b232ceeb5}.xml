@@ -68,7 +68,10 @@
 			<value>5</value>
 		</property>
 		<property name="voiceStealing">
-			<value>3</value>
+			<value>1</value>
+		</property>
+		<property name="priority">
+			<value>1</value>
 		</property>
 		<property name="triggerCooldown">
 			<value>80</value>

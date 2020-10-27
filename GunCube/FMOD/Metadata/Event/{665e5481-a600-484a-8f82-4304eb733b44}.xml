@@ -66,7 +66,17 @@
 			<destination>{b472bce7-7616-4f5a-8991-c23b6df15242}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{1c5b2c2a-6810-467f-a731-0cd7f1ddcda7}" />
+	<object class="EventAutomatableProperties" id="{1c5b2c2a-6810-467f-a731-0cd7f1ddcda7}">
+		<property name="maxVoices">
+			<value>8</value>
+		</property>
+		<property name="voiceStealing">
+			<value>1</value>
+		</property>
+		<property name="triggerCooldown">
+			<value>40</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{38a66bd6-309f-4aa2-bcc4-33702773645e}" />
 	<object class="GroupTrack" id="{44f460fa-7993-4bbc-a83e-51f70c0f9495}">
 		<relationship name="modules">
@@ -87,6 +97,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{31a5b29c-22f7-4611-8288-9ad3176010ce}">
+		<property name="volume">
+			<value>-2.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{36ecd298-1c13-4f38-a2a9-ef0c23d1e27f}</destination>
 		</relationship>
@@ -121,6 +134,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{8262e7c1-506a-4313-aab4-05399c9aa520}">
+		<property name="volume">
+			<value>-14.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>

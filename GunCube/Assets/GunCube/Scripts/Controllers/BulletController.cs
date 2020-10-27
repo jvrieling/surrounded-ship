@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BulletController : MonoBehaviour
@@ -16,6 +17,9 @@ public class BulletController : MonoBehaviour
     private Rigidbody rb;
 
     public GameObject collisionPrefab;
+
+    [EventRef]
+    public string hitSound;
 
     private void Awake()
     {
@@ -36,6 +40,7 @@ public class BulletController : MonoBehaviour
         if (!clear)
         {
             Instantiate(collisionPrefab, transform.position, Quaternion.identity);
+            RuntimeManager.PlayOneShot(hitSound);
             Destroy(gameObject);
         }
     }

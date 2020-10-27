@@ -39,6 +39,7 @@ public class SaveGame
         kills = shipsSunk;
         if (kills > highKills) highKills = kills;
         gold = goldEarned;
+        totalGold += goldEarned;
     }
     public void CheckHighScore(int score)
     {

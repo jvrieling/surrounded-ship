@@ -79,7 +79,7 @@ MonoBehaviour:
   sinkTimer: 5
   hasLanded: 0
   splashSound: event:/Foley/Splash
-  spashSize: 2
+  spashSize: 1
 --- !u!114 &1834292762922600472
 MonoBehaviour:
   m_ObjectHideFlags: 0
