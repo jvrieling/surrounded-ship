@@ -20,6 +20,7 @@ public class CircleSpawner : MonoBehaviour
 
     private void Update()
     {
+        timeBetweenSpawns = ManagerManager.scoreManager.timeBetweenSpawns;
         spawnTimer += Time.deltaTime;
         if(spawnTimer > timeBetweenSpawns)
         {
@@ -62,7 +63,12 @@ public class CircleSpawner : MonoBehaviour
         GameObject temp = Instantiate(enemyPrefab, pos, rot);
 
         temp.transform.SetParent(transform);
-        temp.GetComponent<EnemyController>().InitializeData(selectedEnemy);
+
+        selectedEnemy.hp += ManagerManager.scoreManager.difficulty * 0.5f;
+        selectedEnemy.goldValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.5f);
+
+        EnemyController tempController = temp.GetComponent<EnemyController>();
+        tempController.InitializeData(selectedEnemy);
     }
 
     Vector3 RandomCircle(Vector3 center, float radius)

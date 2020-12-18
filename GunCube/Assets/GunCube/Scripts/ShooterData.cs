@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShooterData
 {
     public const float MIN_ACCURACY = 0f;
-    public const float MAX_ACCURACY = 0.9f;
+    public const float MAX_ACCURACY = 0.98f;
 
     public const float MIN_SHOTTIME = 0.1f;
     public const float MAX_SHOTTIME = 2f;

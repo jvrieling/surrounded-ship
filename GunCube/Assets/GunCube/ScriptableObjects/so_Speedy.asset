@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 0.5
   maxDifficulty: 1000
-  movementSpeed: 3
+  movementSpeed: 2.53
   damage: 1
-  hp: 2
+  hp: 16.499998
   pointValue: 3
-  goldValue: 2
+  goldValue: 10
   color: {r: 0.5320378, g: 0.6792453, b: 0.3556426, a: 1}

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
+    const float MIN_TIME_BETWEEN_SPAWNS = 0.2f;
+
     public int score;
     public int hp = 100;
     public int kills = 0;
@@ -16,6 +18,8 @@ public class ScoreManager : MonoBehaviour
     public float difficultyIncrement = 0.1f;
     public float difficultyIncrementTime = 1;
     private float difficultyIncrementTimer;
+
+    public float timeBetweenSpawns = 1;
 
     public SpawnSpeedChangeEvent spawnSpeedChangeEvent;
 
@@ -33,13 +37,12 @@ public class ScoreManager : MonoBehaviour
         {
             difficultyIncrementTimer = 0;
             difficulty += difficultyIncrement;
-            if (difficulty > 1) spawnSpeedChangeEvent.Invoke(0.9f);
-            if (difficulty > 2) spawnSpeedChangeEvent.Invoke(0.8f);
-            if (difficulty > 3) spawnSpeedChangeEvent.Invoke(0.7f);
-            if (difficulty > 4) spawnSpeedChangeEvent.Invoke(0.6f);
-            if (difficulty > 6) spawnSpeedChangeEvent.Invoke(0.5f);
-            if (difficulty > 8) spawnSpeedChangeEvent.Invoke(0.4f);
-            if (difficulty > 10) spawnSpeedChangeEvent.Invoke(0.3f);
+
+            if(difficulty % 10 == 0)
+            {
+                timeBetweenSpawns -= 0.1f;
+            }
+
         }
     }
     public void AddScore(int amount)

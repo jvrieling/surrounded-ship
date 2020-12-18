@@ -16,7 +16,7 @@ MonoBehaviour:
   maxDifficulty: 1000
   movementSpeed: 0.4
   damage: 1
-  hp: 15
+  hp: 14
   pointValue: 10
   goldValue: 3
   color: {r: 0.5943396, g: 0.19727817, b: 0.11494303, a: 1}
