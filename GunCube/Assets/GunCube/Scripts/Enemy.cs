@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Enemy", menuName = "Enemy", order = 2)]
 public class Enemy : ScriptableObject
 {
+    new public string name = "";
+
     public float minDifficulty;
     public float maxDifficulty = 1000;
 

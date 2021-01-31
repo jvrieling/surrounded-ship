@@ -43,6 +43,8 @@ public class EnemyController : MonoBehaviour
 
     public void InitializeData(Enemy data)
     {
+        gameObject.name = data.name;
+
         enemyData = data;
 
         moveSpeed = data.movementSpeed;
@@ -50,10 +52,15 @@ public class EnemyController : MonoBehaviour
         DestructableObject temp = GetComponent<DestructableObject>();
 
         temp.health = data.hp;
-        temp.pointValue = data.pointValue;
-        temp.goldValue = data.goldValue;
+        temp.health += ManagerManager.scoreManager.difficulty * 0.6f;
 
-        foreach(MeshRenderer i in sailsMeshRenderer)
+        temp.pointValue = data.pointValue;
+        temp.pointValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.5f);
+
+        temp.goldValue = data.goldValue;
+        temp.goldValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.35f);
+
+        foreach (MeshRenderer i in sailsMeshRenderer)
         {
             i.material.color = data.color;
         }

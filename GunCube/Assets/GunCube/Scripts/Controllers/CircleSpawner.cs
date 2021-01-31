@@ -52,6 +52,7 @@ public class CircleSpawner : MonoBehaviour
     public void SpawnEnemy()
     {
         Enemy selectedEnemy = enemies[Random.Range(0, enemies.Count)];
+
         while(selectedEnemy.minDifficulty > ManagerManager.scoreManager.difficulty)
         {
             selectedEnemy = enemies[Random.Range(0, enemies.Count)];
@@ -63,9 +64,6 @@ public class CircleSpawner : MonoBehaviour
         GameObject temp = Instantiate(enemyPrefab, pos, rot);
 
         temp.transform.SetParent(transform);
-
-        selectedEnemy.hp += ManagerManager.scoreManager.difficulty * 0.5f;
-        selectedEnemy.goldValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.5f);
 
         EnemyController tempController = temp.GetComponent<EnemyController>();
         tempController.InitializeData(selectedEnemy);

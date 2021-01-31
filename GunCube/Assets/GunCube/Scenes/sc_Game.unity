@@ -33,7 +33,7 @@ RenderSettings:
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 16
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 12
@@ -9923,6 +9923,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4216859302048453862, guid: 20606a1da5c59f34ba70bce383d91375,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 20606a1da5c59f34ba70bce383d91375,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.3441045
       objectReference: {fileID: 0}
@@ -9938,6 +9943,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 20606a1da5c59f34ba70bce383d91375,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 20606a1da5c59f34ba70bce383d91375,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -9950,16 +9960,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 20606a1da5c59f34ba70bce383d91375,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 20606a1da5c59f34ba70bce383d91375,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 20606a1da5c59f34ba70bce383d91375,
         type: 3}
@@ -10208,6 +10208,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d6283c0d3b347ef479133d39cfe12fe0, type: 2}
   - {fileID: 11400000, guid: 74abec1a8d07e0c419182c53f216509f, type: 2}
   - {fileID: 11400000, guid: a3f7b1b126cc56a47a86ce5afd5c3f32, type: 2}
+  - {fileID: 11400000, guid: 0193d5b5832c2fc4f9ceb599735fb0ec, type: 2}
+  - {fileID: 11400000, guid: c6d449a0336ad784a93345f0219bd56b, type: 2}
 --- !u!1 &508600579
 GameObject:
   m_ObjectHideFlags: 0
@@ -25827,6 +25829,7 @@ MonoBehaviour:
   difficulty: 0
   difficultyIncrement: 0.1
   difficultyIncrementTime: 1
+  timeBetweenSpawns: 1
   spawnSpeedChangeEvent:
     m_PersistentCalls:
       m_Calls: []

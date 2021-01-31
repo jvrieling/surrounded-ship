@@ -14,10 +14,10 @@ public class ShooterData
     public const float MAX_VELOCITY = 6;
 
     public const float MIN_DAMAGE = 0.3f;
-    public const float MAX_DAMAGE = 10;
+    public const float MAX_DAMAGE = 100;
 
     public const int MIN_BULLETS = 1;
-    public const int MAX_BULLETS = 15;
+    public const int MAX_BULLETS = 10;
 
     public float timeBetweenShots = 0.75f;
 

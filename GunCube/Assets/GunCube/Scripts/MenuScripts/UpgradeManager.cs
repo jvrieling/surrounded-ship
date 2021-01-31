@@ -8,24 +8,25 @@ public class UpgradeManager : MonoBehaviour
 {
     public int selectedGun = 1;
 
-    public Upgrade sniperUpgrade;
-
-    public Upgrade shotgunUpgrade;
-
-    public Upgrade minigunUpgrade;
+    public Upgrade damageUpgrade;
+    public Upgrade countUpgrade;
+    public Upgrade rateUpgrade;
+    public Upgrade accuracyUpgrade;
 
     public Text selectedGunText;
-    public Text minigunCostText;
-    public Text sniperCostText;
-    public Text shotgunCostText;
+    public Text rateUpgradeText;
+    public Text damageUpgradeText;
+    public Text countUpgradeText;
+    public Text accuracyUpgradeText;
     public Text yourGoldText;
 
     private void Start()
     {
         ValidateGunSelection();
-        minigunCostText.text = "" + minigunUpgrade.cost;
-        sniperCostText.text = "" + sniperUpgrade.cost;
-        shotgunCostText.text = "" + shotgunUpgrade.cost;
+        rateUpgradeText.text = "" + rateUpgrade.cost;
+        damageUpgradeText.text = "" + damageUpgrade.cost;
+        countUpgradeText.text = "" + countUpgrade.cost;
+        accuracyUpgradeText.text = "" + accuracyUpgrade.cost;
     }
 
     private void Update()
@@ -33,9 +34,10 @@ public class UpgradeManager : MonoBehaviour
         yourGoldText.text = "" + OptionsHolder.instance.save.totalGold;
     }
 
-    public void SniperUpgrade() { UpgradeGun(sniperUpgrade); }
-    public void MinigunUpgrade() { UpgradeGun(minigunUpgrade); }
-    public void ShotgunUpgrade() { UpgradeGun(shotgunUpgrade); }
+    public void DamageUpgrade() { UpgradeGun(damageUpgrade); }
+    public void RateUpgrade() { UpgradeGun(rateUpgrade); }
+    public void CountUpgrade() { UpgradeGun(countUpgrade); }
+    public void AccuracyUpgrade() { UpgradeGun(accuracyUpgrade); }
     public void UpgradeGun(Upgrade data)
     {
         if (OptionsHolder.instance.save.totalGold >= data.cost)

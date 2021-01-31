@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbc057ba5a668c43932b93f58240a01, type: 3}
   m_Name: so_Speedy
   m_EditorClassIdentifier: 
-  minDifficulty: 0.5
+  name: Speedy
+  minDifficulty: 3
   maxDifficulty: 1000
   movementSpeed: 2.53
   damage: 1
-  hp: 16.499998
+  hp: 2
   pointValue: 3
-  goldValue: 10
+  goldValue: 5
   color: {r: 0.5320378, g: 0.6792453, b: 0.3556426, a: 1}
