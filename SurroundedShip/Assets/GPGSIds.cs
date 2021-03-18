@@ -24,9 +24,13 @@
 
 public static class GPGSIds
 {
-        public const string achievement_gold_hoarder = "CgkIm-CJyvgPEAIQAg"; // <GPGSID>
-        public const string achievement_first_day_at_sea = "CgkIm-CJyvgPEAIQAw"; // <GPGSID>
+        public const string achievement_pocket_change = "CgkIm-CJyvgPEAIQBQ"; // <GPGSID>
+        public const string achievement_pirate_eliminator = "CgkIm-CJyvgPEAIQCA"; // <GPGSID>
         public const string leaderboard_high_scores = "CgkIm-CJyvgPEAIQAQ"; // <GPGSID>
+        public const string achievement_first_day_at_sea = "CgkIm-CJyvgPEAIQAw"; // <GPGSID>
+        public const string achievement_defender = "CgkIm-CJyvgPEAIQBg"; // <GPGSID>
+        public const string achievement_gold_hoarder = "CgkIm-CJyvgPEAIQAg"; // <GPGSID>
+        public const string achievement_ultimate_destroyer = "CgkIm-CJyvgPEAIQBw"; // <GPGSID>
 
 }
 

@@ -2,7 +2,7 @@
 
 public class GPGSLeaderboards : MonoBehaviour
 {
-    public static void OpenLeaderboard()
+    public void OpenLeaderboard()
     {
         Social.ShowLeaderboardUI();
     }

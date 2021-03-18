@@ -51,7 +51,9 @@ public class SaveGame
         gold = goldEarned;
         totalGold += goldEarned;
 
-        GPGSAchievements.UpdateIncremental(goldEarned);
+        GPGSAchievements.UpdateGoldEarned(goldEarned);
+        GPGSAchievements.UpdateShipsDestroyed(shipsSunk);
+        if(shipsSunk > 75) GPGSAchievements.AchieveDestroyer();
     }
     public void CheckHighScore(int score)
     {

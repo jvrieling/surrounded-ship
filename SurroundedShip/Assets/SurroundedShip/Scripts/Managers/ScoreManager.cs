@@ -76,7 +76,7 @@ public class ScoreManager : MonoBehaviour
             BGMManager.instance.StopMusic();
 
             //unlock the first day at sea achievement.
-            GPGSAchievements.FirstDayAtSea();
+            GPGSAchievements.AchieveFirstDayAtSea();
 
             SceneManager.LoadScene("sc_EndScreen");
         }
