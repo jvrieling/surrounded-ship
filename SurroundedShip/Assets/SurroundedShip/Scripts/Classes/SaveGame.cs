@@ -40,19 +40,29 @@ public class SaveGame
         gun4 = new ShooterData();
     }
 
+    //Called when the round ends. 
     public void CompleteRound(float diff, int shipsSunk, int goldEarned)
     {
+        //Update the scores in the SaveGame.
         difficulty = diff;
         if (diff > recordDifficulty) recordDifficulty = diff;
         kills = shipsSunk;
         if (kills > highKills) highKills = kills;
         gold = goldEarned;
         totalGold += goldEarned;
+
+        GPGSAchievements.UpdateIncremental(goldEarned);
     }
     public void CheckHighScore(int score)
     {
         this.score = score;
-        if (score > highScore) highScore = score;
+        if (score > highScore)
+        {
+            highScore = score;
+
+            //update the GPG leaderboard
+            GPGSLeaderboards.UpdateLeaderboardScore(highScore);
+        }
     }
     public void UpgradeGun(int index, Upgrade data)
     {

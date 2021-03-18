@@ -24,6 +24,8 @@
 
 public static class GPGSIds
 {
+        public const string achievement_gold_hoarder = "CgkIm-CJyvgPEAIQAg"; // <GPGSID>
+        public const string achievement_first_day_at_sea = "CgkIm-CJyvgPEAIQAw"; // <GPGSID>
         public const string leaderboard_high_scores = "CgkIm-CJyvgPEAIQAQ"; // <GPGSID>
 
 }
