@@ -3,12 +3,13 @@
 /// Date: March 18, 2021     ///
 ///////////////////////////////
 using UnityEngine;
+using EasyMobile;
 
 public class GPGSLeaderboards : MonoBehaviour
 {
     public void OpenLeaderboard()
     {
-        Social.ShowLeaderboardUI();
+        if(GameServices.IsInitialized()) GameServices.ShowLeaderboardUI();
     }
 
     public static void UpdateLeaderboardScore(int score)
@@ -18,6 +19,6 @@ public class GPGSLeaderboards : MonoBehaviour
             return;
         }
 
-        Social.ReportScore(score, GPGSIds.leaderboard_high_scores, null);
+        GameServices.ReportScore(score, EM_GameServicesConstants.Leaderboard_High_Scores);
     }
 }
