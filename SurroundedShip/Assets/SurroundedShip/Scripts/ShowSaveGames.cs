@@ -1,34 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿///////////////////////////////
+/// Author: Justin Vrieling ///
+/// Date: March 24, 2021    ///
+///////////////////////////////
+///
 using UnityEngine;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
-using GooglePlayGames.BasicApi.SavedGame;
+using EasyMobile;
 
 public class ShowSaveGames : MonoBehaviour
 {
     public void ShowSelectUI()
     {
-        uint maxNumToDisplay = 5;
-        bool allowCreateNew = false;
-        bool allowDelete = true;
-
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
-        savedGameClient.ShowSelectSavedGameUI("Select saved game",
-            maxNumToDisplay,
-            allowCreateNew,
-            allowDelete,
-            OnSavedGameSelected);
-    }
-
-    public void OnSavedGameSelected(SelectUIStatus status, ISavedGameMetadata game)
-    {
-        if (status == SelectUIStatus.SavedGameSelected)
-        {
-        }
-        else
-        {
-            // handle cancel or error
-        }
+        GameServices.SavedGames.ShowSelectSavedGameUI(
+       "Select Saved Game",    // UI title
+       5,        // maximum number of displayed saved games
+       true,    // allow creating saved games     
+       true,    // allow deleting saved games
+       (SavedGame game, string error) =>
+       {
+           if (string.IsNullOrEmpty(error))
+           {
+               Debug.Log("You selected saved game: " + game.Name);
+               OptionsHolder.savedGameName = game.Name;
+           }
+           else
+           {
+               Debug.Log(error);
+           }
+       }
+    );
     }
 }

@@ -3,19 +3,11 @@
 /// Date: March 2, 2021     ///
 ///////////////////////////////
 
-using System;
-using System.Xml.Serialization;
 using UnityEngine;
-using System.IO;
 using UnityEngine.Events;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UI;
-using GooglePlayGames;
-using GooglePlayGames.BasicApi;
-using GooglePlayGames.BasicApi.SavedGame;
+using EasyMobile;
 using System.Collections;
-using System.Collections.Generic;
 
 /// <summary>
 /// OptionsHolder handles saving the SaveGame to the actual file. In the future, it will also handle saving the options within the game.
@@ -30,9 +22,10 @@ public class OptionsHolder : MonoBehaviour
 
     public UnityEvent onLoadEvent;
 
-    public static PlayGamesPlatform platform;
-
     public Text statusText;
+
+    private SavedGame savedGame;
+    public static string savedGameName;
 
     private void Awake()
     {
@@ -45,122 +38,86 @@ public class OptionsHolder : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         save.name = "DefaultOptions";
+        savedGameName = "SurroundedShipSave";
         gameSaveLocation = Application.persistentDataPath + "/balls.gcsav";
 
-        statusText.text = "Logging in...";
-        //Authenticate GPG
-        if (platform == null)
-        {
-            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().EnableSavedGames().Build();
-            PlayGamesPlatform.InitializeInstance(config);
-            PlayGamesPlatform.DebugLogEnabled = true;
-
-            platform = PlayGamesPlatform.Activate();
-        }
-
-        Social.Active.localUser.Authenticate(success =>
-        {
-            if (success)
-            {
-                Debug.Log("Logged in!");
-                statusText.text = "Logged in!";
-                GPGSSaveGame.OpenSavedGame("sssave", OnOpenForLoad);
-            }
-            else
-            {
-                statusText.text = "login failed";
-                LoadGame();
-                Debug.LogWarning("Failed to log in.");
-            }
-        });
+        statusText.text = "Attempting to log in...";
+        StartCoroutine(WaitForLogin()); 
     }
-    public void OnOpenForLoad(SavedGameRequestStatus status, ISavedGameMetadata game)
+    public IEnumerator WaitForLogin()
     {
-        if (status == SavedGameRequestStatus.Success)
-        {
-            GPGSSaveGame.openedGame = game;
-            statusText.text = "Opened the savegame";
-            LoadGame();
+        float timeSpent = 0;
+        while (!GameServices.IsInitialized()){
+            timeSpent += Time.deltaTime;
+            if(timeSpent > 3)
+            {
+                onLoadEvent.Invoke();
+                StopAllCoroutines();
+            }
+            yield return null;
         }
-        else
-        {
-            Debug.LogError("Failed to open the GPG save game!");
-            statusText.text = "failed to open";
-        }
+        statusText.text = "Logged in!";
+        LoadGame();
+
+        yield return new WaitForSeconds(2);
+        onLoadEvent.Invoke();
     }
     public void LoadGame()
     {
         if (saveEnabled)
         {
-            if (Application.platform == RuntimePlatform.Android && Social.localUser.authenticated)
+            GameServices.SavedGames.OpenWithAutomaticConflictResolution(savedGameName, (openedGame, error) =>
             {
-                statusText.text = "loading from GPG...";
-                GPGSSaveGame.LoadGameData(OnLoad);
-            }
-            else
-            {
-                if (File.Exists(gameSaveLocation))
+                if (string.IsNullOrEmpty(error))
                 {
-                    statusText.text = "loading from file...";
-                    BinaryFormatter bf = new BinaryFormatter();
-                    FileStream file = File.Open(gameSaveLocation, FileMode.Open);
-                    byte[] data = File.ReadAllBytes(Application.persistentDataPath + "/balls.gcsav");
-                    file.Read(data, 0, 0);
-                    OnLoad(data);
-
-                    //save = (SaveGame)bf.Deserialize(file);
-
-
-                    file.Close();
-                    onLoadEvent.Invoke();
+                    statusText.text = "Opened game!\nLoading data...";
+                    savedGame = openedGame;
+                    GameServices.SavedGames.ReadSavedGameData(savedGame, (game, data, readingError) =>
+                    {
+                        if (string.IsNullOrEmpty(readingError))
+                        {
+                            if (data.Length > 0)
+                            {
+                                statusText.text = "Almost done!";
+                                save = Utils.ObjectSerializationExtension.Deserialize<SaveGame>(data);
+                                StopAllCoroutines();
+                                onLoadEvent.Invoke();
+                            }
+                            else
+                            {
+                                Debug.LogWarning("The loaded saveGame has no data!");
+                            }
+                        }
+                        else
+                        {
+                            statusText.text = "Failed to load data due to error: " + readingError;
+                        }
+                    });
                 }
-            }
+            });
         }
-    }
-    public void OnLoad(byte[] data)
-    {
-        statusText.text = "Reading received data...";
-        if (data != null && data.Length > 0)
-        {
-            statusText.text = "parsing";
-            using (MemoryStream stream = new MemoryStream(data))
-            {
-                statusText.text = "parsing.";
-                XmlSerializer x = new XmlSerializer(typeof(SaveGame));
-                statusText.text = "parsing.. data is " + data.Length;
-                save = (SaveGame)x.Deserialize(stream);
-                stream.Close();
-                statusText.text = "parsing...";
-
-
-                onLoadEvent.Invoke();
-            }
-        }
-        onLoadEvent.Invoke();
     }
     public void SaveGame()
     {
         if (saveEnabled)
         {
-            if (Application.platform == RuntimePlatform.Android && Social.localUser.authenticated)
+            GameServices.SavedGames.OpenWithAutomaticConflictResolution(savedGameName, (openedGame, error) =>
             {
-                byte[] message;
-                using (MemoryStream stream = new MemoryStream())
+                if (string.IsNullOrEmpty(error))
                 {
-                    XmlSerializer x = new XmlSerializer(typeof(SaveGame));
-                    x.Serialize(stream, save);
-                    message = stream.ToArray();
-                    stream.Close();
+                    GameServices.SavedGames.WriteSavedGameData(savedGame, Utils.ObjectSerializationExtension.SerializeToByteArray(save), (updatedSavedGame, writingError) =>
+                    {
+                        if (string.IsNullOrEmpty(writingError))
+                        {
+                            Debug.Log("Saved game data has been written successfully!");
+                        }
+                        else
+                        {
+                            Debug.LogError("Writing saved game data failed with error: " + writingError);
+                        }
+                    });
                 }
-                GPGSSaveGame.SaveGame(message, DateTime.Now - save.dateStarted);
-            }
-            else
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Create(gameSaveLocation);
-                bf.Serialize(file, save);
-                file.Close();
-            }
+            });
         }
     }
     public void GiveGold()
