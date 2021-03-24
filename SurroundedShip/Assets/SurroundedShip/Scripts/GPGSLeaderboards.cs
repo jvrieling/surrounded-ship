@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿///////////////////////////////
+/// Author: Justin Vrieling ///
+/// Date: March 18, 2021     ///
+///////////////////////////////
+using UnityEngine;
 
 public class GPGSLeaderboards : MonoBehaviour
 {

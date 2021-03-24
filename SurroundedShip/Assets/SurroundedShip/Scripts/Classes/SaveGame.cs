@@ -3,6 +3,7 @@
 /// Date: March 2, 2021     ///
 ///////////////////////////////
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ using UnityEngine;
 public class SaveGame
 {
     public string name;
+
+    public float gamesPlayed = 0;
 
     public float difficulty;
     public float recordDifficulty;
@@ -31,6 +34,13 @@ public class SaveGame
     public ShooterData gun2;
     public ShooterData gun3;
     public ShooterData gun4;
+
+    public string gun1JSON;
+    public string gun2JSON;
+    public string gun3JSON;
+    public string gun4JSON;
+
+    public DateTime dateStarted;
 
     public SaveGame()
     {
@@ -50,6 +60,13 @@ public class SaveGame
         if (kills > highKills) highKills = kills;
         gold = goldEarned;
         totalGold += goldEarned;
+
+        if(gamesPlayed == 0)
+        {
+            dateStarted = DateTime.Now;
+        }
+
+        gamesPlayed++;
 
         GPGSAchievements.UpdateGoldEarned(goldEarned);
         GPGSAchievements.UpdateShipsDestroyed(shipsSunk);

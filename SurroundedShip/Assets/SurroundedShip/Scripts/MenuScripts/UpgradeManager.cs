@@ -79,4 +79,8 @@ public class UpgradeManager : MonoBehaviour
 
         selectedGunText.text = (selectedGun).ToString();
     }
+    public void AddGold()
+    {
+        OptionsHolder.instance.GiveGold();
+    }
 }

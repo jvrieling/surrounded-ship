@@ -86,6 +86,12 @@ public class ScoreManager : MonoBehaviour
         kills++;
     }
 
+    public void ForceGameEnd()
+    {
+        hp = 0;
+        ReduceHealth(1);
+    }
+
 }
 
 [System.Serializable]
