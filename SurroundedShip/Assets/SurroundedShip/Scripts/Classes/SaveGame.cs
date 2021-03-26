@@ -41,6 +41,7 @@ public class SaveGame
     public string gun4JSON;
 
     public DateTime dateStarted;
+    public float totalTimePlayed;
 
     public SaveGame()
     {
@@ -51,7 +52,7 @@ public class SaveGame
     }
 
     //Called when the round ends. 
-    public void CompleteRound(float diff, int shipsSunk, int goldEarned)
+    public void CompleteRound(float diff, int shipsSunk, int goldEarned, float roundDuration)
     {
         //Update the scores in the SaveGame.
         difficulty = diff;
@@ -67,10 +68,11 @@ public class SaveGame
         }
 
         gamesPlayed++;
+        totalTimePlayed += roundDuration;
 
         GPGSAchievements.UpdateGoldEarned(goldEarned);
         GPGSAchievements.UpdateShipsDestroyed(shipsSunk);
-        if(shipsSunk > 75) GPGSAchievements.AchieveDestroyer();
+        if(shipsSunk > 150) GPGSAchievements.AchieveDestroyer();
     }
     public void CheckHighScore(int score)
     {

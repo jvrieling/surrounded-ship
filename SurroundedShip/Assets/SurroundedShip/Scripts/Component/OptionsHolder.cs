@@ -8,6 +8,9 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using EasyMobile;
 using System.Collections;
+using System;
+
+using GooglePlayGames.BasicApi.SavedGame;
 
 /// <summary>
 /// OptionsHolder handles saving the SaveGame to the actual file. In the future, it will also handle saving the options within the game.
@@ -23,6 +26,7 @@ public class OptionsHolder : MonoBehaviour
     public UnityEvent onLoadEvent;
 
     public Text statusText;
+    public Text saveStatus;
 
     private SavedGame savedGame;
     public static string savedGameName;
@@ -37,19 +41,20 @@ public class OptionsHolder : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        save.name = "DefaultOptions";
-        savedGameName = "SurroundedShipSave";
+        save.name = "DefaultSave";
+        savedGameName = "sss";
         gameSaveLocation = Application.persistentDataPath + "/balls.gcsav";
 
         statusText.text = "Attempting to log in...";
-        StartCoroutine(WaitForLogin()); 
+        StartCoroutine(WaitForLogin());
     }
     public IEnumerator WaitForLogin()
     {
         float timeSpent = 0;
-        while (!GameServices.IsInitialized()){
+        while (!GameServices.IsInitialized())
+        {
             timeSpent += Time.deltaTime;
-            if(timeSpent > 3)
+            if (timeSpent > 3)
             {
                 onLoadEvent.Invoke();
                 StopAllCoroutines();
@@ -101,24 +106,59 @@ public class OptionsHolder : MonoBehaviour
     {
         if (saveEnabled)
         {
-            GameServices.SavedGames.OpenWithAutomaticConflictResolution(savedGameName, (openedGame, error) =>
+            if (savedGame.IsOpen)
             {
-                if (string.IsNullOrEmpty(error))
+                if (saveStatus != null) saveStatus.text = "Savegame is already open!";
+                WriteSaveGame();
+            }
+            else
+            {
+                if (saveStatus != null) saveStatus.text = "Reopening...";
+                GameServices.SavedGames.OpenWithAutomaticConflictResolution(savedGameName, (openedGame, error) =>
                 {
-                    GameServices.SavedGames.WriteSavedGameData(savedGame, Utils.ObjectSerializationExtension.SerializeToByteArray(save), (updatedSavedGame, writingError) =>
+                    if (string.IsNullOrEmpty(error))
                     {
-                        if (string.IsNullOrEmpty(writingError))
-                        {
-                            Debug.Log("Saved game data has been written successfully!");
-                        }
-                        else
-                        {
-                            Debug.LogError("Writing saved game data failed with error: " + writingError);
-                        }
-                    });
-                }
-            });
+                        savedGame = openedGame;
+                        WriteSaveGame();
+                    }
+                    else { saveStatus.text = "Error opening: " + error; }
+                });
+            }
         }
+    }
+    public void WriteSaveGame()
+    {
+        byte[] saveData = null;
+        try
+        {
+            saveData = Utils.ObjectSerializationExtension.SerializeToByteArray(save);
+        }
+        catch (Exception e)
+        {
+            if (saveStatus != null) saveStatus.text = "Error serializing: " + e;
+        }
+
+
+        SavedGameInfoUpdate.Builder builder = new SavedGameInfoUpdate.Builder();
+        builder.WithUpdatedDescription("Gold: " + save.totalGold + "\nMax Level: " + string.Format("{0:0.#}", save.recordDifficulty));
+        TimeSpan timePlayed = TimeSpan.FromSeconds(save.totalTimePlayed);
+        builder.WithUpdatedPlayedTime(timePlayed);
+
+        SavedGameInfoUpdate infoUpdate = builder.Build();
+        
+        GameServices.SavedGames.WriteSavedGameData(savedGame, saveData, infoUpdate, (updatedSavedGame, writingError) =>
+        {
+            if (string.IsNullOrEmpty(writingError))
+            {
+                Debug.Log("Saved game data has been written successfully!");
+                if (saveStatus != null) saveStatus.text = "Saved!";
+            }
+            else
+            {
+                Debug.LogError("Writing saved game data failed with error: " + writingError);
+                if (saveStatus != null) saveStatus.text = "Error " + writingError + " size " + saveData.Length;
+            }
+        });
     }
     public void GiveGold()
     {

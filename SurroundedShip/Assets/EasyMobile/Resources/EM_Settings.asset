@@ -267,7 +267,7 @@ MonoBehaviour:
     mAutoInitAfterUserLogout: 0
     mAutoInitDelay: 0
     mAndroidMaxLoginRequests: 0
-    mGpgsDebugLogEnabled: 0
+    mGpgsDebugLogEnabled: 1
     mGpgsPopupGravity: 0
     mGpgsShouldRequestServerAuthCode: 0
     mGpgsForceRefreshServerAuthCode: 0
@@ -356,7 +356,14 @@ MonoBehaviour:
       mContent: 
       mTitle: Privacy Consent
       mToggles: []
-      mActionButtons: []
+      mActionButtons:
+      - id: 
+        title: 
+        interactable: 0
+        titleColor: {r: 0, g: 0, b: 0, a: 0}
+        backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+        uninteractableTitleColor: {r: 0, g: 0, b: 0, a: 0}
+        uninteractableBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
     mConsentDialogComposerSettings:
       mToggleSelectedIndex: 0
       mButtonSelectedIndex: 0

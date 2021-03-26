@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System;
 
 namespace Utils
 {
@@ -20,7 +21,13 @@ namespace Utils
             var bf = new BinaryFormatter();
             using (var ms = new MemoryStream())
             {
-                bf.Serialize(ms, obj);
+                try
+                {
+                    bf.Serialize(ms, obj);
+                } catch (Exception e)
+                {
+                    throw e;
+                }
                 return ms.ToArray();
             }
         }

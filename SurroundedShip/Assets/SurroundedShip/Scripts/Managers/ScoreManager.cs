@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
     public int hp = 100;
     public int kills = 0;
     public int gold = 0;
-
+    public float roundDuration;
 
     public float difficulty = 0;
     public float difficultyIncrement = 0.1f;
@@ -40,6 +40,7 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        roundDuration += Time.deltaTime;
         difficultyIncrementTimer += Time.deltaTime;
         if (difficultyIncrementTimer > difficultyIncrementTime)
         {
@@ -68,7 +69,7 @@ public class ScoreManager : MonoBehaviour
 
         if(hp <= 0)
         {
-            OptionsHolder.instance.save.CompleteRound(difficulty, kills, gold);
+            OptionsHolder.instance.save.CompleteRound(difficulty, kills, gold, roundDuration);
             OptionsHolder.instance.save.CheckHighScore(score);
 
             OptionsHolder.instance.SaveGame();
