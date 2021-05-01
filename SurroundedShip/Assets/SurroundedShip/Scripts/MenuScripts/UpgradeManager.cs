@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 /// <summary>
 /// Handles the upgrades as they go through to the shooterData and thus the save game.
@@ -20,6 +21,12 @@ public class UpgradeManager : MonoBehaviour
     public Upgrade countUpgrade;
     public Upgrade rateUpgrade;
     public Upgrade accuracyUpgrade;
+
+    private int damageCount;
+    private int countCount;
+    private int rateCount;
+    private int accuracyCount;
+    private int totalGoldSpent;
 
     public Text selectedGunText;
     public Text rateUpgradeText;
@@ -41,10 +48,24 @@ public class UpgradeManager : MonoBehaviour
     {
         yourGoldText.text = "" + OptionsHolder.instance.save.totalGold;
     }
+    private void OnDestroy()
+    {
+        if (totalGoldSpent > 0)
+        {
+            Debug.Log("Sending analytic for upgrades: " + AnalyticsEvent.LevelUp("upgrade_ship", new Dictionary<string, object> {
+            {"damage", damageCount},
+            {"accuracy", accuracyCount },
+            {"count", countCount },
+            {"rate", rateCount},
+            {"total_spent", totalGoldSpent }
 
-    public void DamageUpgrade() { UpgradeGun(damageUpgrade); }
-    public void RateUpgrade() { UpgradeGun(rateUpgrade); }
-    public void CountUpgrade() { UpgradeGun(countUpgrade); }
+        }));
+        }
+    }
+
+    public void DamageUpgrade() { UpgradeGun(damageUpgrade);  }
+    public void RateUpgrade() { UpgradeGun(rateUpgrade);  }
+    public void CountUpgrade() { UpgradeGun(countUpgrade);  }
     public void AccuracyUpgrade() { UpgradeGun(accuracyUpgrade); }
     public void UpgradeGun(Upgrade data)
     {
@@ -52,6 +73,13 @@ public class UpgradeManager : MonoBehaviour
         {
             OptionsHolder.instance.save.UpgradeGun(selectedGun, data);
             OptionsHolder.instance.save.totalGold -= data.cost;
+
+            totalGoldSpent += data.cost;
+            if(data.accuracy > 0) { accuracyCount++; } 
+            else if(data.bulletCount > 0) { countCount++; }
+            else if(data.bulletDamage > 0) { damageCount++; }
+            else if(data.timeBetweenShots < 0) { rateCount++; }
+
         }
     }
 

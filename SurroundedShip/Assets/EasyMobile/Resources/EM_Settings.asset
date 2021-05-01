@@ -206,10 +206,10 @@ MonoBehaviour:
       mEnable: 1
       mAppId:
         mIosId: 
-        mAndroidId: 547763679259
+        mAndroidId: 4061427
       mDefaultBannerAdId:
         mIosId: 
-        mAndroidId: 
+        mAndroidId: Banner_Android
       mDefaultInterstitialAdId:
         mIosId: video
         mAndroidId: video
@@ -217,15 +217,27 @@ MonoBehaviour:
         mIosId: rewardedVideo
         mAndroidId: rewardedVideo
       mCustomBannerAdIds:
-        keys: []
-        values: []
+        keys:
+        - mName: Home_Screen
+          mUseCustomName: 0
+        values:
+        - mIosId: 
+          mAndroidId: Banner_Android
       mCustomInterstitialAdIds:
-        keys: []
-        values: []
+        keys:
+        - mName: Game_Over
+          mUseCustomName: 0
+        values:
+        - mIosId: 
+          mAndroidId: Interstitial_Android
       mCustomRewardedAdIds:
-        keys: []
-        values: []
-      mEnableTestMode: 0
+        keys:
+        - mName: Item_Store
+          mUseCustomName: 0
+        values:
+        - mIosId: 
+          mAndroidId: Rewarded_Android
+      mEnableTestMode: 1
     mVungleAds:
       mEnable: 0
       mAppId:
@@ -428,5 +440,5 @@ MonoBehaviour:
   mIsGameServiceModuleEnable: 1
   mIsNotificationModuleEnable: 0
   mIsSharingModuleEnable: 0
-  mActiveModuleIndex: 1
+  mActiveModuleIndex: 0
   mIsSelectingModule: 0

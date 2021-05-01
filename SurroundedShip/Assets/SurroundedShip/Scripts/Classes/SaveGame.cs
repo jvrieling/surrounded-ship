@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 /// <summary>
 /// SaveGame handles the data for the current instance of the game. It's a serialized object so it can be easilty written to a file in binary.
@@ -43,6 +44,8 @@ public class SaveGame
     public DateTime dateStarted;
     public float totalTimePlayed;
 
+    public bool showTutorial = true;
+
     public SaveGame()
     {
         gun1 = new ShooterData();
@@ -67,12 +70,16 @@ public class SaveGame
             dateStarted = DateTime.Now;
         }
 
+        showTutorial = false;
         gamesPlayed++;
         totalTimePlayed += roundDuration;
 
         GPGSAchievements.UpdateGoldEarned(goldEarned);
         GPGSAchievements.UpdateShipsDestroyed(shipsSunk);
-        if(shipsSunk > 150) GPGSAchievements.AchieveDestroyer();
+        if (shipsSunk > 150) { 
+            GPGSAchievements.AchieveDestroyer();
+            Debug.Log("Sending analytic destroyer achievement: " + AnalyticsEvent.AchievementUnlocked(EM_GPGSIds.achievement_ultimate_destroyer));
+        }
     }
     public void CheckHighScore(int score)
     {

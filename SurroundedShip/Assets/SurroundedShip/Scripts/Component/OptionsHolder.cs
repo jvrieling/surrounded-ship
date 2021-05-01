@@ -53,6 +53,7 @@ public class OptionsHolder : MonoBehaviour
         float timeSpent = 0;
         while (!GameServices.IsInitialized())
         {
+            //Wait for game services to initialize. If it takes too long just give up and move on.
             timeSpent += Time.deltaTime;
             if (timeSpent > 3)
             {
@@ -61,9 +62,12 @@ public class OptionsHolder : MonoBehaviour
             }
             yield return null;
         }
+
+        //If we get here, game services are ready to go!
         statusText.text = "Logged in!";
         LoadGame();
 
+        //If loading returns an error, it will freeze. Loading should take under 2 seconds...
         yield return new WaitForSeconds(2);
         onLoadEvent.Invoke();
     }
@@ -71,6 +75,7 @@ public class OptionsHolder : MonoBehaviour
     {
         if (saveEnabled)
         {
+            //open the save game...
             GameServices.SavedGames.OpenWithAutomaticConflictResolution(savedGameName, (openedGame, error) =>
             {
                 if (string.IsNullOrEmpty(error))
@@ -106,23 +111,30 @@ public class OptionsHolder : MonoBehaviour
     {
         if (saveEnabled)
         {
-            if (savedGame.IsOpen)
+            if (savedGame != null)
             {
-                if (saveStatus != null) saveStatus.text = "Savegame is already open!";
-                WriteSaveGame();
-            }
-            else
-            {
-                if (saveStatus != null) saveStatus.text = "Reopening...";
-                GameServices.SavedGames.OpenWithAutomaticConflictResolution(savedGameName, (openedGame, error) =>
+                if (savedGame.IsOpen)
                 {
-                    if (string.IsNullOrEmpty(error))
+                    //If the saved game is ope, skip trying to open it.
+                    if (saveStatus != null) saveStatus.text = "Savegame is already open!";
+                    WriteSaveGame();
+                }
+                else
+                {
+                    if (saveStatus != null) saveStatus.text = "Reopening...";
+                    GameServices.SavedGames.OpenWithAutomaticConflictResolution(savedGameName, (openedGame, error) =>
                     {
-                        savedGame = openedGame;
-                        WriteSaveGame();
-                    }
-                    else { saveStatus.text = "Error opening: " + error; }
-                });
+                        if (string.IsNullOrEmpty(error))
+                        {
+                            savedGame = openedGame;
+                            WriteSaveGame();
+                        }
+                        else { saveStatus.text = "Error opening: " + error; }
+                    });
+                }
+            } else
+            {
+                Debug.Log("There's no save game. Assuming this is the editor!");
             }
         }
     }
@@ -138,7 +150,7 @@ public class OptionsHolder : MonoBehaviour
             if (saveStatus != null) saveStatus.text = "Error serializing: " + e;
         }
 
-
+        //Assemble meta data for the cloud save.
         SavedGameInfoUpdate.Builder builder = new SavedGameInfoUpdate.Builder();
         builder.WithUpdatedDescription("Gold: " + save.totalGold + "\nMax Level: " + string.Format("{0:0.#}", save.recordDifficulty));
         TimeSpan timePlayed = TimeSpan.FromSeconds(save.totalTimePlayed);

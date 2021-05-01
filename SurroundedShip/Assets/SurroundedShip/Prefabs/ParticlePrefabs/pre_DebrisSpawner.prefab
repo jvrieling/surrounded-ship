@@ -46,7 +46,7 @@ MonoBehaviour:
   debrisCount: 3
   debrisPrefabs:
   - {fileID: 1834292762922600473, guid: a80078fc389950946868ebf08d57d14f, type: 3}
-  - {fileID: 1834292762922600473, guid: 9ef3803284a0cf94b9c15d3f96fe8668, type: 3}
+  - {fileID: 1834292762922600473, guid: 417f1b63bfbb2f043abbe68d1c0be178, type: 3}
   - {fileID: 1834292762922600473, guid: 7fb188c92b8b6f8459e894f84a9e2430, type: 3}
   - {fileID: 1834292762922600473, guid: 32be6567d56ba894fb54d438a223ed3e, type: 3}
   - {fileID: 1834292762922600473, guid: 3e3bbad0d3bc2f540bea5a8860749fe5, type: 3}

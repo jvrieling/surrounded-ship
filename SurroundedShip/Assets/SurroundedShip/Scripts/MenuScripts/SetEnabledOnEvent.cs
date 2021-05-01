@@ -19,13 +19,14 @@ public class SetEnabledOnEvent : MonoBehaviour
 
     public void ToggleObjects()
     {
-        foreach(GameObject i in disableObjects)
-        {
-            i.SetActive(reverse);
-        }
+        
         foreach(GameObject i in enableObjects)
         {
             i.SetActive(!reverse);
+        }
+        foreach (GameObject i in disableObjects)
+        {
+            i.SetActive(reverse);
         }
         reverse = !reverse;
     }

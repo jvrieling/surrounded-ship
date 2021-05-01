@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 /// <summary>
 /// Manages the scores for the current game, then sends them over to the save game to be saved to a file.
@@ -27,6 +28,8 @@ public class ScoreManager : MonoBehaviour
     public float difficultyIncrementTime = 1;       //How long between each difficulty increment
     private float difficultyIncrementTimer;
 
+    public GameObject spawner;
+
     public float timeBetweenSpawns = 1;
 
     public SpawnSpeedChangeEvent spawnSpeedChangeEvent;
@@ -40,18 +43,21 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        roundDuration += Time.deltaTime;
-        difficultyIncrementTimer += Time.deltaTime;
-        if (difficultyIncrementTimer > difficultyIncrementTime)
+        if (spawner.activeSelf)
         {
-            difficultyIncrementTimer = 0;
-            difficulty += difficultyIncrement;
-
-            if(difficulty % 10 == 0)
+            roundDuration += Time.deltaTime;
+            difficultyIncrementTimer += Time.deltaTime;
+            if (difficultyIncrementTimer > difficultyIncrementTime)
             {
-                timeBetweenSpawns = Mathf.Clamp(timeBetweenSpawns -= 0.1f, MIN_TIME_BETWEEN_SPAWNS, 1);
-            }
+                difficultyIncrementTimer = 0;
+                difficulty += difficultyIncrement;
 
+                if (difficulty % 10 == 0)
+                {
+                    timeBetweenSpawns = Mathf.Clamp(timeBetweenSpawns -= 0.1f, MIN_TIME_BETWEEN_SPAWNS, 1);
+                }
+
+            }
         }
     }
     public void AddScore(int amount)
@@ -69,6 +75,7 @@ public class ScoreManager : MonoBehaviour
 
         if(hp <= 0)
         {
+            BannerAd.showBannerAd = true;
             OptionsHolder.instance.save.CompleteRound(difficulty, kills, gold, roundDuration);
             OptionsHolder.instance.save.CheckHighScore(score);
 
@@ -76,8 +83,21 @@ public class ScoreManager : MonoBehaviour
 
             BGMManager.instance.StopMusic();
 
-            //unlock the first day at sea achievement.
-            GPGSAchievements.AchieveFirstDayAtSea();
+            if (OptionsHolder.instance.save.gamesPlayed == 0)
+            {
+                //unlock the first day at sea achievement.
+                GPGSAchievements.AchieveFirstDayAtSea();
+                AnalyticsResult analyticAchievement = AnalyticsEvent.AchievementUnlocked(EM_GPGSIds.achievement_first_day_at_sea);
+                Debug.Log("Sent analytic on first day at sea! " + analyticAchievement);
+            }
+
+            AnalyticsResult analytic = AnalyticsEvent.LevelComplete("standard_game", new Dictionary<string, object> {
+                {"difficulty_reached", difficulty},
+                {"kills", kills },
+                {"gold_earned", gold },
+                {"time_survived", roundDuration }
+            });
+            Debug.Log("Sent analytic on game played! " + analytic);
 
             SceneManager.LoadScene("sc_EndScreen");
         }

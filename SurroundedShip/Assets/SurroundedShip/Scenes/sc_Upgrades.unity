@@ -1121,6 +1121,7 @@ RectTransform:
   - {fileID: 210410542}
   - {fileID: 717411192}
   - {fileID: 1254377173}
+  - {fileID: 745688701}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1633,7 +1634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0000019073, y: -369.8}
+  m_AnchoredPosition: {x: 0.73002, y: -311.4}
   m_SizeDelta: {x: 163.9715, y: 46.300674}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &717411193
@@ -1750,6 +1751,84 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738111227}
+  m_CullTransparentMesh: 0
+--- !u!1 &745688700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745688701}
+  - component: {fileID: 745688703}
+  - component: {fileID: 745688702}
+  m_Layer: 5
+  m_Name: WatchAShortVideo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &745688701
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745688700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 518999922}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 286.4, y: -283.62}
+  m_SizeDelta: {x: 168.21228, y: 23.683441}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &745688702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745688700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 69d2cf84584213a4b9f1c5bc62a6cf31, type: 3}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Watch a short video
+--- !u!222 &745688703
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745688700}
   m_CullTransparentMesh: 0
 --- !u!1 &745757235
 GameObject:
@@ -1920,8 +1999,9 @@ GameObject:
   - component: {fileID: 954524147}
   - component: {fileID: 954524146}
   - component: {fileID: 954524145}
+  - component: {fileID: 954524149}
   m_Layer: 5
-  m_Name: Damage (1)
+  m_Name: Free Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1944,8 +2024,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 2411, y: -348}
-  m_SizeDelta: {x: 160, y: 50}
+  m_AnchoredPosition: {x: 2512.3, y: -366.9}
+  m_SizeDelta: {x: 150.4177, y: 39.672256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &954524145
 MonoBehaviour:
@@ -2004,8 +2084,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1872551686}
-        m_MethodName: AddGold
+      - m_Target: {fileID: 954524149}
+        m_MethodName: PlayRewardedAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2063,6 +2143,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954524143}
   m_CullTransparentMesh: 0
+--- !u!114 &954524149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954524143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c28dab4b33d1814d9cb116a8c8a4b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &994538588
 GameObject:
   m_ObjectHideFlags: 0
@@ -2711,8 +2803,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 3.76}
-  m_SizeDelta: {x: 0, y: -7.528618}
+  m_AnchoredPosition: {x: 2.93, y: 3.76}
+  m_SizeDelta: {x: -5.8653717, y: -7.528618}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319825327
 MonoBehaviour:
@@ -3549,8 +3641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 117.100006, y: 58.47}
-  m_SizeDelta: {x: 203.99008, y: 54.810272}
+  m_AnchoredPosition: {x: 100.2, y: 66.92}
+  m_SizeDelta: {x: 151.41235, y: 37.9103}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1700178344
 MonoBehaviour:

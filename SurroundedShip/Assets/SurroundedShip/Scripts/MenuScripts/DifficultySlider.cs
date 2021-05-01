@@ -38,6 +38,7 @@ public class DifficultySlider : MonoBehaviour
     {
         OptionsHolder.instance.save.difficulty = difficultySlider.value;
         BGMManager.instance.SetMusicLevel(1);
+        BannerAd.showBannerAd = false;
         SceneManager.LoadScene("sc_Game");
     }
 }
