@@ -237,7 +237,7 @@ MonoBehaviour:
         values:
         - mIosId: 
           mAndroidId: Rewarded_Android
-      mEnableTestMode: 1
+      mEnableTestMode: 0
     mVungleAds:
       mEnable: 0
       mAppId:
