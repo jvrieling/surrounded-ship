@@ -20,7 +20,7 @@ public class ShowAd : MonoBehaviour
     }
 
     // The event handler
-    void InterstitialAdCompletedHandler(InterstitialAdNetwork network, AdLocation location)
+    void InterstitialAdCompletedHandler(InterstitialAdNetwork network, AdPlacement location)
     {
         Debug.Log("Interstitial ad has been closed.");
     }

@@ -22,9 +22,9 @@ MonoBehaviour:
       interstitialAdNetwork: 0
       rewardedAdNetwork: 0
     mAndroidDefaultAdNetworks:
-      bannerAdNetwork: 10
-      interstitialAdNetwork: 10
-      rewardedAdNetwork: 10
+      bannerAdNetwork: 2
+      interstitialAdNetwork: 2
+      rewardedAdNetwork: 2
     mAdColony:
       mEnable: 0
       mAppId:
@@ -52,7 +52,7 @@ MonoBehaviour:
         keys: []
         values: []
     mAdMob:
-      mEnable: 0
+      mEnable: 1
       mTargetingSettings:
         mTagForChildDirectedTreatment: 0
         mExtraOptions:

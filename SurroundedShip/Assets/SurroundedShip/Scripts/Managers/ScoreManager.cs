@@ -85,7 +85,7 @@ public class ScoreManager : MonoBehaviour
 
             if (OptionsHolder.instance.save.gamesPlayed == 0)
             {
-                //unlock the first day at sea achievement.
+                //unlock the first day at sea achievement. 
                 GPGSAchievements.AchieveFirstDayAtSea();
                 AnalyticsResult analyticAchievement = AnalyticsEvent.AchievementUnlocked(EM_GPGSIds.achievement_first_day_at_sea);
                 Debug.Log("Sent analytic on first day at sea! " + analyticAchievement);
