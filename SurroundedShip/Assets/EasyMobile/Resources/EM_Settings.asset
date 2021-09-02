@@ -21,10 +21,12 @@ MonoBehaviour:
       bannerAdNetwork: 0
       interstitialAdNetwork: 0
       rewardedAdNetwork: 0
+      rewardedInterstitialNetwork: 0
     mAndroidDefaultAdNetworks:
       bannerAdNetwork: 2
       interstitialAdNetwork: 2
       rewardedAdNetwork: 2
+      rewardedInterstitialNetwork: 0
     mAdColony:
       mEnable: 0
       mAppId:
@@ -58,18 +60,21 @@ MonoBehaviour:
         mExtraOptions:
           keys: []
           values: []
-      mEnableTestMode: 0
-      mUseAdaptiveBanner: 0
+      mEnableTestMode: 1
+      mUseAdaptiveBanner: 1
       mAppId:
         mIosId: 
         mAndroidId: 
       mDefaultBannerAdId:
         mIosId: 
-        mAndroidId: 
+        mAndroidId: ca-app-pub-7032347944808950/9406709125
       mDefaultInterstitialAdId:
         mIosId: 
         mAndroidId: 
       mDefaultRewardedAdId:
+        mIosId: 
+        mAndroidId: ca-app-pub-7032347944808950/1859106183
+      mDefaultRewardedInterstitialAdId:
         mIosId: 
         mAndroidId: 
       mCustomBannerAdIds:
@@ -79,6 +84,9 @@ MonoBehaviour:
         keys: []
         values: []
       mCustomRewardedAdIds:
+        keys: []
+        values: []
+      mCustomRewardedInterstitialAdIds:
         keys: []
         values: []
     mAppLovin:
@@ -380,6 +388,11 @@ MonoBehaviour:
       mToggleSelectedIndex: 0
       mButtonSelectedIndex: 0
       mEnableCopyPasteMode: 0
+    mIsAppTrackingEnabled: 0
+    mAppTrackingSettings:
+      mIOSInfoPlistKeys:
+      - mKey: NSUserTrackingUsageDescription
+        mValue: '[Your usage description]'
   mRatingRequestSettings:
     mDefaultRatingDialogContent:
       mTitle: Rate $PRODUCT_NAME

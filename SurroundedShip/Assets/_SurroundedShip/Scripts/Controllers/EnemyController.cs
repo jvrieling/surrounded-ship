@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour
         DestructableObject temp = GetComponent<DestructableObject>();
 
         temp.health = data.hp;
-        temp.health += ManagerManager.scoreManager.difficulty * 0.6f;
+        temp.health += ManagerManager.scoreManager.difficulty * 0.7f;
 
         temp.pointValue = data.pointValue;
         temp.pointValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.5f);

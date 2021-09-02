@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tank
   minDifficulty: 15
-  maxDifficulty: 1000
+  maxDifficulty: 80
   movementSpeed: 0.55
   damage: 1
-  hp: 15
+  hp: 17
   pointValue: 10
   goldValue: 6
   color: {r: 0.5943396, g: 0.19727817, b: 0.11494303, a: 1}
