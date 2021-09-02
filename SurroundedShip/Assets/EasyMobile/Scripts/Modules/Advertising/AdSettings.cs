@@ -163,12 +163,14 @@ namespace EasyMobile
             public BannerAdNetwork bannerAdNetwork;
             public InterstitialAdNetwork interstitialAdNetwork;
             public RewardedAdNetwork rewardedAdNetwork;
+            public RewardedInterstitialAdNetwork rewardedInterstitialNetwork;
 
-            public DefaultAdNetworks(BannerAdNetwork banner, InterstitialAdNetwork interstitial, RewardedAdNetwork rewarded)
+            public DefaultAdNetworks(BannerAdNetwork banner, InterstitialAdNetwork interstitial, RewardedAdNetwork rewarded, RewardedInterstitialAdNetwork rewardedInterstitial)
             {
                 bannerAdNetwork = banner;
                 interstitialAdNetwork = interstitial;
                 rewardedAdNetwork = rewarded;
+                rewardedInterstitialNetwork = rewardedInterstitial;
             }
         }
 
@@ -187,9 +189,9 @@ namespace EasyMobile
 
         // Default ad networks.
         [SerializeField]
-        private DefaultAdNetworks mIosDefaultAdNetworks = new DefaultAdNetworks(BannerAdNetwork.None, InterstitialAdNetwork.None, RewardedAdNetwork.None);
+        private DefaultAdNetworks mIosDefaultAdNetworks = new DefaultAdNetworks(BannerAdNetwork.None, InterstitialAdNetwork.None, RewardedAdNetwork.None, RewardedInterstitialAdNetwork.None);
         [SerializeField]
-        private DefaultAdNetworks mAndroidDefaultAdNetworks = new DefaultAdNetworks(BannerAdNetwork.None, InterstitialAdNetwork.None, RewardedAdNetwork.None);
+        private DefaultAdNetworks mAndroidDefaultAdNetworks = new DefaultAdNetworks(BannerAdNetwork.None, InterstitialAdNetwork.None, RewardedAdNetwork.None, RewardedInterstitialAdNetwork.None);
 
         // Network settings.
         [SerializeField]

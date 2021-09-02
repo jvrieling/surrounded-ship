@@ -65,4 +65,10 @@ namespace EasyMobile
         UnityAds = AdNetwork.UnityAds,
         Vungle = AdNetwork.Vungle,
     }
+
+    public enum RewardedInterstitialAdNetwork
+    {
+        None = AdNetwork.None,
+        AdMob = AdNetwork.AdMob
+    }
 }

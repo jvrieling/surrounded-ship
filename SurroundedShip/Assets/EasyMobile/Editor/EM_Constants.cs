@@ -7,7 +7,7 @@ namespace EasyMobile.Editor
     {
         // Product name
         public const string ProductName = "Easy Mobile";
-        public const string Copyright = "© 2017-2020 SgLib Games LLC. All Rights Reserved.";
+        public const string Copyright = "© 2017-2021 SgLib Games LLC. All Rights Reserved.";
 
         // Folder
         public const string RootPath = "Assets/EasyMobile";
@@ -21,7 +21,7 @@ namespace EasyMobile.Editor
         public const string SkinTextureFolder = SkinFolder + "/Textures";
         public const string ResourcesFolder = RootPath + "/Resources";
         public const string ScriptsFolder = RootPath + "/Scripts";
-        public const string ReceiptValidationFolder = "Assets/Plugins/UnityPurchasing/generated";
+        public const string DummyReceiptValidationFolder = GeneratedFolder;
         public const string AssetsPluginsAndroidFolder = "Assets/Plugins/Android";
         public const string AssetsPluginsIOSFolder = "Assets/Plugins/iOS";
 

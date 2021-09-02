@@ -7,17 +7,34 @@ namespace EasyMobile
     [Serializable]
     public class PrivacySettings
     {
+        [SerializeField]
+        private ConsentDialog mDefaultConsentDialog = null;
+
+        [SerializeField]
+        private ConsentDialogComposerSettings mConsentDialogComposerSettings;
+
+        [SerializeField]
+        private bool mIsAppTrackingEnabled = false;
+
+        [SerializeField]
+        private AppTrackingSettings mAppTrackingSettings = null;
+
         /// <summary>
         /// Gets the default consent dialog.
         /// </summary>
         /// <value>The default consent dialog.</value>
         public ConsentDialog DefaultConsentDialog { get { return mDefaultConsentDialog; } }
 
-        [SerializeField]
-        private ConsentDialog mDefaultConsentDialog = null;
+        /// <summary>
+        /// Is App Tracking submodule enabled?
+        /// </summary>
+        public bool IsAppTrackingEnabled { get { return mIsAppTrackingEnabled; } }
 
-        [SerializeField]
-        private ConsentDialogComposerSettings mConsentDialogComposerSettings;
+        /// <summary>
+        /// Gets the App Tracking submodule settings.
+        /// </summary>
+        /// <value>The App Tracking settings.</value>
+        public AppTrackingSettings AppTracking { get { return mAppTrackingSettings; } }
     }
 
     [Serializable]

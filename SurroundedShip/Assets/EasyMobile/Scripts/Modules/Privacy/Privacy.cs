@@ -10,6 +10,32 @@ namespace EasyMobile
     /// </summary>
     public static class Privacy
     {
+        private static IAppTrackingManager sAppTrackingManager;
+
+        /// <summary>
+        /// Entry interface to use the App Tracking Transparency API.
+        /// </summary>
+        public static IAppTrackingManager AppTrackingManager
+        {
+            get
+            {
+                if (sAppTrackingManager == null)
+                {
+#if !EM_ATT
+                    Debug.LogError("App Tracking submodule is currently disable. Please enable it to use Privacy.AppTrackingManager API.");
+                    sAppTrackingManager = null;
+#elif UNITY_EDITOR
+                    sAppTrackingManager = new UnsupportedAppTrackingManager();
+#elif UNITY_IOS
+                    sAppTrackingManager = new iOSAppTrackingManager();
+#else
+                    sAppTrackingManager = new UnsupportedAppTrackingManager();
+#endif
+                }
+                return sAppTrackingManager;
+            }
+        }
+
         /// <summary>
         /// The global data privacy consent status as managed by the GlobalConsentManager.
         /// </summary>

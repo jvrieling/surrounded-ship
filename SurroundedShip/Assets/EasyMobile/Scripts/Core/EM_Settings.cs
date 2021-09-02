@@ -67,7 +67,7 @@ namespace EasyMobile
 
         public static bool IsCompositeModule(Module mod)
         {
-            if (mod == Module.NativeApis || mod == Module.Utilities)
+            if (mod == Module.NativeApis || mod == Module.Privacy || mod == Module.Utilities)
                 return true;
             else
                 return false;
@@ -118,6 +118,8 @@ namespace EasyMobile
                     #endif
                 case Submodule.RatingRequest:
                     return true;
+                case Submodule.AppTracking:
+                    return Privacy.IsAppTrackingEnabled;
                 default:
                     return false;
             }

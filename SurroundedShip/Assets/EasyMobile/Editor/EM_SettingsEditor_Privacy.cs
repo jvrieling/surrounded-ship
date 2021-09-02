@@ -19,6 +19,13 @@ namespace EasyMobile.Editor
         const string PrivacyModuleLabel = "PRIVACY";
         const string PrivacyModuleIntro = "The Privacy module provides convenient tools and resources that help with getting compliant with " +
                                           "user privacy regulations such as GDPR.";
+
+        // App Tracking Settings GUI
+        const string AppTrackingSubmoduleLabel = "APP TRACKING";
+        const string AppTrackingSectionKey = "PRIVACY_APP_TRACKING";
+        const string AppTrackingSubmoduleIntroMsg = "Enable the App Tracking submodule to gain access to the APIs involved app tracking transparency.";
+
+        // Consent Dialog Settings GUI
         const string ContentDescription = "The main content description of the dialog. You can use HTML tags like <b>, <i> and <a> in the text as well as " +
                                           "insert toggles and buttons to form the dialog layout.";
         const string TogglesArrayDescription = "The toggles to be inserted to the dialog content.";
@@ -36,6 +43,47 @@ namespace EasyMobile.Editor
         const int MinActionButtonsCount = 1;
 
         static Dictionary<string, bool> privacyFoldoutStates = new Dictionary<string, bool>();
+
+        private CompositeModuleManager mPrivacyModuleManager;
+
+        private CompositeModuleManager PrivacyModuleManager
+        {
+            get
+            {
+                if (mPrivacyModuleManager == null)
+                    mPrivacyModuleManager = EM_PluginManager.GetModuleManager(Module.Privacy) as CompositeModuleManager;
+                return mPrivacyModuleManager;
+            }
+
+        }
+
+        private SerializedProperty IsAppTrackingSubmoduleEnableProperty
+        {
+            get { return PrivacyProperties.isAppTrackingEnabled.property; }
+        }
+
+        private bool IsAppTrackingSubmoduleEnabled
+        {
+            get
+            {
+                return IsAppTrackingSubmoduleEnableProperty != null ? IsAppTrackingSubmoduleEnableProperty.boolValue : false;
+            }
+            set
+            {
+                if (IsAppTrackingSubmoduleEnableProperty == null || IsAppTrackingSubmoduleEnableProperty.boolValue == value)
+                    return;
+
+                IsAppTrackingSubmoduleEnableProperty.boolValue = value;
+
+                if (PrivacyModuleManager != null)
+                {
+                    if (value)
+                        PrivacyModuleManager.EnableSubmodule(Submodule.AppTracking);
+                    else
+                        PrivacyModuleManager.DisableSubmodule(Submodule.AppTracking);
+                }
+            }
+        }
 
         ConsentDialog DefaultConsentDialog
         {
@@ -76,10 +124,42 @@ namespace EasyMobile.Editor
         {
             DrawModuleHeader();
             EGL.Space();
-            DrawModuleMainGUI();
+            DrawAppTrackingSubmoduleGUI();
+            EGL.Space();
+            DrawPrivacyConsentDialogSettingsGUI();
         }
 
-        void DrawModuleMainGUI()
+        private void DrawAppTrackingSubmoduleGUI()
+        {
+            IsAppTrackingSubmoduleEnabled = DrawUppercaseSectionWithToggle(AppTrackingSectionKey, AppTrackingSubmoduleLabel, IsAppTrackingSubmoduleEnabled, () =>
+            {
+                if (IsAppTrackingSubmoduleEnabled)
+                {
+                    if (PrivacyModuleManager != null)
+                    {
+                        /**
+                        // Android permissions.
+                        var permHolder = PrivacyModuleManager.AndroidPermissionHolderForSubmodule(Submodule.AppTracking);
+
+                        if (permHolder != null)
+                            DrawAndroidPermissionsRequiredSubsection(permHolder.GetAndroidPermissions(), new GUIContent("Required Android Permissions"));
+                        **/
+
+                        // iOS keys.
+                        var itemHolder = PrivacyModuleManager.iOSInfoItemsHolderForSubmodule(Submodule.AppTracking);
+
+                        if (itemHolder != null)
+                            DrawIOSInfoPlistItemsRequiredSubsection(itemHolder.GetIOSInfoPlistKeys(), new GUIContent("Required iOS Info.plist Keys"));
+                    }
+                }
+                else
+                {
+                    EditorGUILayout.HelpBox(AppTrackingSubmoduleIntroMsg, MessageType.Info);
+                }
+            });
+        }
+
+        void DrawPrivacyConsentDialogSettingsGUI()
         {
             DrawUppercaseSection("CONSENT_DIALOG_COMPOSER_FOLDOUT_KEY", "DEFAULT CONSENT DIALOG COMPOSER", () =>
                 {
@@ -130,6 +210,32 @@ namespace EasyMobile.Editor
                     }
                 });
         }
+
+        #region App Tracking submodule
+
+        private void DrawAndroidPermissionsRequiredByPrivacySubmodule(Submodule submob)
+        {
+            if (PrivacyModuleManager != null)
+            {
+                var permHolder = PrivacyModuleManager.AndroidPermissionHolderForSubmodule(submob);
+
+                if (permHolder != null)
+                    DrawAndroidPermissionsRequiredSubsection(permHolder.GetAndroidPermissions(), new GUIContent("Required Android Permissions"));
+            }
+        }
+
+        private void DrawIOSInfoPlistItemsRequiredByPrivacySubmodule(Submodule submod)
+        {
+            if (PrivacyModuleManager != null)
+            {
+                var itemHolder = PrivacyModuleManager.iOSInfoItemsHolderForSubmodule(submod);
+
+                if (itemHolder != null)
+                    DrawIOSInfoPlistItemsRequiredSubsection(itemHolder.GetIOSInfoPlistKeys(), new GUIContent("Required iOS Info.plist Keys"));
+            }
+        }
+
+        #endregion
 
         #region Dialog editor
 

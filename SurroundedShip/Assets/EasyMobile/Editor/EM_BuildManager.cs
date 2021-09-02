@@ -213,7 +213,7 @@ namespace EasyMobile.Editor
                 return plistRoot;
 
             if (string.IsNullOrEmpty(value))
-                Debug.LogWarning("Dectected an empty Info.plist item value with the key: " + key);
+                Debug.LogWarning("Detected an empty Info.plist item value with the key: " + key);
 
             plistRoot.SetString(key, value);
             return plistRoot;

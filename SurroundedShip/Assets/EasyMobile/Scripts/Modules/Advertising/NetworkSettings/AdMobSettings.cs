@@ -47,6 +47,15 @@ namespace EasyMobile
         }
 
         /// <summary>
+        /// Gets or sets the default rewarded interstitial ad identifier.
+        /// </summary>
+        public AdId DefaultRewardedInterstitialAdId
+        {
+            get { return mDefaultRewardedInterstitialAdId; }
+            set { mDefaultRewardedInterstitialAdId = value; }
+        }
+
+        /// <summary>
         /// Enables or disables test mode.
         /// </summary>
         public bool EnableTestMode
@@ -104,6 +113,16 @@ namespace EasyMobile
             set { mCustomRewardedAdIds = value as Dictionary_AdPlacement_AdId; }
         }
 
+        /// <summary>
+        /// Gets or sets the list of custom rewarded interstitial ad identifiers.
+        /// Each identifier is associated with an ad placement.
+        /// </summary>
+        public Dictionary<AdPlacement, AdId> CustomRewardedInterstitialAdIds
+        {
+            get { return mCustomRewardedInterstitialAdIds; }
+            set { mCustomRewardedInterstitialAdIds = value as Dictionary_AdPlacement_AdId; }
+        }
+
         [SerializeField]
         private AdMobTargetingSettings mTargetingSettings;
         [SerializeField]
@@ -120,11 +139,15 @@ namespace EasyMobile
         [SerializeField]
         private AdId mDefaultRewardedAdId;
         [SerializeField]
+        private AdId mDefaultRewardedInterstitialAdId;
+        [SerializeField]
         private Dictionary_AdPlacement_AdId mCustomBannerAdIds;
         [SerializeField]
         private Dictionary_AdPlacement_AdId mCustomInterstitialAdIds;
         [SerializeField]
         private Dictionary_AdPlacement_AdId mCustomRewardedAdIds;
+        [SerializeField]
+        private Dictionary_AdPlacement_AdId mCustomRewardedInterstitialAdIds;
 
         [Serializable]
         public class AdMobTargetingSettings

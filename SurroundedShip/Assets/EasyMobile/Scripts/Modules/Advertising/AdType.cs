@@ -7,6 +7,7 @@ namespace EasyMobile
     {
         Banner,
         Interstitial,
-        Rewarded
+        Rewarded,
+        RewardedInterstitial
     }
 }

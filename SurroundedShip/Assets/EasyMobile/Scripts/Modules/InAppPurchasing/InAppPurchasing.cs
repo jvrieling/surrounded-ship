@@ -112,12 +112,6 @@ namespace EasyMobile
         /// <value>The amazon store extensions.</value>
         public static IAmazonExtensions AmazonStoreExtensions { get { return sAmazonExtensions; } }
 
-        /// <summary>
-        /// Gets the Samsung Apps store extensions.
-        /// </summary>
-        /// <value>The samsung apps store extensions.</value>
-        public static ISamsungAppsExtensions SamsungAppsStoreExtensions { get { return sSamsungAppsExtensions; } }
-
         // The ConfigurationBuilder
         private static ConfigurationBuilder sBuilder;
 
@@ -135,9 +129,6 @@ namespace EasyMobile
 
         // The Amazon store extensions.
         private static IAmazonExtensions sAmazonExtensions;
-
-        // The Samsung Apps store extensions.
-        private static ISamsungAppsExtensions sSamsungAppsExtensions;
 
         // Store listener to handle purchasing events
         private static StoreListener sStoreListener = new StoreListener();
@@ -1129,13 +1120,6 @@ namespace EasyMobile
                 return null;
             }
 
-            if (!IsProductAvailableForSubscriptionManager(prod.receipt))
-            {
-                Debug.Log("Couldn't get subscription info: this product is not available for SubscriptionManager class, " +
-                    "only products that are purchase by 1.19+ SDK can use this class.");
-                return null;
-            }
-
             // Now actually get the subscription info using SubscriptionManager class.
             Dictionary<string, string> introPriceDict = null;
 
@@ -1162,16 +1146,12 @@ namespace EasyMobile
                     return GooglePlay.Name;
                 case IAPStore.AmazonAppStore:
                     return AmazonApps.Name;
-                case IAPStore.SamsungApps:
-                    return SamsungApps.Name;
                 case IAPStore.MacAppStore:
                     return MacAppStore.Name;
                 case IAPStore.AppleAppStore:
                     return AppleAppStore.Name;
                 case IAPStore.WinRT:
                     return WindowsStore.Name;
-                case IAPStore.FacebookStore:
-                    return FacebookStore.Name;
                 default:
                     return string.Empty;
             }
@@ -1210,8 +1190,6 @@ namespace EasyMobile
                     return AndroidStore.AmazonAppStore;
                 case IAPAndroidStore.GooglePlay:
                     return AndroidStore.GooglePlay;
-                case IAPAndroidStore.SamsungApps:
-                    return AndroidStore.SamsungApps;
                 case IAPAndroidStore.NotSpecified:
                     return AndroidStore.NotSpecified;
                 default:
@@ -1232,8 +1210,6 @@ namespace EasyMobile
                     return AppStore.AmazonAppStore;
                 case IAPAndroidStore.GooglePlay:
                     return AppStore.GooglePlay;
-                case IAPAndroidStore.SamsungApps:
-                    return AppStore.SamsungApps;
                 case IAPAndroidStore.NotSpecified:
                     return AppStore.NotSpecified;
                 default:
@@ -1363,7 +1339,6 @@ namespace EasyMobile
                 sAppleExtensions = sStoreExtensionProvider.GetExtension<IAppleExtensions>();
                 sGooglePlayStoreExtensions = sStoreExtensionProvider.GetExtension<IGooglePlayStoreExtensions>();
                 sAmazonExtensions = sStoreExtensionProvider.GetExtension<IAmazonExtensions>();
-                sSamsungAppsExtensions = sStoreExtensionProvider.GetExtension<ISamsungAppsExtensions>();
 
                 // Apple store specific setup.
                 if (sAppleExtensions != null && Application.platform == RuntimePlatform.IPhonePlayer)
@@ -1608,6 +1583,7 @@ namespace EasyMobile
             return isValidReceipt;
         }
 
+        [Obsolete("This method is mainly for checking if the product was bought with UnityIAP version 1.19+, a task not needed now.")]
         private static bool IsProductAvailableForSubscriptionManager(string receipt)
         {
             var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);

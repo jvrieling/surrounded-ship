@@ -5,8 +5,10 @@ using System;
 
 namespace EasyMobile.Editor
 {
-    internal class ModuleManager_Privacy : ModuleManager
+    internal class ModuleManager_Privacy : CompositeModuleManager
     {
+        private const string iOSATTLibPath = EM_Constants.RootPath + "/Plugins/iOS/libEasyMobile_AppTrackingTransparency.a";
+
         #region Singleton
 
         private static ModuleManager_Privacy sInstance;
@@ -29,46 +31,68 @@ namespace EasyMobile.Editor
 
         #region implemented abstract members of ModuleManager
 
-        protected override void InternalEnableModule()
-        {
-            // Nothing.
-        }
-
-        protected override void InternalDisableModule()
-        {
-            // Nothing.
-        }
-
-        public override List<string> AndroidManifestTemplatePaths
-        {
-            get
-            {
-                return null;
-            }
-        }
-
-        public override IAndroidPermissionRequired AndroidPermissionsHolder
-        {
-            get
-            {
-                return EM_Settings.Privacy as IAndroidPermissionRequired;
-            }
-        }
-
-        public override IIOSInfoItemRequired iOSInfoItemsHolder
-        {
-            get
-            {
-                return EM_Settings.Privacy as IIOSInfoItemRequired;
-            }
-        }
-
         public override Module SelfModule
         {
             get
             {
                 return Module.Privacy;
             }
+        }
+
+        #endregion
+
+        #region implemented abstract members of CompositeModuleManager
+
+        public override List<Submodule> SelfSubmodules
+        {
+            get
+            {
+                return new List<Submodule> { Submodule.AppTracking };
+            }
+        }
+
+        public override List<string> AndroidManifestTemplatePathsForSubmodule(Submodule submod)
+        {
+            return null;
+        }
+
+        public override IAndroidPermissionRequired AndroidPermissionHolderForSubmodule(Submodule submod)
+        {
+            return null;
+        }
+
+        public override IIOSInfoItemRequired iOSInfoItemsHolderForSubmodule(Submodule submod)
+        {
+            switch (submod)
+            {
+                case Submodule.AppTracking:
+                    return EM_Settings.Privacy.AppTracking as IIOSInfoItemRequired;
+                default:
+                    return null;
+            }
+        }
+
+        protected override void InternalEnableSubmodule(Submodule submod)
+        {
+            // Include iOS native lib for Contacts.
+            var pluginImporter = AssetImporter.GetAtPath(iOSATTLibPath) as PluginImporter;
+            pluginImporter.ClearSettings();
+            pluginImporter.SetCompatibleWithAnyPlatform(false);
+            pluginImporter.SetCompatibleWithPlatform(BuildTarget.iOS, true);
+
+            // Define scripting symbol.
+            GlobalDefineManager.SDS_AddDefineOnAllPlatforms(EM_ScriptingSymbols.AppTrackingSubmodule);
+        }
+
+        protected override void InternalDisableSubmodule(Submodule submod)
+        {
+            // Exclude iOS native lib for Contacts.
+            var pluginImporter = AssetImporter.GetAtPath(iOSATTLibPath) as PluginImporter;
+            pluginImporter.ClearSettings();
+            pluginImporter.SetCompatibleWithAnyPlatform(false);
+
+            // Remove associated scripting symbol on all platforms it was defined.
+            GlobalDefineManager.SDS_RemoveDefineOnAllPlatforms(EM_ScriptingSymbols.AppTrackingSubmodule);
         }
 
         #endregion

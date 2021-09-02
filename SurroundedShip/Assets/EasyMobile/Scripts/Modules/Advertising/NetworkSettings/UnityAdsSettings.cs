@@ -82,10 +82,13 @@ namespace EasyMobile
             get { return mEnableTestMode; }
             set { mEnableTestMode = value; }
         }
-
-        public const string DEFAULT_BANNER_ZONE_ID = "";
-        public const string DEFAULT_VIDEO_ZONE_ID = "video";
-        public const string DEFAULT_REWARDED_ZONE_ID = "rewardedVideo";
+        
+        public const string DEFAULT_INTERSTITIAL_ID_ANDROID = "Interstitial_Android";
+        public const string DEFAULT_INTERSTITIAL_ID_IOS = "Interstitial_iOS";
+        public const string DEFAULT_REWARDED_ID_ANDROID = "Rewarded_Android";
+        public const string DEFAULT_REWARDED_ID_IOS = "Rewarded_iOS";
+        public const string DEFAULT_BANNER_ID_ANDROID = "Banner_Android";
+        public const string DEFAULT_BANNER_ID_IOS = "Banner_iOS";
 
         [SerializeField]
         private AdId mAppId;
@@ -106,9 +109,9 @@ namespace EasyMobile
 
         public UnityAdsSettings()
         {
-            mDefaultBannerAdId = new AdId(DEFAULT_BANNER_ZONE_ID, DEFAULT_BANNER_ZONE_ID);
-            mDefaultInterstitialAdId = new AdId(DEFAULT_VIDEO_ZONE_ID, DEFAULT_VIDEO_ZONE_ID);
-            mDefaultRewardedAdId = new AdId(DEFAULT_REWARDED_ZONE_ID, DEFAULT_REWARDED_ZONE_ID);
+            mDefaultBannerAdId = new AdId(DEFAULT_BANNER_ID_IOS, DEFAULT_BANNER_ID_ANDROID);
+            mDefaultInterstitialAdId = new AdId(DEFAULT_INTERSTITIAL_ID_IOS, DEFAULT_INTERSTITIAL_ID_ANDROID);
+            mDefaultRewardedAdId = new AdId(DEFAULT_REWARDED_ID_IOS, DEFAULT_REWARDED_ID_ANDROID);
         }
     }
 }

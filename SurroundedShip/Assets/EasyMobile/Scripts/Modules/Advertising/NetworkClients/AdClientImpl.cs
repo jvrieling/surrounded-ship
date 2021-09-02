@@ -95,6 +95,25 @@ namespace EasyMobile
         protected abstract void InternalShowRewardedAd(AdPlacement placement);
 
         /// <summary>
+        /// Instructs the underlaying SDK to load a rewarded interstital ad. Only invoked if the client is initialized.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        protected virtual void InternalLoadRewardedInterstitialAd(AdPlacement placement) {}
+
+        /// <summary>
+        /// Checks with the underlaying SDK to see if a rewarded interstital ad is loaded. Only invoked if the client is initialized.
+        /// </summary>
+        /// <returns><c>true</c>, if is rewarded ad ready was internaled, <c>false</c> otherwise.</returns>
+        /// <param name="placement">Placement.</param>
+        protected virtual bool InternalIsRewardedInterstitialAdReady(AdPlacement placement) {return false;}
+
+        /// <summary>
+        /// Instructs the underlaying SDK to show a rewarded interstital ad. Only invoked if the client is initialized.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        protected virtual void InternalShowRewardedInterstitialAd(AdPlacement placement) {}
+
+        /// <summary>
         /// Occurs when an interstitial ad completed.
         /// </summary>
         public event Action<IAdClient, AdPlacement> InterstitialAdCompleted;
@@ -108,6 +127,16 @@ namespace EasyMobile
         /// Occurs when a rewarded ad completed.
         /// </summary>
         public event Action<IAdClient, AdPlacement> RewardedAdCompleted;
+
+        /// <summary>
+        /// Occurs when a rewarded interstitial ad is skipped.
+        /// </summary>
+        public event Action<IAdClient, AdPlacement> RewardedInterstitialAdSkipped;
+
+        /// <summary>
+        /// Occurs when a rewarded interstitial ad completed.
+        /// </summary>
+        public event Action<IAdClient, AdPlacement> RewardedInterstitialAdCompleted;
 
         /// <summary>
         /// Gets the associated ad network of this client.
@@ -158,6 +187,18 @@ namespace EasyMobile
         }
 
         /// <summary>
+        /// All the custom rewarded interstitial <see cref="AdPlacement"/>(s) defined in <see cref="EM_Settings"/>.
+        /// If there's no such custom placement defined, this will return <c>null</c>.
+        /// </summary>
+        public List<AdPlacement> DefinedCustomRewardedInterstitialAdPlacements
+        {
+            get
+            {
+                return GetCustomPlacementsFromDefinedDict(CustomRewardedInterstitialAdsDict);
+            }
+        }
+
+        /// <summary>
         /// Defined interstitial <see cref="AdPlacement"/>(s) in <see cref="EM_Settings"/>.
         /// </summary>
         protected abstract Dictionary<AdPlacement, AdId> CustomInterstitialAdsDict { get; }
@@ -166,6 +207,11 @@ namespace EasyMobile
         /// Defined rewarded <see cref="AdPlacement"/>(s) in <see cref="EM_Settings"/>.
         /// </summary>
         protected abstract Dictionary<AdPlacement, AdId> CustomRewardedAdsDict { get; }
+
+        /// <summary>
+        /// Defined rewarded <see cref="AdPlacement"/>(s) in <see cref="EM_Settings"/>.
+        /// </summary>
+        protected virtual Dictionary<AdPlacement, AdId> CustomRewardedInterstitialAdsDict { get {return null;} }
 
         /// <summary>
         /// Gets a value indicating whether this client is initialized.
@@ -406,7 +452,42 @@ namespace EasyMobile
         }
 
         /// <summary>
-        /// Determines whether the rewarded ad ready at the default placement is loaded.
+        /// Loads the rewarded interstital ad at the default placement.
+        /// </summary>
+        public virtual void LoadRewardedInterstitialAd()
+        {
+            LoadRewardedInterstitialAd(AdPlacement.Default);
+        }
+
+        /// <summary>
+        /// Loads the rewarded interstital ad at the specified placement.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        public virtual void LoadRewardedInterstitialAd(AdPlacement placement)
+        {
+            if (IsSdkAvail)
+            {
+                if (placement == null)
+                {
+                    Debug.LogFormat("Cannot load {0} rewarded interstitial ad at placement: null", Network.ToString());
+                    return;
+                }
+
+                if (!CheckInitialize())
+                    return;
+
+                // Not reloading a loaded ad.
+                if (!IsRewardedInterstitialAdReady(placement))
+                    InternalLoadRewardedInterstitialAd(placement);
+            }
+            else
+            {
+                Debug.Log(NoSdkMessage);
+            }
+        }
+
+        /// <summary>
+        /// Determines whether the rewarded interstital ad ready at the default placement is loaded.
         /// </summary>
         /// <returns><c>true</c> if the ad is loaded; otherwise, <c>false</c>.</returns>
         public virtual bool IsRewardedAdReady()
@@ -426,6 +507,29 @@ namespace EasyMobile
             else
                 return false;
         }
+
+        /// <summary>
+        /// Determines whether the rewarded ad ready at the default placement is loaded.
+        /// </summary>
+        /// <returns><c>true</c> if the ad is loaded; otherwise, <c>false</c>.</returns>
+        public virtual bool IsRewardedInterstitialAdReady()
+        {
+            return IsRewardedInterstitialAdReady(AdPlacement.Default);
+        }
+
+        /// <summary>
+        /// Determines whether the rewarded interstital ad at the specified placement is loaded.
+        /// </summary>
+        /// <returns><c>true</c> if the ad is loaded; otherwise, <c>false</c>.</returns>
+        /// <param name="placement">Placement.</param>
+        public virtual bool IsRewardedInterstitialAdReady(AdPlacement placement)
+        {
+            if (CheckInitialize(false) && placement != null)
+                return InternalIsRewardedInterstitialAdReady(placement);
+            else
+                return false;
+        }
+
 
         /// <summary>
         /// Shows the rewarded ad at the default placement.
@@ -469,6 +573,48 @@ namespace EasyMobile
         }
 
         /// <summary>
+        /// Shows the rewarded interstitial ad at the default placement.
+        /// </summary>
+        public virtual void ShowRewardedInterstitialAd()
+        {
+            ShowRewardedInterstitialAd(AdPlacement.Default);
+        }
+
+        /// <summary>
+        /// Shows the rewarded interstitial ad at the specified placement.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        public virtual void ShowRewardedInterstitialAd(AdPlacement placement)
+        {
+            if (IsSdkAvail)
+            {
+                if (placement == null)
+                {
+                    Debug.LogFormat("Cannot show {0} rewarded interstitial ad at placement: null", Network.ToString());
+                    return;
+                }
+
+                if (!CheckInitialize())
+                    return;
+
+                if (!IsRewardedInterstitialAdReady(placement))
+                {
+                    Debug.LogFormat("Cannot show {0} rewarded interstitial ad at placement {1}: ad is not loaded.",
+                        Network.ToString(),
+                        AdPlacement.GetPrintableName(placement));
+                    return;
+                }
+
+                InternalShowRewardedInterstitialAd(placement);
+            }
+            else
+            {
+                Debug.Log(NoSdkMessage);
+            }
+        }
+
+
+        /// <summary>
         /// Raises the <see cref="InterstitialAdCompleted"/> event on main thread.
         /// </summary>
         /// <param name="placement">Placement.</param>
@@ -504,6 +650,33 @@ namespace EasyMobile
             {
                 if (RewardedAdCompleted != null)
                     RewardedAdCompleted(this, placement);
+            });
+        }
+
+
+        /// <summary>
+        /// Raises the <see cref="RewardedInterstitialAdSkipped"/> event on main thread.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        protected virtual void OnRewardedInterstitialAdSkipped(AdPlacement placement)
+        {
+            RuntimeHelper.RunOnMainThread(() =>
+            {
+                if (RewardedInterstitialAdSkipped != null)
+                    RewardedInterstitialAdSkipped(this, placement);
+            });
+        }
+
+        /// <summary>
+        /// Raises the <see cref="RewardedInterstitialAdCompleted"/> event on main thread.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        protected virtual void OnRewardedInterstitialAdCompleted(AdPlacement placement)
+        {
+            RuntimeHelper.RunOnMainThread(() =>
+            {
+                if (RewardedInterstitialAdCompleted != null)
+                    RewardedInterstitialAdCompleted(this, placement);
             });
         }
 

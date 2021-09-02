@@ -569,7 +569,7 @@ namespace EasyMobile
 
         #region Internal Stuff
 
-        #if EM_ADCOLONY
+#if EM_ADCOLONY
         
         private void Configure()
         {

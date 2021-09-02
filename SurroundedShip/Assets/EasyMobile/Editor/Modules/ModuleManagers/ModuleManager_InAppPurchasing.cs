@@ -34,19 +34,21 @@ namespace EasyMobile.Editor
             // Check if UnityIAP is enable and act accordingly.
             if (EM_ExternalPluginManager.IsUnityIAPAvail())
             {
-                // Generate dummy AppleTangle and GoogleTangle classes if they don't exist.
+                // Generate dummy AppleTangle and GoogleTangle classes if the "real" ones don't exist, to prevent
+                // reference errors in InAppPurchasing receipt validation code.
+                // If the actual tangles files are already generated, remove all dummy files if they exist.
                 // Note that AppleTangle and GooglePlayTangle only get compiled on following platforms,
                 // therefore the compilational condition is needed, otherwise the code will repeat forever.
                 #if UNITY_ANDROID || UNITY_IPHONE || UNITY_STANDALONE_OSX || UNITY_TVOS
-                if (!EM_EditorUtil.AppleTangleClassExists())
-                {
+                if (!EM_EditorUtil.AppleTangleClassExists() && !EM_EditorUtil.DummyAppleTangleClassExists())
                     EM_EditorUtil.GenerateDummyAppleTangleClass();
-                }
+                else if (EM_EditorUtil.AppleTangleClassExists())
+                    EM_EditorUtil.RemoveDummyAppleTangleClass();
 
-                if (!EM_EditorUtil.GooglePlayTangleClassExists())
-                {
+                if (!EM_EditorUtil.GooglePlayTangleClassExists() && !EM_EditorUtil.DummyGooglePlayTangleExists())
                     EM_EditorUtil.GenerateDummyGooglePlayTangleClass();
-                }
+                else if (EM_EditorUtil.GooglePlayTangleClassExists())
+                    EM_EditorUtil.RemoveDummyGooglePlayTangleClass();
                 #endif
 
                 GlobalDefineManager.SDS_AddDefineOnAllPlatforms(EM_ScriptingSymbols.UnityIAP);

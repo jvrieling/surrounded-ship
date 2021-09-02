@@ -194,6 +194,35 @@ namespace EasyMobile
         /// <param name="placement">Placement.</param>
         void ShowRewardedAd(AdPlacement placement);
 
+        /// <summary>
+        /// Occurs when a rewarded interstitial ad is skipped. This event is always raised on main thread.
+        /// </summary>
+        event Action<IAdClient, AdPlacement> RewardedInterstitialAdSkipped;
+
+        /// <summary>
+        /// Occurs when a rewarded interstitial ad completed. This event is always raised on main thread.
+        /// </summary>
+        event Action<IAdClient, AdPlacement> RewardedInterstitialAdCompleted;
+
+        /// <summary>
+        /// Loads the rewarded interstital ad at the specified placement.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        void LoadRewardedInterstitialAd(AdPlacement placement);
+
+        /// <summary>
+        /// Determines whether the rewarded interstital ad at the specified placement is loaded.
+        /// </summary>
+        /// <returns><c>true</c> if the ad is loaded; otherwise, <c>false</c>.</returns>
+        /// <param name="placement">Placement.</param>
+        bool IsRewardedInterstitialAdReady(AdPlacement placement);
+
+        /// <summary>
+        /// Shows the rewarded interstitial ad at the specified placement.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        void ShowRewardedInterstitialAd(AdPlacement placement);
+
         #endregion
 
         #region Custom AdPlacements
@@ -210,6 +239,11 @@ namespace EasyMobile
         /// </summary>
         List<AdPlacement> DefinedCustomRewardedAdPlacements { get; }
 
+        /// <summary>
+        /// All the custom rewarded interstitial <see cref="AdPlacement"/>(s) defined in <see cref="EM_Settings"/>.
+        /// If there's no such custom placement defined, this will return <c>null</c>.
+        /// </summary>
+        List<AdPlacement> DefinedCustomRewardedInterstitialAdPlacements { get; }
         #endregion
     }
 }

@@ -140,7 +140,7 @@ namespace EasyMobile.Editor
         /// Deletes the file at path if it exists.
         /// </summary>
         /// <param name="path">File path.</param>
-        public static void Deletefile(string path)
+        public static void DeleteFile(string path)
         {
             path = SlashesToPlatformSeparator(path);
 

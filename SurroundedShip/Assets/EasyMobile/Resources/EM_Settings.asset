@@ -203,7 +203,7 @@ MonoBehaviour:
         keys: []
         values: []
     mUnityAds:
-      mEnable: 1
+      mEnable: 0
       mAppId:
         mIosId: 
         mAndroidId: 4061427

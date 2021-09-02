@@ -39,8 +39,8 @@ namespace EasyMobile.Editor
         const string TapJoyAvailMsg = "Tapjoy plugin was imported.";
         const string UnityAdsUnvailableWarning = "Unity Ads service is disabled or not available for the current platform. To enable it go to Window > Services and make sure the current platform is iOS or Android.";
         const string UnityAdsAvailableMsg = "Unity Ads service is enabled.";
-        const string UnityAdsDefaultPlacementsMsg = "The below interstitial and rewarded ad placement IDs match the default IDs generated automatically by Unity Ads . " +
-                                                    "These IDs are not editable and you should avoid repeating them when creating custom placements.";
+        const string UnityAdsDefaultPlacementsMsg = "The below ad placement IDs match the default IDs generated automatically by Unity Ads . " +
+                                                    "Generally these should not be modified and you should also avoid repeating them when creating custom placements.";
         const string UnityAdsMonetizationSDKRequiredMsg = "The current built-in Unity Ads service doesn't support banner ads. Please import the Unity Monetization SDK from Assets Store to use Unity's banner ads.";
         const string AdvertisingConstantGenerationIntro = "Generate the static class " + EM_Constants.RootNameSpace + "." + EM_Constants.AdvertisingConstantsClassName + " that contains the constants of the above ad IDs." +
                                                           " Remember to regenerate if you make changes to these IDs.";
@@ -457,6 +457,7 @@ namespace EasyMobile.Editor
                     EditorGUILayout.PropertyField(AdProperties.admobDefaultBannerAdId.property, AdProperties.admobDefaultBannerAdId.content, true);
                     EditorGUILayout.PropertyField(AdProperties.admobDefaultInterstitialAdId.property, AdProperties.admobDefaultInterstitialAdId.content, true);
                     EditorGUILayout.PropertyField(AdProperties.admobDefaultRewardedAdId.property, AdProperties.admobDefaultRewardedAdId.content, true);
+                    EditorGUILayout.PropertyField(AdProperties.admobDefaultRewardedInterstitialAdId.property, AdProperties.admobDefaultRewardedInterstitialAdId.content, true);
                     EditorGUI.indentLevel--;
 
                     // Custom placements.
@@ -466,6 +467,7 @@ namespace EasyMobile.Editor
                     EditorGUILayout.PropertyField(AdProperties.admobCustomBannerAdIds.property, AdProperties.admobCustomBannerAdIds.content, true);
                     EditorGUILayout.PropertyField(AdProperties.admobCustomInterstitialAdIds.property, AdProperties.admobCustomInterstitialAdIds.content, true);
                     EditorGUILayout.PropertyField(AdProperties.admobCustomRewardedAdIds.property, AdProperties.admobCustomRewardedAdIds.content, true);
+                    EditorGUILayout.PropertyField(AdProperties.admobCustomRewardedInterstitialAdIds.property, AdProperties.admobCustomRewardedInterstitialAdIds.content, true);
                     EditorGUI.indentLevel--;
 
                     // Ad targeting settings.
@@ -1040,19 +1042,16 @@ namespace EasyMobile.Editor
                     // Default Placements.
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Default Placement", EditorStyles.boldLabel);
-
+                    EditorGUILayout.HelpBox(UnityAdsDefaultPlacementsMsg, MessageType.None);
 #if UNITY_MONETIZATION
                     EditorGUI.indentLevel++;
                     EditorGUILayout.PropertyField(AdProperties.unityAdsDefaultBannerAdId.property, AdProperties.unityAdsDefaultBannerAdId.content, true);
                     EditorGUI.indentLevel--;
 #endif
-                    EditorGUILayout.HelpBox(UnityAdsDefaultPlacementsMsg, MessageType.None);
                     EditorGUI.indentLevel++;
                     // not allowing modifying default UnityAds default placement IDs
-                    EditorGUI.BeginDisabledGroup(true);
                     EditorGUILayout.PropertyField(AdProperties.unityAdsDefaultInterstitialAdId.property, AdProperties.unityAdsDefaultInterstitialAdId.content, true);
                     EditorGUILayout.PropertyField(AdProperties.unityAdsDefaultRewardedAdId.property, AdProperties.unityAdsDefaultRewardedAdId.content, true);
-                    EditorGUI.EndDisabledGroup();
                     EditorGUI.indentLevel--;
 
                     // Custom placements.

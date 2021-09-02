@@ -18,6 +18,7 @@ namespace EasyMobile
         public const string NSCameraUsageDescription = "NSCameraUsageDescription";
         public const string NSMicrophoneUsageDescription = "NSMicrophoneUsageDescription";
         public const string NSContactsUsageDescription = "NSContactsUsageDescription";
+        public const string NSUserTrackingUsageDescription = "NSUserTrackingUsageDescription";
 
         #endregion
 

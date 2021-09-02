@@ -44,8 +44,10 @@ namespace EasyMobile
         private static AutoAdLoadingMode currentAutoLoadAdsMode = AutoAdLoadingMode.None;
         private static float lastDefaultInterstitialAdLoadTimestamp = DEFAULT_TIMESTAMP;
         private static float lastDefaultRewardedAdLoadTimestamp = DEFAULT_TIMESTAMP;
+        private static float lastDefaultRewardedInterstitialAdLoadTimestamp = DEFAULT_TIMESTAMP;
         private static Dictionary<string, float> lastCustomInterstitialAdsLoadTimestamp = new Dictionary<string, float>();
         private static Dictionary<string, float> lastCustomRewardedAdsLoadTimestamp = new Dictionary<string, float>();
+        private static Dictionary<string, float> lastCustomRewardedInterstitialAdsLoadTimestamp = new Dictionary<string, float>();
 
         /// <summary>
         /// Since <see cref="AutoLoadAdsMode"/> can be changed in both <see cref="Update"/> method and from outside script,
@@ -75,6 +77,17 @@ namespace EasyMobile
         /// Occurs when a rewarded ad completed and the user should be rewarded.
         /// </summary>
         public static event Action<RewardedAdNetwork, AdPlacement> RewardedAdCompleted;
+
+        /// <summary>
+        /// Occurs when a rewarded interstitial ad is skipped (the user didn't complete watching
+        /// the ad and therefore is not entitled to the reward).
+        /// </summary>
+        public static event Action<RewardedInterstitialAdNetwork, AdPlacement> RewardedInterstitialAdSkipped;
+
+        /// <summary>
+        /// Occurs when a rewarded interstitial ad completed and the user should be rewarded.
+        /// </summary>
+        public static event Action<RewardedInterstitialAdNetwork, AdPlacement> RewardedInterstitialAdCompleted;
 
         /// <summary>
         /// Occurs when ads have been removed.
@@ -294,6 +307,21 @@ namespace EasyMobile
                 return GetWorkableAdClient((AdNetwork)EM_Settings.Advertising.IosDefaultAdNetworks.rewardedAdNetwork);
 #elif UNITY_ANDROID
                 return GetWorkableAdClient((AdNetwork)EM_Settings.Advertising.AndroidDefaultAdNetworks.rewardedAdNetwork);
+#else
+                return GetWorkableAdClient(AdNetwork.None);
+#endif
+            }
+        }
+
+        private static AdClientImpl DefaultRewardedInterstitialAdClient
+        {
+
+            get
+            {
+#if UNITY_IOS
+                return GetWorkableAdClient((AdNetwork)EM_Settings.Advertising.IosDefaultAdNetworks.rewardedInterstitialNetwork);
+#elif UNITY_ANDROID
+                return GetWorkableAdClient((AdNetwork)EM_Settings.Advertising.AndroidDefaultAdNetworks.rewardedInterstitialNetwork);
 #else
                 return GetWorkableAdClient(AdNetwork.None);
 #endif
@@ -774,6 +802,103 @@ namespace EasyMobile
         }
 
         //------------------------------------------------------------
+        // Rewarded Interstitial.
+        //------------------------------------------------------------
+/// <summary>
+        /// Loads the default rewarded interstitial ad.
+        /// </summary>
+        public static void LoadRewardedInterstitialAd()
+        {
+            LoadRewardedInterstitialAd(DefaultRewardedInterstitialAdClient, AdPlacement.Default);
+        }
+
+        /// <summary>
+        /// Loads the rewarded interstital ad of the default rewarded ad network at the specified placement.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        public static void LoadRewardedInterstitialAd(AdPlacement placement)
+        {
+            LoadRewardedInterstitialAd(DefaultRewardedInterstitialAdClient, placement);
+        }
+
+        /// <summary>
+        /// Loads the rewarded interstitial ad of the specified ad network at the specified placement.
+        /// </summary>
+        /// <param name="adNetwork">Ad network.</param>
+        /// <param name="placement">Placement. Pass <c>AdPlacement.Default</c> to specify the default placement.</param>
+        public static void LoadRewardedInterstitialAd(RewardedInterstitialAdNetwork adNetwork, AdPlacement placement)
+        {
+            LoadRewardedInterstitialAd(GetWorkableAdClient((AdNetwork)adNetwork), placement);
+        }
+
+        /// <summary>
+        /// Determines whether the default rewarded interstital ad is ready to show.
+        /// </summary>
+        /// <returns><c>true</c> if the ad is ready; otherwise, <c>false</c>.</returns>
+        public static bool IsRewardedInterstitialAdReady()
+        {
+            if (!IsInitialized())
+                return false;
+            return IsRewardedInterstitialAdReady(DefaultRewardedInterstitialAdClient, AdPlacement.Default);
+        }
+
+        /// <summary>
+        /// Determines whether the rewarded interstitial ad of the default rewarded ad network
+        /// at the specified placement is ready to show.
+        /// </summary>
+        /// <returns><c>true</c> if the ad is ready; otherwise, <c>false</c>.</returns>
+        /// <param name="placement">Placement.</param>
+        public static bool IsRewardedInterstitialAdReady(AdPlacement placement)
+        {
+            if (!IsInitialized())
+                return false;
+            return IsRewardedInterstitialAdReady(DefaultRewardedInterstitialAdClient, placement);
+        }
+
+        /// <summary>
+        /// Determines whether the rewarded interstital ad of the specified ad network
+        /// at the specified placement is ready to show.
+        /// </summary>
+        /// <returns><c>true</c> if the ad is ready; otherwise, <c>false</c>.</returns>
+        /// <param name="adNetwork">Ad network.</param>
+        /// <param name="placement">Placement. Pass <c>AdPlacement.Default</c> to specify the default placement.</param>
+        public static bool IsRewardedInterstitialAdReady(RewardedInterstitialAdNetwork adNetwork, AdPlacement placement)
+        {
+            if (!IsInitialized())
+                return false;
+            return IsRewardedInterstitialAdReady(GetWorkableAdClient((AdNetwork)adNetwork), placement);
+        }
+
+        /// <summary>
+        /// Shows the default rewarded interstitial ad.
+        /// </summary>
+        public static void ShowRewardedInterstitialAd()
+        {
+            ShowRewardedInterstitialAd(DefaultRewardedInterstitialAdClient, AdPlacement.Default);
+        }
+
+        /// <summary>
+        /// Shows the rewarded interstitial ad of the default rewarded ad network at the specified placement.
+        /// </summary>
+        /// <param name="placement">Placement.</param>
+        public static void ShowRewardedInterstitialAd(AdPlacement placement)
+        {
+            ShowRewardedInterstitialAd(DefaultRewardedInterstitialAdClient, placement);
+        }
+
+        /// <summary>
+        /// Shows the rewarded interstital ad of the specified ad network at the specified placement.
+        /// </summary>
+        /// <param name="adNetwork">Ad network.</param>
+        /// <param name="placement">Placement. Pass <c>AdPlacement.Default</c> to specify the default placement.</param>
+        public static void ShowRewardedInterstitialAd(RewardedInterstitialAdNetwork adNetwork, AdPlacement placement)
+        {
+            ShowRewardedInterstitialAd(GetWorkableAdClient((AdNetwork)adNetwork), placement);
+        }
+
+
+
+        //------------------------------------------------------------
         // Ads Removal.
         //------------------------------------------------------------
 
@@ -938,6 +1063,16 @@ namespace EasyMobile
                                 }
                             }
                             break;
+                        case AdType.RewardedInterstitial:
+                            if (!IsRewardedInterstitialAdReady())
+                            {
+                                if (Time.realtimeSinceStartup - lastDefaultRewardedInterstitialAdLoadTimestamp >= EM_Settings.Advertising.AdLoadingInterval)
+                                {
+                                    LoadRewardedInterstitialAd();
+                                    lastDefaultRewardedInterstitialAdLoadTimestamp = Time.realtimeSinceStartup;
+                                }
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -963,6 +1098,7 @@ namespace EasyMobile
             {
                 LoadAllInterstitialAds(availableInterstitialNetworks);
                 LoadAllRewardedAds(availableRewardedNetworks);
+                LoadAllRewardedInterstitialAds(availableInterstitialNetworks);
                 yield return new WaitForSeconds(EM_Settings.Advertising.AdCheckingInterval);
             }
         }
@@ -1050,6 +1186,50 @@ namespace EasyMobile
 
                     LoadRewardedAd(client, placement);
                     lastCustomRewardedAdsLoadTimestamp[tempIndex] = Time.realtimeSinceStartup;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load all available rewarded ads of specific clients. 
+        /// </summary>
+        private static void LoadAllRewardedInterstitialAds(List<IAdClient> clients)
+        {
+            foreach (var client in clients)
+            {
+                /// Load all custom rewarded ads if available.
+                var customPlacements = client.DefinedCustomRewardedInterstitialAdPlacements;
+
+                if (customPlacements == null)
+                {
+                    customPlacements = new List<AdPlacement>();
+                }
+
+                // Add the Default placement to the loading list. Some networks
+                // may only allow loading one rewarded ad at a time (subsequent loadings can
+                // only be done if previous ad has been consumed), so we make sure the
+                // Default placement is always loaded first by inserting it at the first index.
+                if (!customPlacements.Contains(AdPlacement.Default))
+                    customPlacements.Insert(0, AdPlacement.Default);
+
+                foreach (var placement in customPlacements)
+                {
+                    if (!client.IsValidPlacement(placement, AdType.RewardedInterstitial))
+                        continue;
+
+                    string tempIndex = client.Network.ToString() + placement.ToString();
+
+                    if (IsRewardedInterstitialAdReady(client, placement))
+                        continue;
+
+                    if (!lastCustomRewardedInterstitialAdsLoadTimestamp.ContainsKey(tempIndex))
+                        lastCustomRewardedInterstitialAdsLoadTimestamp.Add(tempIndex, DEFAULT_TIMESTAMP);
+
+                    if (Time.realtimeSinceStartup - lastCustomRewardedInterstitialAdsLoadTimestamp[tempIndex] < EM_Settings.Advertising.AdLoadingInterval)
+                        continue;
+
+                    LoadRewardedInterstitialAd(client, placement);
+                    lastCustomRewardedInterstitialAdsLoadTimestamp[tempIndex] = Time.realtimeSinceStartup;
                 }
             }
         }
@@ -1151,6 +1331,11 @@ namespace EasyMobile
             client.LoadRewardedAd(placement);
         }
 
+        private static void LoadRewardedInterstitialAd(IAdClient client, AdPlacement placement)
+        {
+            client.LoadRewardedInterstitialAd(placement);
+        }
+
         private static bool IsRewardedAdReady(IAdClient client, AdPlacement placement)
         {
             if (!IsInitialized())
@@ -1159,9 +1344,22 @@ namespace EasyMobile
             return client.IsRewardedAdReady(placement);
         }
 
+        private static bool IsRewardedInterstitialAdReady(IAdClient client, AdPlacement placement)
+        {
+            if (!IsInitialized())
+                return false;
+            
+            return client.IsRewardedInterstitialAdReady(placement);
+        }
+
         private static void ShowRewardedAd(IAdClient client, AdPlacement placement)
         {
             client.ShowRewardedAd(placement);
+        }
+
+        private static void ShowRewardedInterstitialAd(IAdClient client, AdPlacement placement)
+        {
+            client.ShowRewardedInterstitialAd(placement);
         }
 
         /// <summary>
@@ -1342,6 +1540,9 @@ namespace EasyMobile
             client.InterstitialAdCompleted += OnInternalInterstitialAdCompleted;
             client.RewardedAdSkipped += OnInternalRewardedAdSkipped;
             client.RewardedAdCompleted += OnInternalRewardedAdCompleted;
+            
+            client.RewardedInterstitialAdSkipped += OnInternalRewardedInterstitialAdSkipped;
+            client.RewardedInterstitialAdCompleted += OnInternalRewardedInterstitialAdCompleted;
         }
 
         private static void OnInternalInterstitialAdCompleted(IAdClient client, AdPlacement placement)
@@ -1360,6 +1561,18 @@ namespace EasyMobile
         {
             if (RewardedAdCompleted != null)
                 RewardedAdCompleted((RewardedAdNetwork)client.Network, placement);
+        }
+
+        private static void OnInternalRewardedInterstitialAdSkipped(IAdClient client, AdPlacement placement)
+        {
+            if (RewardedInterstitialAdSkipped != null)
+                RewardedInterstitialAdSkipped((RewardedInterstitialAdNetwork)client.Network, placement);
+        }
+
+        private static void OnInternalRewardedInterstitialAdCompleted(IAdClient client, AdPlacement placement)
+        {
+            if (RewardedInterstitialAdCompleted != null)
+                RewardedInterstitialAdCompleted((RewardedInterstitialAdNetwork)client.Network, placement);
         }
 
         #endregion

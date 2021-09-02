@@ -7,18 +7,15 @@ namespace EasyMobile
     {
         GooglePlay,
         AmazonAppStore,
-        SamsungApps,
         MacAppStore,
         AppleAppStore,
-        WinRT,
-        FacebookStore
+        WinRT
     }
 
     public enum IAPAndroidStore
     {
         GooglePlay,
         AmazonAppStore,
-        SamsungApps,
         NotSpecified
     }
 }

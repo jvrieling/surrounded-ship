@@ -11,6 +11,9 @@ namespace EasyMobile
         Contacts,
 
         // Utilities submodules
-        RatingRequest
+        RatingRequest,
+
+        // Privacy submodules
+        AppTracking
     }
 }
