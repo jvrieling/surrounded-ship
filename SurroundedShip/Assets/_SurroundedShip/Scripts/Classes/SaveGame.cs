@@ -48,10 +48,30 @@ public class SaveGame
 
     public SaveGame()
     {
+        ResetSaveData();
+    }
+
+    public void ResetSaveData()
+    {
         gun1 = new ShooterData();
         gun2 = new ShooterData();
         gun3 = new ShooterData();
         gun4 = new ShooterData();
+
+        showTutorial = true;
+
+        gamesPlayed = 0;
+        showTutorial = true;
+        difficulty = 0;
+        recordDifficulty = 0;
+        score = 0;
+        highScore = 0;
+        kills = 0;
+        highKills = 0;
+        gold = 0;
+        totalGold = 0;
+        dateStarted = DateTime.Now;
+        totalTimePlayed = 0;
     }
 
     //Called when the round ends. 
