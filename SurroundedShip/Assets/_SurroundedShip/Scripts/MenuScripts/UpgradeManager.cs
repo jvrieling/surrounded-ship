@@ -15,7 +15,7 @@ using UnityEngine.Analytics;
 public enum UpgradeType { sniper = 1, shotgun = 2, minigun = 3 };
 public class UpgradeManager : MonoBehaviour
 {
-    public int selectedGun = 1;
+    public static int selectedGun = 1;
 
     public Upgrade damageUpgrade;
     public Upgrade countUpgrade;

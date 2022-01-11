@@ -17,6 +17,8 @@ public class DestructableObject : MonoBehaviour
     public int pointValue = 0;
     public int goldValue = 0;
 
+    public bool dead = false;
+
     [Tooltip("This prefab will be instantiated just before the object dies.")]
     public GameObject[] deathPrefabs;
 
@@ -35,8 +37,10 @@ public class DestructableObject : MonoBehaviour
     public void CheckAlive()
     {
         //If there's no health left, the object is dead...
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
+            dead = true;
+
             ManagerManager.scoreManager.AddScore(pointValue);
             ManagerManager.scoreManager.AddGold(goldValue);
             if (gameObject.tag == "Enemy") ManagerManager.scoreManager.AddKill();

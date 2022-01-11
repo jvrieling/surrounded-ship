@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: accuracy
   m_EditorClassIdentifier: 
   cost: 100
-  accuracy: -0.04
+  accuracy: -0.05
   bulletDamage: 0
   bulletVelocity: 0
   timeBetweenShots: 0

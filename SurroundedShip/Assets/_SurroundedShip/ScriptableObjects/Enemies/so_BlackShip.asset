@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbc057ba5a668c43932b93f58240a01, type: 3}
   m_Name: so_BlackShip
   m_EditorClassIdentifier: 
-  name: 
+  name: Black
   minDifficulty: 50
   maxDifficulty: 1000
   movementSpeed: 0.95

@@ -41,7 +41,7 @@ public class ShooterData
     public void UpgradeGun(Upgrade data)
     {
         accuracy =          Mathf.Clamp(accuracy += data.accuracy, MIN_ACCURACY, MAX_ACCURACY);
-        bulletDamage =      Mathf.Clamp(bulletDamage += data.bulletDamage, MIN_DAMAGE, MAX_DAMAGE);
+        bulletDamage =      Mathf.Clamp(bulletDamage += data.bulletDamage, MIN_DAMAGE, float.PositiveInfinity);
         bulletVelocity =    Mathf.Clamp(bulletVelocity += data.bulletVelocity, 4, MAX_VELOCITY);
         timeBetweenShots =  Mathf.Clamp(timeBetweenShots += data.timeBetweenShots, MIN_SHOTTIME, MAX_SHOTTIME);
         bulletCount =       Mathf.Clamp(bulletCount += data.bulletCount, MIN_BULLETS, MAX_BULLETS);
