@@ -83,14 +83,6 @@ public class ScoreManager : MonoBehaviour
 
             BGMManager.instance.StopMusic();
 
-            if (OptionsHolder.instance.save.gamesPlayed == 0)
-            {
-                //unlock the first day at sea achievement. 
-                GPGSAchievements.AchieveFirstDayAtSea();
-                AnalyticsResult analyticAchievement = AnalyticsEvent.AchievementUnlocked(EM_GPGSIds.achievement_first_day_at_sea);
-                Debug.Log("Sent analytic on first day at sea! " + analyticAchievement);
-            }
-
             AnalyticsResult analytic = AnalyticsEvent.LevelComplete("standard_game", new Dictionary<string, object> {
                 {"difficulty_reached", difficulty},
                 {"kills", kills },

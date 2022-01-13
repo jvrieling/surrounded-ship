@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using EasyMobile;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 using GooglePlayGames.BasicApi.SavedGame;
 
@@ -48,6 +49,15 @@ public class OptionsHolder : MonoBehaviour
         statusText.text = "Attempting to log in...";
         StartCoroutine(WaitForLogin());
     }
+    /*private void OnApplicationQuit()
+    {
+        string scene = SceneManager.GetActiveScene().name;
+        if (scene == "sc_MainMenu" || scene == "sc_Settings" || scene == "sc_Upgrades")
+        {
+            Debug.Log("Saving game before closing! scene is " + scene);
+            SaveGame();
+        }
+    }*/
     public IEnumerator WaitForLogin()
     {
         float timeSpent = 0;

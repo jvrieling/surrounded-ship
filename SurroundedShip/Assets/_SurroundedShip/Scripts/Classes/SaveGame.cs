@@ -45,6 +45,7 @@ public class SaveGame
     public float totalTimePlayed;
 
     public bool showTutorial = true;
+    public bool firstGameCompleted;
 
     public SaveGame()
     {
@@ -72,6 +73,7 @@ public class SaveGame
         totalGold = 0;
         dateStarted = DateTime.Now;
         totalTimePlayed = 0;
+        firstGameCompleted = false;
     }
 
     //Called when the round ends. 
@@ -85,9 +87,11 @@ public class SaveGame
         gold = goldEarned;
         totalGold += goldEarned;
 
-        if(gamesPlayed == 0)
+        if(!firstGameCompleted)
         {
             dateStarted = DateTime.Now;
+            //unlock the first day at sea achievement. 
+            GPGSAchievements.AchieveFirstDayAtSea();
         }
 
         showTutorial = false;
@@ -98,7 +102,6 @@ public class SaveGame
         GPGSAchievements.UpdateShipsDestroyed(shipsSunk);
         if (shipsSunk > 150) { 
             GPGSAchievements.AchieveDestroyer();
-            Debug.Log("Sending analytic destroyer achievement: " + AnalyticsEvent.AchievementUnlocked(EM_GPGSIds.achievement_ultimate_destroyer));
         }
     }
     public void CheckHighScore(int score)
