@@ -15,13 +15,14 @@ using FMODUnity;
 public class HealthReducer : MonoBehaviour
 {
     public string collisionTag = "Enemy";
+    public string collisionTag2;
 
     [EventRef]
     public string damageSound;
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == collisionTag)
+        if (other.gameObject.tag == collisionTag || other.gameObject.tag == collisionTag2)
         {
             ManagerManager.scoreManager.ReduceHealth(other.gameObject.GetComponent<EnemyController>().damage);
             RuntimeManager.PlayOneShot(damageSound);
@@ -29,7 +30,7 @@ public class HealthReducer : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.gameObject.tag == collisionTag)
+        if(collision.gameObject.tag == collisionTag || collision.gameObject.tag == collisionTag2)
         {
             ManagerManager.scoreManager.ReduceHealth(collision.gameObject.GetComponent<EnemyController>().damage);
         }

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fbc057ba5a668c43932b93f58240a01, type: 3}
-  m_Name: so_BlackShip
+  m_Name: so_boss_1
   m_EditorClassIdentifier: 
-  name: Black
-  minDifficulty: 50
+  name: Boss 1
+  minDifficulty: 0
   maxDifficulty: 1000
-  movementSpeed: 0.95
-  damage: 5
-  hp: 100
-  pointValue: 30
+  movementSpeed: 1
+  damage: 1
+  hp: 30
+  pointValue: 100
   goldValue: 10
-  sailColour: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+  sailColour: {r: 1, g: 0, b: 0, a: 1}
   deckColour: {r: 1, g: 1, b: 1, a: 1}
   deck2Colour: {r: 1, g: 1, b: 1, a: 1}
   flagColour: {r: 1, g: 1, b: 1, a: 1}
-  scale: {x: 1, y: 1, z: 1}
-  isBoss: 0
+  scale: {x: 1.5, y: 1.5, z: 1.5}
+  isBoss: 1

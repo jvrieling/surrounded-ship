@@ -16,7 +16,7 @@ public class DestructableObject : MonoBehaviour
     public float health = 1;
     public int pointValue = 0;
     public int goldValue = 0;
-
+    public float spawnYDelta = 0;
     public bool dead = false;
 
     [Tooltip("This prefab will be instantiated just before the object dies.")]
@@ -48,11 +48,16 @@ public class DestructableObject : MonoBehaviour
             //Initiate the prefabs, if there are any specified
             if (deathPrefabs.Length > 0)
             {
+                GameObject temp;
                 foreach (GameObject deathPrefab in deathPrefabs)
-                    Instantiate(deathPrefab, transform.position, Quaternion.identity);
+                {
+                    temp = Instantiate(deathPrefab, transform.position, Quaternion.identity);
+                    temp.transform.rotation = transform.rotation;
+                    temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - spawnYDelta, temp.transform.position.z);
+                }
             }
 
-            if(deathSound != "")
+            if (deathSound != "")
             {
                 RuntimeManager.PlayOneShot(deathSound);
             }

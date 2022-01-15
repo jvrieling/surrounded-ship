@@ -20,4 +20,9 @@ MonoBehaviour:
   hp: 7
   pointValue: 5
   goldValue: 7
-  color: {r: 1, g: 0.8503312, b: 0, a: 1}
+  sailColour: {r: 1, g: 1, b: 0.15686275, a: 1}
+  deckColour: {r: 1, g: 1, b: 1, a: 1}
+  deck2Colour: {r: 1, g: 1, b: 1, a: 1}
+  flagColour: {r: 1, g: 1, b: 1, a: 1}
+  scale: {x: 1, y: 1, z: 1}
+  isBoss: 0

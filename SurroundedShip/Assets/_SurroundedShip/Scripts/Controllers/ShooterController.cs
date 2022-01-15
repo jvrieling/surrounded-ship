@@ -35,7 +35,16 @@ public class ShooterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            bulletCount += 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.P))
+        {
+            bulletDamage += 1;
+        }
+#endif
         if (shotTimer > 0)
         {
             shotTimer -= Time.deltaTime;

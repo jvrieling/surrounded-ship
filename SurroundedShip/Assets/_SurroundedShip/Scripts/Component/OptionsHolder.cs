@@ -49,7 +49,7 @@ public class OptionsHolder : MonoBehaviour
         statusText.text = "Attempting to log in...";
         StartCoroutine(WaitForLogin());
     }
-    /*private void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         string scene = SceneManager.GetActiveScene().name;
         if (scene == "sc_MainMenu" || scene == "sc_Settings" || scene == "sc_Upgrades")
@@ -57,7 +57,7 @@ public class OptionsHolder : MonoBehaviour
             Debug.Log("Saving game before closing! scene is " + scene);
             SaveGame();
         }
-    }*/
+    }
     public IEnumerator WaitForLogin()
     {
         float timeSpent = 0;

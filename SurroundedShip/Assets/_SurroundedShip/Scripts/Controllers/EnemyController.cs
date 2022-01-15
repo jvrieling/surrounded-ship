@@ -25,8 +25,12 @@ public class EnemyController : MonoBehaviour
     public ParticleSystem[] wakeParticles;
 
     public MeshRenderer[] sailsMeshRenderer;
+    public MeshRenderer[] deckMeshes;
+    public MeshRenderer[] deck2Meshes;
+    public MeshRenderer[] flagMeshes;
     void Awake()
     {
+        if (enemyData != null) InitializeData(enemyData);
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
         foreach (ParticleSystem i in wakeParticles)
@@ -40,15 +44,26 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         rb.AddForce(((player.transform.position - transform.position) * (moveSpeed) * MOVE_SPEED_MODIFIER) * Time.deltaTime);
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawLine(transform.position, (transform.position - player.transform.position) * moveSpeed);
-        Gizmos.color = Color.white;
+        if (player != null)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(transform.position, (transform.position - player.transform.position) * moveSpeed);
+            Gizmos.color = Color.white;
+        }
     }
-
+    private void OnDestroy()
+    {
+        if (enemyData.isBoss)
+        {
+            Debug.Log("Disabling boss active!");
+            CircleSpawner.bossActive = false;
+        }
+    }
     public void InitializeData(Enemy data)
     {
         gameObject.name = data.name;
@@ -68,9 +83,29 @@ public class EnemyController : MonoBehaviour
         temp.goldValue = data.goldValue;
         temp.goldValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.35f);
 
+        if (data.isBoss)
+        {
+            gameObject.tag = "Boss";
+            CircleSpawner.bossActive = true;
+        }
+
+        transform.localScale = data.scale;
+
         foreach (MeshRenderer i in sailsMeshRenderer)
         {
-            i.material.color = data.color;
+            i.material.color = data.sailColour;
+        }
+
+        foreach (MeshRenderer i in deckMeshes) {
+            i.material.color = data.deckColour;
+        }
+        foreach (MeshRenderer i in deck2Meshes)
+        {
+            i.material.color = data.deckColour;
+        }
+        foreach (MeshRenderer i in flagMeshes)
+        {
+            i.material.color = data.deckColour;
         }
     }
 

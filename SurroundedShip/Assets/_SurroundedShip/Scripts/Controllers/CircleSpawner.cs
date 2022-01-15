@@ -15,24 +15,26 @@ public class CircleSpawner : MonoBehaviour
     public float radius = 5;
 
     public GameObject enemyPrefab;
+    public GameObject[] bossPrefabs;
 
     public float timeBetweenSpawns = 1;
     private float spawnTimer;
 
+    public GameObject lockUI;
+
     public List<Enemy> enemies = new List<Enemy>();
 
-    private void Start()
-    {
-        ManagerManager.scoreManager.spawnSpeedChangeEvent.AddListener(SetSpawnTimer);
-    }
+    public static bool bossActive;
 
     private void Update()
     {
+        lockUI.SetActive(bossActive);
+
         timeBetweenSpawns = ManagerManager.scoreManager.timeBetweenSpawns;
         spawnTimer += Time.deltaTime;
-        if(spawnTimer > timeBetweenSpawns)
+        if (spawnTimer > timeBetweenSpawns * ((bossActive) ? 2:1))
         {
-            spawnTimer = 0;            
+            spawnTimer = 0;
             SpawnEnemy();
         }
     }
@@ -44,28 +46,37 @@ public class CircleSpawner : MonoBehaviour
         Gizmos.color = Color.white;
     }
 
-    public void SetSpawnTimer(float time)
-    {
-        timeBetweenSpawns = time;
-    }
-
     public void SpawnEnemies(int count)
     {
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             SpawnEnemy();
         }
     }
 
+    public void SpawnBoss(int index)
+    {
+        index = (bossPrefabs.Length - (index % bossPrefabs.Length)) - 1;   
+
+        Vector3 center = transform.position;
+        Vector3 pos = RandomCircle(center, radius);
+        Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
+        GameObject temp = Instantiate(bossPrefabs[index], pos, rot);
+
+        temp.transform.SetParent(transform);
+    }
+
     public void SpawnEnemy()
     {
         Enemy selectedEnemy = enemies[Random.Range(0, enemies.Count)];
-
-        while(selectedEnemy.minDifficulty > ManagerManager.scoreManager.difficulty)
+        while (selectedEnemy.minDifficulty > ManagerManager.scoreManager.difficulty)
         {
             selectedEnemy = enemies[Random.Range(0, enemies.Count)];
         }
-
+        SpawnEnemy(selectedEnemy);
+    }
+    public void SpawnEnemy(Enemy selectedEnemy)
+    {
         Vector3 center = transform.position;
         Vector3 pos = RandomCircle(center, radius);
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);

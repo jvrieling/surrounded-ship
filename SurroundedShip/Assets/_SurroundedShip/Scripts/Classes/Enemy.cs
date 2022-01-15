@@ -27,5 +27,13 @@ public class Enemy : ScriptableObject
     public int pointValue = 10;
     public int goldValue = 1;
 
-    public Color color = Color.red;
+    public Color sailColour = Color.red;
+    public Color deckColour = Color.white;
+    public Color deck2Colour = Color.white;
+    public Color flagColour = Color.white;
+
+    public Vector3 scale = Vector3.one;
+
+    public bool isBoss = false;
+
 }

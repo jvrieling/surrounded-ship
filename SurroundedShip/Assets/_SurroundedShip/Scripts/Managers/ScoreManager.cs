@@ -32,18 +32,55 @@ public class ScoreManager : MonoBehaviour
 
     public float timeBetweenSpawns = 1;
 
-    public SpawnSpeedChangeEvent spawnSpeedChangeEvent;
 
     private void Awake()
     {
-        spawnSpeedChangeEvent = new SpawnSpeedChangeEvent();
         difficulty = OptionsHolder.instance.save.difficulty;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spawner.activeSelf)
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            difficulty = 19.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            difficulty = 39.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            difficulty = 59.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            difficulty = 79.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            difficulty = 99.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            difficulty = 119.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            difficulty = 139.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            difficulty = 159.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            difficulty = 179.5f;
+        }
+#endif
+
+        if (spawner.activeSelf && !CircleSpawner.bossActive)
         {
             roundDuration += Time.deltaTime;
             difficultyIncrementTimer += Time.deltaTime;
@@ -51,12 +88,11 @@ public class ScoreManager : MonoBehaviour
             {
                 difficultyIncrementTimer = 0;
                 difficulty += difficultyIncrement;
-
-                if (difficulty % 10 == 0)
+                if ((Mathf.Round(difficulty * 10) / 10) % 20 == 0)
                 {
-                    timeBetweenSpawns = Mathf.Clamp(timeBetweenSpawns -= 0.1f, MIN_TIME_BETWEEN_SPAWNS, 1);
+                    //timeBetweenSpawns = Mathf.Clamp(timeBetweenSpawns -= 0.1f, MIN_TIME_BETWEEN_SPAWNS, 1);
+                    spawner.GetComponent<CircleSpawner>().SpawnBoss(Mathf.RoundToInt(difficulty / 20));
                 }
-
             }
         }
     }
@@ -73,7 +109,7 @@ public class ScoreManager : MonoBehaviour
         hp -= amount;
 
 
-        if(hp <= 0)
+        if (hp <= 0)
         {
             BannerAd.showBannerAd = true;
             OptionsHolder.instance.save.CompleteRound(difficulty, kills, gold, roundDuration);
@@ -83,7 +119,7 @@ public class ScoreManager : MonoBehaviour
 
             BGMManager.instance.StopMusic();
 
-            AnalyticsResult analytic = AnalyticsEvent.LevelComplete("standard_game", new Dictionary<string, object> {
+            AnalyticsResult analytic = Analytics.CustomEvent("standard_game", new Dictionary<string, object> {
                 {"difficulty_reached", difficulty},
                 {"kills", kills },
                 {"gold_earned", gold },
@@ -106,6 +142,3 @@ public class ScoreManager : MonoBehaviour
     }
 
 }
-
-[System.Serializable]
-public class SpawnSpeedChangeEvent : UnityEvent<float> { }
