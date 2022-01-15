@@ -62,6 +62,7 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("Disabling boss active!");
             CircleSpawner.bossActive = false;
+            BGMManager.instance.SetMusicLevel(1);
         }
     }
     public void InitializeData(Enemy data)

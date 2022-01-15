@@ -19415,8 +19415,8 @@ GameObject:
   - component: {fileID: 6135423439641937193}
   - component: {fileID: 2917876963919642399}
   - component: {fileID: 8881917364316292070}
-  - component: {fileID: 8845461390869889736}
   - component: {fileID: 2496568777679765324}
+  - component: {fileID: 1826994077}
   - component: {fileID: 2268791223168840061}
   - component: {fileID: 673922025}
   m_Layer: 0
@@ -19498,24 +19498,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8845461390869889736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7169236670064129850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3963da04401504b48b6023d50e5ae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floatPower: 8
-  sinkAfterTimer: 0
-  sinkTimer: 0
-  hasLanded: 1
-  splashSound: 
-  spashSize: 0
 --- !u!114 &2496568777679765324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19528,7 +19510,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e38368d3e475a67458740d5de0b49892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 20
+  delay: 10
+--- !u!114 &1826994077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7169236670064129850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60bb537c5fc07143b133b85eaf9f4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sinkSpeed: 0.75
+  sinkRotSpeed: 6
 --- !u!65 &2268791223168840061
 BoxCollider:
   m_ObjectHideFlags: 0

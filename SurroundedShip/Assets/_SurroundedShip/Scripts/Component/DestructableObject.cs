@@ -52,7 +52,9 @@ public class DestructableObject : MonoBehaviour
                 foreach (GameObject deathPrefab in deathPrefabs)
                 {
                     temp = Instantiate(deathPrefab, transform.position, Quaternion.identity);
-                    temp.transform.rotation = transform.rotation;
+                    Quaternion rot = transform.rotation;
+                    rot *= Quaternion.AngleAxis(180, transform.up);
+                    temp.transform.rotation = rot;
                     temp.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y - spawnYDelta, temp.transform.position.z);
                 }
             }

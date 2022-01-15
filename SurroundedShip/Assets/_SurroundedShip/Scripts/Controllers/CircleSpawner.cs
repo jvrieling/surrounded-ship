@@ -62,7 +62,7 @@ public class CircleSpawner : MonoBehaviour
         Vector3 pos = RandomCircle(center, radius);
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
         GameObject temp = Instantiate(bossPrefabs[index], pos, rot);
-
+        BGMManager.instance.SetMusicLevel(2);
         temp.transform.SetParent(transform);
     }
 
