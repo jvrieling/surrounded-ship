@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: so_Speedy
   m_EditorClassIdentifier: 
   name: Speedy
-  minDifficulty: 3
+  minDifficulty: 10
   maxDifficulty: 100
   movementSpeed: 2.53
   damage: 1

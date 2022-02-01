@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: so_Tank
   m_EditorClassIdentifier: 
   name: Tank
-  minDifficulty: 15
+  minDifficulty: 30
   maxDifficulty: 80
   movementSpeed: 0.55
   damage: 1

@@ -10488,6 +10488,7 @@ MonoBehaviour:
     type: 3}
   bossPrefabs:
   - {fileID: 2225653007965479181, guid: a710212383c82024a824d27a43ef4cc0, type: 3}
+  - {fileID: 210782596420310573, guid: 265040d631c349746aedd3236d8b711b, type: 3}
   - {fileID: 7997808059733216721, guid: 98fd8a10a1f892448a879090d568ce75, type: 3}
   timeBetweenSpawns: 1
   lockUI: {fileID: 45510093}

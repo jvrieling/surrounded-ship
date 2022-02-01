@@ -13,13 +13,13 @@ using UnityEngine;
 [RequireComponent(typeof(DestructableObject))]
 public class EnemyController : MonoBehaviour
 {
-    private const float MOVE_SPEED_MODIFIER = 3.8f;
+    public const float MOVE_SPEED_MODIFIER = 3.8f;
     public Enemy enemyData;
 
     public float moveSpeed;
     public int damage;
 
-    private GameObject player;
+    private static GameObject player;
     private Rigidbody rb;
 
     public ParticleSystem[] wakeParticles;
@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         if (enemyData != null) InitializeData(enemyData);
-        player = GameObject.FindGameObjectWithTag("Player");
+        if(player == null) player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
         foreach (ParticleSystem i in wakeParticles)
         {
@@ -58,9 +58,9 @@ public class EnemyController : MonoBehaviour
     }
     private void OnDestroy()
     {
+        if(enemyData != null)
         if (enemyData.isBoss)
         {
-            Debug.Log("Disabling boss active!");
             CircleSpawner.bossActive = false;
             BGMManager.instance.SetMusicLevel(1);
         }
@@ -76,7 +76,7 @@ public class EnemyController : MonoBehaviour
         DestructableObject temp = GetComponent<DestructableObject>();
 
         temp.health = data.hp;
-        temp.health += ManagerManager.scoreManager.difficulty * 0.7f;
+        temp.health += (ManagerManager.scoreManager.difficulty * 0.7f) + (Mathf.Floor(ManagerManager.scoreManager.difficulty/20) * 20);
 
         temp.pointValue = data.pointValue;
         temp.pointValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.5f);

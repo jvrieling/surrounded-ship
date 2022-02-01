@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: so_BlackShip
   m_EditorClassIdentifier: 
   name: Black
-  minDifficulty: 50
+  minDifficulty: 60.1
   maxDifficulty: 1000
   movementSpeed: 0.95
   damage: 5

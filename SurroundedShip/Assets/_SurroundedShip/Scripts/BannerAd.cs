@@ -34,9 +34,7 @@ public class BannerAd : MonoBehaviour
         if (Advertising.IsInitialized() && !currentlyShowing)
         {
             currentlyShowing = true;
-            Debug.Log("Showing a banner at at the " + position);
 
-            //Advertising.ShowBannerAd(BannerAdNetwork.UnityAds, AdPlacement.PlacementWithName("Banner_Android"), position, BannerAdSize.SmartBanner);
             Advertising.ShowBannerAd(position);
         }
     }

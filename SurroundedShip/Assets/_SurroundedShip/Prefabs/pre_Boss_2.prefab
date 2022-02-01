@@ -14893,7 +14893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b292e54bd52e199439c1a457864aeaea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: 7d9f1b2c55d3888439375a77fc6e54fd, type: 2}
+  enemyData: {fileID: 11400000, guid: 8481d7edaf19ce44aa8b6893a9c87764, type: 2}
   moveSpeed: 15
   damage: 0
   wakeParticles:
@@ -14923,6 +14923,7 @@ MonoBehaviour:
   deathPrefabs:
   - {fileID: 7169236670064129850, guid: b601c177a5056bc4995dedb944896cc9, type: 3}
   deathSound: event:/Foley/ShipDestroy
+  originalHealth: 0
 --- !u!65 &5925615730337193985
 BoxCollider:
   m_ObjectHideFlags: 0

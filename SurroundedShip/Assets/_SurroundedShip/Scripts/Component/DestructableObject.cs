@@ -25,6 +25,21 @@ public class DestructableObject : MonoBehaviour
     [EventRef]
     public string deathSound;
 
+    [HideInInspector]
+    public float originalHealth;
+
+#if UNITY_EDITOR
+
+    public void Update()
+    {
+        if (health < 0 && !dead) CheckAlive();
+    }
+
+#endif
+    private void Awake()
+    {
+        originalHealth = health;
+    }
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Bullet")
@@ -67,5 +82,12 @@ public class DestructableObject : MonoBehaviour
             //Finally, destroy this GameObject
             Destroy(gameObject);
         }
+    }
+    
+    [ContextMenu("Test - Kill")]
+    public void instaKill()
+    {
+        health = 0;
+        CheckAlive();
     }
 }

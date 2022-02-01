@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: so_Golden
   m_EditorClassIdentifier: 
   name: Golden
-  minDifficulty: 5
+  minDifficulty: 20.1
   maxDifficulty: 1000
   movementSpeed: 3.5
   damage: 1

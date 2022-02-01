@@ -44,39 +44,39 @@ public class ScoreManager : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            difficulty = 19.5f;
+            difficulty = 19.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            difficulty = 39.5f;
+            difficulty = 39.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            difficulty = 59.5f;
+            difficulty = 59.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            difficulty = 79.5f;
+            difficulty = 79.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            difficulty = 99.5f;
+            difficulty = 99.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            difficulty = 119.5f;
+            difficulty = 119.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            difficulty = 139.5f;
+            difficulty = 139.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            difficulty = 159.5f;
+            difficulty = 159.8f;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            difficulty = 179.5f;
+            difficulty = 179.8f;
         }
 #endif
 
@@ -91,7 +91,7 @@ public class ScoreManager : MonoBehaviour
                 if ((Mathf.Round(difficulty * 10) / 10) % 20 == 0)
                 {
                     //timeBetweenSpawns = Mathf.Clamp(timeBetweenSpawns -= 0.1f, MIN_TIME_BETWEEN_SPAWNS, 1);
-                    spawner.GetComponent<CircleSpawner>().SpawnBoss(Mathf.RoundToInt(difficulty / 20));
+                    spawner.GetComponent<CircleSpawner>().SpawnBoss();
                 }
             }
         }

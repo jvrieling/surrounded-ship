@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: so_TougherTank
   m_EditorClassIdentifier: 
   name: Tank
-  minDifficulty: 25
+  minDifficulty: 40.1
   maxDifficulty: 1000
   movementSpeed: 0.9
   damage: 1

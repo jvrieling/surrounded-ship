@@ -25,6 +25,21 @@ public class CircleSpawner : MonoBehaviour
     public List<Enemy> enemies = new List<Enemy>();
 
     public static bool bossActive;
+    private static int bossIndex;
+
+    public void Start()
+    {
+        bossIndex = 0;
+
+        Debug.Log("Starting circle spawner!");
+        float diff = ManagerManager.scoreManager.difficulty;
+
+        while(diff >= 20)
+        {
+            IncrementIndex();
+            diff -= 20;
+        }
+    }
 
     private void Update()
     {
@@ -54,16 +69,17 @@ public class CircleSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnBoss(int index)
+    public void SpawnBoss()
     {
-        index = (bossPrefabs.Length - (index % bossPrefabs.Length)) - 1;   
-
+        Debug.Log("Boss index: " + bossIndex);
         Vector3 center = transform.position;
         Vector3 pos = RandomCircle(center, radius);
         Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
-        GameObject temp = Instantiate(bossPrefabs[index], pos, rot);
+        GameObject temp = Instantiate(bossPrefabs[bossIndex], pos, rot);
         BGMManager.instance.SetMusicLevel(2);
         temp.transform.SetParent(transform);
+
+        IncrementIndex();
     }
 
     public void SpawnEnemy()
@@ -96,5 +112,12 @@ public class CircleSpawner : MonoBehaviour
         pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         pos.y = center.y;
         return pos;
+    }
+
+    private void IncrementIndex()
+    {
+        bossIndex++;
+        if (bossIndex >= bossPrefabs.Length) bossIndex = 0;
+        Debug.Log("NEW Boss index: " + bossIndex);
     }
 }
