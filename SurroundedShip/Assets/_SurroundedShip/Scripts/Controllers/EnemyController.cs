@@ -28,8 +28,13 @@ public class EnemyController : MonoBehaviour
     public MeshRenderer[] deckMeshes;
     public MeshRenderer[] deck2Meshes;
     public MeshRenderer[] flagMeshes;
+
+    private Animator an;
+
     void Awake()
     {
+        an = GetComponent<Animator>();
+
         if (enemyData != null) InitializeData(enemyData);
         if(player == null) player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();

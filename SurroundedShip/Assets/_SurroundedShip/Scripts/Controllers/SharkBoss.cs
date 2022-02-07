@@ -31,6 +31,7 @@ public class SharkBoss : MonoBehaviour
     private float chargeStartHp;
 
     private DestructableObject destructibleObject;
+    private Animator an;
 
     void OnDrawGizmosSelected()
     {
@@ -44,6 +45,8 @@ public class SharkBoss : MonoBehaviour
     }
     void Start()
     {
+        an = GetComponent<Animator>();
+
         transform.Translate(0, -sinkDistance, 0);
         destructibleObject = GetComponent<DestructableObject>();
         stunParticle.SetActive(false);
@@ -64,6 +67,9 @@ public class SharkBoss : MonoBehaviour
 
     void Update()
     {
+        transform.LookAt(ManagerManager.instance.player.transform.position);
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
         if (state == SharkState.Rising)
         {
             transform.Translate(0, risingDistance / risingTime * Time.deltaTime, 0);
@@ -72,6 +78,7 @@ public class SharkBoss : MonoBehaviour
             {
                 state = SharkState.Waiting;
                 timer = 0;
+                an.SetTrigger("idle");
             }
         }
         else if (state == SharkState.Waiting)
@@ -79,28 +86,27 @@ public class SharkBoss : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= waitingTime)
             {
+                an.SetTrigger("swim");
                 state = SharkState.Charging;
                 timer = 0;
                 chargeStartHp = destructibleObject.health;
-
-                transform.LookAt(ManagerManager.instance.player.transform.position);
-                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
                 foreach (ParticleSystem i in wakeParticles)
                 {
                     i.gameObject.SetActive(true);
                 }
             }
-
         }
         else if (state == SharkState.Charging)
         {
+            transform.LookAt(ManagerManager.instance.player.transform.position);
             Vector3 movement = (ManagerManager.instance.player.transform.position - transform.position).normalized;
             movement.y = 0;
             transform.position += (movement * chargingSpeed * Time.deltaTime);
 
             if (chargeStartHp - destructibleObject.health > destructibleObject.originalHealth * stunDamagePercent)
             {
+                an.SetTrigger("stun");
                 state = SharkState.Recovering;
                 stunParticle.SetActive(true);
                 foreach (ParticleSystem i in wakeParticles)
@@ -114,6 +120,7 @@ public class SharkBoss : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= stunTime)
             {
+                an.SetTrigger("sink");
                 stunParticle.SetActive(false);
                 state = SharkState.Sinking;
                 timer = 0;
@@ -125,16 +132,12 @@ public class SharkBoss : MonoBehaviour
             timer += Time.deltaTime;
             if (timer >= sinkTime)
             {
+                an.SetTrigger("idle");
                 state = SharkState.Rising;
                 timer = 0;
                 transform.position = RandomCircle(Vector3.zero, 15) - new Vector3(0, sinkDistance, 0);
             }
         }
-        else if (state == SharkState.Dying)
-        {
-
-        }
-
     }
 
     private void OnDestroy()

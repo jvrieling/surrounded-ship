@@ -31,7 +31,6 @@ public class CircleSpawner : MonoBehaviour
     {
         bossIndex = 0;
 
-        Debug.Log("Starting circle spawner!");
         float diff = ManagerManager.scoreManager.difficulty;
 
         while(diff >= 20)
@@ -118,6 +117,5 @@ public class CircleSpawner : MonoBehaviour
     {
         bossIndex++;
         if (bossIndex >= bossPrefabs.Length) bossIndex = 0;
-        Debug.Log("NEW Boss index: " + bossIndex);
     }
 }

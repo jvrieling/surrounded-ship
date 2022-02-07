@@ -35,4 +35,16 @@ public class HealthReducer : MonoBehaviour
             ManagerManager.scoreManager.ReduceHealth(collision.gameObject.GetComponent<EnemyController>().damage);
         }
     }
+
+#if UNITY_EDITOR
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I)) {
+            {
+                collisionTag = "";
+                collisionTag2 = "";
+            } }
+    }
+#endif
+
 }

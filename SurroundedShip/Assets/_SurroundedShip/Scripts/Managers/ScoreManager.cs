@@ -90,7 +90,6 @@ public class ScoreManager : MonoBehaviour
                 difficulty += difficultyIncrement;
                 if ((Mathf.Round(difficulty * 10) / 10) % 20 == 0)
                 {
-                    //timeBetweenSpawns = Mathf.Clamp(timeBetweenSpawns -= 0.1f, MIN_TIME_BETWEEN_SPAWNS, 1);
                     spawner.GetComponent<CircleSpawner>().SpawnBoss();
                 }
             }
