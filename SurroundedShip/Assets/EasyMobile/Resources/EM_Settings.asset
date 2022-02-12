@@ -287,7 +287,7 @@ MonoBehaviour:
     mAutoInitAfterUserLogout: 0
     mAutoInitDelay: 0
     mAndroidMaxLoginRequests: 0
-    mGpgsDebugLogEnabled: 1
+    mGpgsDebugLogEnabled: 0
     mGpgsPopupGravity: 0
     mGpgsShouldRequestServerAuthCode: 0
     mGpgsForceRefreshServerAuthCode: 0
@@ -453,5 +453,5 @@ MonoBehaviour:
   mIsGameServiceModuleEnable: 1
   mIsNotificationModuleEnable: 0
   mIsSharingModuleEnable: 0
-  mActiveModuleIndex: 0
-  mIsSelectingModule: 1
+  mActiveModuleIndex: 1
+  mIsSelectingModule: 0
