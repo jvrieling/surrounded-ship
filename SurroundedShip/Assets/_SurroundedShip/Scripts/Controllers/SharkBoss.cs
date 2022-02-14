@@ -62,7 +62,7 @@ public class SharkBoss : MonoBehaviour
 
         DestructableObject d = GetComponent<DestructableObject>();
 
-        d.health += (ManagerManager.scoreManager.difficulty * 0.7f) + (Mathf.Floor(ManagerManager.scoreManager.difficulty / 20) * 20);
+        d.health += (ManagerManager.scoreManager.difficulty * 1.3f) + (Mathf.Floor(ManagerManager.scoreManager.difficulty / 20) * 20);
     }
 
     void Update()

@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6c1ffdada064349800af0b463be315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 50
   pointValue: 1000
   goldValue: 10
   spawnYDelta: 0

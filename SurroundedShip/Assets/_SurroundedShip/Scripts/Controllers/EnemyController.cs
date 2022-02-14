@@ -81,7 +81,14 @@ public class EnemyController : MonoBehaviour
         DestructableObject temp = GetComponent<DestructableObject>();
 
         temp.health = data.hp;
-        temp.health += (ManagerManager.scoreManager.difficulty * 0.7f) + (Mathf.Floor(ManagerManager.scoreManager.difficulty/20) * 20);
+
+        if (!data.isBoss)
+        {
+            temp.health += (ManagerManager.scoreManager.difficulty * 0.7f) + (Mathf.Floor(ManagerManager.scoreManager.difficulty / 20) * 20);
+        } else
+        {
+            temp.health += (ManagerManager.scoreManager.difficulty * 1.1f) + (Mathf.Floor(ManagerManager.scoreManager.difficulty / 20) * 20);
+        }
 
         temp.pointValue = data.pointValue;
         temp.pointValue += Mathf.FloorToInt(ManagerManager.scoreManager.difficulty * 0.5f);

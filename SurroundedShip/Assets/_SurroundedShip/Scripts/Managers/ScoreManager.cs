@@ -111,6 +111,10 @@ public class ScoreManager : MonoBehaviour
         if (hp <= 0)
         {
             BannerAd.showBannerAd = true;
+            if (difficulty % 20 == 0)
+            {
+                difficulty -= 0.2f;
+            }
             OptionsHolder.instance.save.CompleteRound(difficulty, kills, gold, roundDuration);
             OptionsHolder.instance.save.CheckHighScore(score);
 
