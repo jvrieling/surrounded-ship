@@ -333,8 +333,8 @@ MonoBehaviour:
       translatable=\"false\">CgkIm-CJyvgPEAIQAQ</string>\r\n</resources>"
     mEnableMultiplayer: 0
     mEnableSavedGames: 1
-    mAutoConflictResolutionStrategy: 0
-    mGpgsDataSource: 0
+    mAutoConflictResolutionStrategy: 1
+    mGpgsDataSource: 1
   mInAppPurchaseSettings:
     mAutoInit: 1
     mTargetAndroidStore: 0

@@ -21,6 +21,19 @@ public class DifficultySlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (OptionsHolder.instance != null)
+        {
+            if (OptionsHolder.instance.save == null)
+            {
+                enabled = false;
+                return;
+            }
+        }
+        else
+        {
+            enabled = false;
+            return;
+        }
         difficultySlider.maxValue = OptionsHolder.instance.save.recordDifficulty;
         difficultySlider.value = OptionsHolder.instance.save.difficulty;
 

@@ -118,7 +118,7 @@ public class ScoreManager : MonoBehaviour
             OptionsHolder.instance.save.CompleteRound(difficulty, kills, gold, roundDuration);
             OptionsHolder.instance.save.CheckHighScore(score);
 
-            OptionsHolder.instance.SaveGame();
+            OptionsHolder.instance.WriteSave();
 
             BGMManager.instance.StopMusic();
 

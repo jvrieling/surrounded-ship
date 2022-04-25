@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.Analytics;
 
 /// <summary>
-/// SaveGame handles the data for the current instance of the game. It's a serialized object so it can be easilty written to a file in binary.
+/// SaveGame handles the data for the current instance of the game. It's a serialized object so it can be easily written to a file in binary.
 /// </summary>
 [System.Serializable]
 public class SaveGame
@@ -41,8 +41,13 @@ public class SaveGame
     public string gun3JSON;
     public string gun4JSON;
 
+    /// <summary>
+    /// The UTC DateTime that this save data was last saved to.
+    /// </summary>
+    public DateTime lastSaved;
     public DateTime dateStarted;
     public float totalTimePlayed;
+    public string lastSaveGameVersion;
 
     public bool showTutorial = true;
     public bool firstGameCompleted;
@@ -71,6 +76,7 @@ public class SaveGame
         highKills = 0;
         gold = 0;
         totalGold = 0;
+        lastSaved = DateTime.MinValue;
         dateStarted = DateTime.Now;
         totalTimePlayed = 0;
         firstGameCompleted = false;
@@ -89,6 +95,7 @@ public class SaveGame
 
         if(!firstGameCompleted)
         {
+            Debug.Log("First game completed");
             dateStarted = DateTime.Now;
             //unlock the first day at sea achievement. 
             GPGSAchievements.AchieveFirstDayAtSea();
@@ -134,4 +141,27 @@ public class SaveGame
         }
 
     }
+
+    public string GetSummary()
+    {
+        return "Save Game: " + name
+            + "\nRounds Played: " + gamesPlayed + " First Game Completed: " + firstGameCompleted
+            + "\nHighest... difficulty: " + recordDifficulty + " Score: " + highScore + " Kills: " + highKills
+            + "\n"
+            + "\n Time Played: " + TimeSpan.FromSeconds(totalTimePlayed)
+            + "\n Last save: " + lastSaved + " ver" + lastSaveGameVersion
+            + "\n Save Created: " + dateStarted
+            + "\n GPG Logged in: " + Social.localUser.authenticated;
+    }
+
+    /// <summary>
+    ///  Compares two savegames and returns the one that is more recently saved.
+    /// </summary>
+    /// <param name="d1">The first SaveGame to be compared</param>
+    /// <param name="d2">The second SaveGame to be compared</param>
+    /// <returns>The more recent of the two passed SaveGames</returns>
+    public static SaveGame CompareLastSaved(SaveGame d1, SaveGame d2)
+    {
+        return (DateTime.Compare(d1.lastSaved, d2.lastSaved) >= 0) ? d1 : d2;
+    } 
 }
