@@ -246,6 +246,7 @@ MonoBehaviour:
         - mIosId: 
           mAndroidId: Rewarded_Android
       mEnableTestMode: 0
+      mUseUnityAd4Client: 0
     mVungleAds:
       mEnable: 0
       mAppId:
@@ -287,7 +288,7 @@ MonoBehaviour:
     mAutoInitAfterUserLogout: 0
     mAutoInitDelay: 0
     mAndroidMaxLoginRequests: 0
-    mGpgsDebugLogEnabled: 0
+    mGpgsDebugLogEnabled: 1
     mGpgsPopupGravity: 0
     mGpgsShouldRequestServerAuthCode: 0
     mGpgsForceRefreshServerAuthCode: 0

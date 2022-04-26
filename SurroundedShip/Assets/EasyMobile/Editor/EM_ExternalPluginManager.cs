@@ -208,6 +208,16 @@ namespace EasyMobile.Editor
             return EM_EditorUtil.NamespaceExists(UnityAdNameSpace) && EM_EditorUtil.FindClass(UnityAdvertisementClass, UnityAdNameSpace) != null;
         }
 
+        /// Determindes if UnityAds plugin 4 is enabled.
+        /// </summary>
+        /// <returns><c>true</c> if UnityAds plugin 4 is enabled, otherwise <c>false</c>.</returns>
+        public static bool IsUnityAd4Enabled()
+        {
+            if (!IsUnityAdAvail())
+                return false;
+            return EM_Settings.Advertising.UnityAds.UseUnityAd4Client;
+        } 
+
         //Determindes if Vungle plugin is available.
         /// </summary>
         /// <returns><c>true</c> if Vungle plugin is available, otherwise <c>false</c>.</returns>

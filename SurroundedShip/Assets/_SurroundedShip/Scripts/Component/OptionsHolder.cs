@@ -87,7 +87,7 @@ public class OptionsHolder : MonoBehaviour
         if (FileSystemEnabled) LoadFromFile();
 
         //////////////
-        /// LOAD FROM CLOUD
+        /// WAIT FOR GPG LOGIN
         //////////////
         if (GPGEnabled)
         {
@@ -96,7 +96,7 @@ public class OptionsHolder : MonoBehaviour
             {
                 statusText.text = "Logging in...";
                 Debug.Log("Logging in...");
-                
+
                 //Wait for game services to initialize. If it takes too long just give up and move on.
                 timeSpent += Time.deltaTime;
                 if (timeSpent > 3)
@@ -108,11 +108,15 @@ public class OptionsHolder : MonoBehaviour
                 }
                 yield return null;
             }
-        } else
+        }
+        else
         {
             InfoPane.log += " GPG Disabled -";
         }
 
+        //////////////
+        /// LOAD GPG CLOUD SAVE
+        //////////////
         if (!cancelGPG && GPGEnabled)
         {
             //If we get here, game services are ready to go!
@@ -120,7 +124,7 @@ public class OptionsHolder : MonoBehaviour
             Debug.Log("Logged in!");
             LoadFromGPG();
 
-            while(GPGSave == null && !cancelGPGLoad)
+            while (GPGSave == null && !cancelGPGLoad)
             {
                 loadTimeSpent += Time.deltaTime;
                 if (loadTimeSpent > 3)
@@ -143,7 +147,7 @@ public class OptionsHolder : MonoBehaviour
             if (GPGEnabled && GPGSave != null)
             {
                 Debug.Log("Comparing GPG with local save, choosing more recent.");
-                
+
                 save = SaveGame.CompareLastSaved(localSave, GPGSave);
                 InfoPane.log += " using " + ((save == localSave) ? "local save." : "GPG save.");
             }
@@ -156,8 +160,8 @@ public class OptionsHolder : MonoBehaviour
 
             if (Time.unscaledTime < 4) InfoPane.log += "\nWaiting a sec because loading went too fast!";
 
-                //Make sure the logo shows for at least a second!
-                if (Time.unscaledTime < 4) yield return new WaitForSeconds(4 - Time.unscaledTime);
+            //Make sure the logo shows for at least a second!
+            if (Time.unscaledTime < 4) yield return new WaitForSeconds(4 - Time.unscaledTime);
 
             onLoadEvent.Invoke();
         }
@@ -237,7 +241,8 @@ public class OptionsHolder : MonoBehaviour
                             GPGEnabled = false;
                         }
                     });
-                } else
+                }
+                else
                 {
                     GPGEnabled = false;
                 }

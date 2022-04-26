@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace EasyMobile
 {
+#if !EM_UNITY_ADS_4
 #if EM_UNITY_ADS || UNITY_MONETIZATION
     using UnityEngine.Advertisements;
 #endif
@@ -686,4 +687,5 @@ namespace EasyMobile
 #endif
         #endregion
     }
+#endif
 }

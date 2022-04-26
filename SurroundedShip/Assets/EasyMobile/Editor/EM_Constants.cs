@@ -7,7 +7,7 @@ namespace EasyMobile.Editor
     {
         // Product name
         public const string ProductName = "Easy Mobile";
-        public const string Copyright = "© 2017-2021 SgLib Games LLC. All Rights Reserved.";
+        public const string Copyright = "© 2017-2022 SgLib Games LLC. All Rights Reserved.";
 
         // Folder
         public const string RootPath = "Assets/EasyMobile";

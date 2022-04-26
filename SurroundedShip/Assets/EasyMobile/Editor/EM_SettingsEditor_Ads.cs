@@ -172,6 +172,20 @@ namespace EasyMobile.Editor
                     MarkSubModulEnableStateHasChanged();
             }
         }
+        private bool UseUnityAds4
+        {
+            get
+            {
+                return AdProperties.unityAds4Enabled.property.boolValue;
+            }
+            set
+            {
+                bool needToUpdate = value != UseUnityAds4;
+                AdProperties.unityAds4Enabled.property.boolValue = value;
+                if (needToUpdate)
+                    MarkSubModulEnableStateHasChanged();
+            }
+        }
         private bool IsAppLovingEnabled
         {
             get
@@ -289,7 +303,7 @@ namespace EasyMobile.Editor
                             EditorGUILayout.HelpBox("Default ad network " + network.ToString() + " has no SDK. Please import its plugin.", MessageType.Warning);
                         }
                     }
-
+#if !EM_UNITY_ADS_4
                     if (((AdNetwork)androidDefault.bannerAdNetwork == AdNetwork.UnityAds) || ((AdNetwork)iosDefault.bannerAdNetwork == AdNetwork.UnityAds))
                     {
                         if (IsPluginAvail(AdNetwork.UnityAds) && !IsUnityMonetizationAvail())
@@ -302,6 +316,7 @@ namespace EasyMobile.Editor
                             EditorGUILayout.HelpBox(UnityAdsMonetizationSDKRequiredMsg, MessageType.Warning);
                         }
                     }
+#endif
                 });
 
             // AdColony setup
@@ -1026,12 +1041,17 @@ namespace EasyMobile.Editor
                 {
                     if (!IsUnityAdsEnabled)
                         return;
-#if (!UNITY_ADS && !UNITY_MONETIZATION)
+                    
+#if (!UNITY_ADS && !(UNITY_MONETIZATION || EM_UNITY_ADS_4))
                     EditorGUILayout.HelpBox(UnityAdsUnvailableWarning, MessageType.Warning);
 #else
                     EditorGUILayout.HelpBox(UnityAdsAvailableMsg, MessageType.Info);
 
-#if UNITY_MONETIZATION
+                    // Using UnityAds 4
+                    EditorGUILayout.Space();
+                    UseUnityAds4 = EditorGUILayout.Toggle("Unity Ads v4",UseUnityAds4);
+
+#if UNITY_MONETIZATION || EM_UNITY_ADS_4
                     // APP ID
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("App ID", EditorStyles.boldLabel);
@@ -1043,7 +1063,7 @@ namespace EasyMobile.Editor
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Default Placement", EditorStyles.boldLabel);
                     EditorGUILayout.HelpBox(UnityAdsDefaultPlacementsMsg, MessageType.None);
-#if UNITY_MONETIZATION
+#if UNITY_MONETIZATION || EM_UNITY_ADS_4
                     EditorGUI.indentLevel++;
                     EditorGUILayout.PropertyField(AdProperties.unityAdsDefaultBannerAdId.property, AdProperties.unityAdsDefaultBannerAdId.content, true);
                     EditorGUI.indentLevel--;
@@ -1058,13 +1078,13 @@ namespace EasyMobile.Editor
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Custom Placements", EditorStyles.boldLabel);
                     EditorGUI.indentLevel++;
-#if UNITY_MONETIZATION
+#if UNITY_MONETIZATION || EM_UNITY_ADS_4
                     EditorGUILayout.PropertyField(AdProperties.unityAdsCustomBannerAdId.property, AdProperties.unityAdsCustomBannerAdId.content, true);
 #endif
                     EditorGUILayout.PropertyField(AdProperties.unityAdsCustomInterstitialAdIds.property, AdProperties.unityAdsCustomInterstitialAdIds.content, true);
                     EditorGUILayout.PropertyField(AdProperties.unityAdsCustomRewardedAdIds.property, AdProperties.unityAdsCustomRewardedAdIds.content, true);
                     EditorGUI.indentLevel--;
-#if UNITY_MONETIZATION
+#if UNITY_MONETIZATION || EM_UNITY_ADS_4
                     // Test mode.
                     EditorGUILayout.Space();
                     EditorGUILayout.LabelField("Test Mode", EditorStyles.boldLabel);

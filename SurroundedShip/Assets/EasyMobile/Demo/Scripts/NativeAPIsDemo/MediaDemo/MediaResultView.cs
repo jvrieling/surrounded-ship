@@ -71,7 +71,7 @@ namespace EasyMobile.Demo
         {
             model = newModel;
             error = null;
-            maxImageSizeRoot.SetActive(model != null && error == null && model.Type == MediaType.Image && (model.contentUri != null || model.absoluteUri != null));
+            maxImageSizeRoot.SetActive(model != null && error == null && model.Type == MediaType.Image && (model.Uri != null));
             loadButton.gameObject.SetActive(model != null && error == null && model.Uri != null);
             infoText.text = string.Format(
                 "<b>Type:</b> <i>{0}</i> \n<b>Uri:</b> <i>{1}</i>",

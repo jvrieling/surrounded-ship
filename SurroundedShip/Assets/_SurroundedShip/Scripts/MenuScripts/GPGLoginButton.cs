@@ -16,6 +16,7 @@ public class GPGLoginButton : MonoBehaviour
 
     public void OnClick()
     {
+        Debug.Log("Clicked GPG button");
         if (GameServices.IsInitialized() && Social.localUser.authenticated)
         {
             GameServices.SignOut();

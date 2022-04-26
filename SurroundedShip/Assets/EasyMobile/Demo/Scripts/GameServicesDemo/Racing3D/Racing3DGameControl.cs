@@ -140,6 +140,7 @@ namespace EasyMobile.Demo
         private List<GameObject> createdPowerUps = new List<GameObject>();
         private List<GameObject> createdSideObjects = new List<GameObject>();
         private bool isPlaying = false, isStartMessageReceived = false;
+        private bool shouldSendStartMessage = false;
         private Stopwatch stopwatch = new Stopwatch();
 
         #endregion
@@ -182,6 +183,17 @@ namespace EasyMobile.Demo
             GameServices.RealTime.LeaveRoom();
         }
 
+        #endregion
+
+        #region MonoBehavior
+        protected virtual void Update()
+        {
+            if (shouldSendStartMessage)
+            {
+                shouldSendStartMessage = false;
+                StartCoroutine(SendStartMessageCoroutine());
+            }
+        }
         #endregion
 
         #region Send Messages
@@ -280,7 +292,7 @@ namespace EasyMobile.Demo
                 model.SideObjectsPosition = sideObjectsPosition;
 
                 isStartMessageReceived = false;
-                Internal.RuntimeHelper.RunOnMainThread(() => StartCoroutine(SendStartMessageCoroutine()));
+                shouldSendStartMessage = true;
             }
 
             ControllableCar.ResetValues();

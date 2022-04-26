@@ -1123,6 +1123,9 @@ namespace EasyMobile
 
                 private void HandleClosed(object sender, EventArgs e)
                 {
+                    #if UNITY_EDITOR
+                    HandleRewardEvent(sender, new Reward());
+                    #endif
                     ClosedEvent.Invoke(this, sender, e);
                     if(Rewarded)
                         Completed.Invoke(this);
@@ -1342,6 +1345,9 @@ namespace EasyMobile
 
                 private void HandleClosed(object sender, EventArgs e)
                 {
+                    #if UNITY_EDITOR
+                    HandleRewardEvent(new Reward());
+                    #endif
                     ClosedEvent.Invoke(this, sender, e);
                     if(Rewarded)
                         Completed.Invoke(this);

@@ -189,6 +189,7 @@ namespace EasyMobile.Editor
 
             // UnityAds properties.
             public static EMProperty unityAdEnabled = new EMProperty(new GUIContent("Unity Ads enable"));
+            public static EMProperty unityAds4Enabled = new EMProperty(new GUIContent("Unity Ads 4 Enabled"));
             public static EMProperty unityAdsAppId = new EMProperty(new GUIContent("App ID"));
             public static EMProperty unityAdsDefaultBannerAdId = new EMProperty(new GUIContent("Banner Ad"));
             public static EMProperty unityAdsDefaultInterstitialAdId = new EMProperty(new GUIContent("Interstitial Ad"));
@@ -498,6 +499,7 @@ namespace EasyMobile.Editor
             // UnityAds properties.
             AdProperties.unityAdsSettings = AdProperties.mainProperty.FindPropertyRelative("mUnityAds");
             AdProperties.unityAdEnabled.property = AdProperties.unityAdsSettings.FindPropertyRelative("mEnable");
+            AdProperties.unityAds4Enabled.property = AdProperties.unityAdsSettings.FindPropertyRelative("mUseUnityAd4Client");
             AdProperties.unityAdsAppId.property = AdProperties.unityAdsSettings.FindPropertyRelative("mAppId");
             AdProperties.unityAdsDefaultBannerAdId.property = AdProperties.unityAdsSettings.FindPropertyRelative("mDefaultBannerAdId");
             AdProperties.unityAdsDefaultInterstitialAdId.property = AdProperties.unityAdsSettings.FindPropertyRelative("mDefaultInterstitialAdId");

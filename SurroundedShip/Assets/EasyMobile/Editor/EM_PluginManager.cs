@@ -10,14 +10,14 @@ namespace EasyMobile.Editor
     public class EM_PluginManager : AssetPostprocessor
     {
         #region Init
-        private const string PreviousUnsuccessfulDefines = "EM_PreviousUnsuccessfulDefines";
+        private const string PreviousUnsuccessfulDefines = "EM_PreviousUnsuccessfulDefines_Record";
         // This static constructor will automatically run thanks to the InitializeOnLoad attribute.
         static EM_PluginManager()
         {
             EditorApplication.update += Initialize;
-            bool compilerErrorFound = false;
             CompilationPipeline.assemblyCompilationFinished += (outputPath, compilerMessages) =>
             {
+                bool compilerErrorFound = false;
                 foreach (var msg in compilerMessages)
                 {
                     if (msg.type == CompilerMessageType.Error && (msg.message.Contains("CS0246") || msg.message.Contains("CS0006")))
@@ -25,18 +25,101 @@ namespace EasyMobile.Editor
                         compilerErrorFound = true;
                     }
                 }
-
-                string lastDefine = EditorPrefs.GetString(PreviousUnsuccessfulDefines, "");
                 string currentDefine = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
-                if (compilerErrorFound && lastDefine != currentDefine)
+                if (compilerErrorFound)
+                {
+                    if(!IsDefineResetBefore(outputPath, currentDefine))
+                    {
+                        Debug.LogWarningFormat("Easy Mobile: Missing type/namespace/dll errors were found in {0}. Attempt to fix by resetting scripting symbols", outputPath);
+                    }
+                    else
+                    {
+                        Debug.LogWarningFormat("Easy Mobile: Missing type/namespace/dll errors were found in {0}. Unable to fix by resetting scripting symbols", outputPath);
+                    }
+                }
+
+                if (compilerErrorFound && !IsDefineResetBefore(outputPath, currentDefine))
                 {
                     //try to remove #defind since there was an error while compiling
-                    //in case the current define symbols are the same as last time => not reset symbols since it might be other party problems
+                    //in case the current define symbols has been resetted before => not reset symbols since it might be other party problems
                     //and to avoid enless recompiling if that was the case
-                    EditorPrefs.SetString(PreviousUnsuccessfulDefines, currentDefine);
+                    SetDefineResetInfo(outputPath, currentDefine, true);
                     GlobalDefineManager.SDS_RemoveDefinesOnAllPlatforms(EM_ScriptingSymbols.GetAllSymbols());
                 }
+
+                if(!compilerErrorFound)
+                {
+                    SetDefineResetInfo(outputPath, currentDefine, false);
+                }
             };
+        }
+
+        [Serializable]
+        private class ProblemDefineInfo
+        {
+            public string AssemblyOutputPath;
+            public string Define;
+            public bool Resetted;
+        }
+
+        [Serializable]
+        private class ProblemDefines
+        {
+            public List<ProblemDefineInfo> problemDefineInfos = new List<ProblemDefineInfo>();
+        }
+
+        private static bool IsDefineResetBefore(string assemblyOutputPath, string define)
+        {
+            ProblemDefines problemDefines = GetProblemDefines();
+            foreach (var defineInfo in problemDefines.problemDefineInfos)
+            {
+                if(defineInfo.AssemblyOutputPath.Equals(assemblyOutputPath) && defineInfo.Define.Equals(define))
+                    return defineInfo.Resetted;
+            }
+            return false;
+        }
+
+        private static void SetDefineResetInfo(string assemblyOutputPath, string define, bool resetted)
+        {
+            ProblemDefines problemDefines = GetProblemDefines();
+            bool foundDefine = false;
+            foreach (var defineInfo in problemDefines.problemDefineInfos)
+            {
+                if(defineInfo.AssemblyOutputPath.Equals(assemblyOutputPath) && defineInfo.Define.Equals(define))
+                {
+                    defineInfo.Resetted = resetted;
+                    foundDefine = true;
+                }
+            }
+            if(!foundDefine)
+            {
+                problemDefines.problemDefineInfos.Add(new ProblemDefineInfo(){
+                    AssemblyOutputPath = assemblyOutputPath,
+                    Define = define,
+                    Resetted = resetted
+                });
+            }
+            for (int i = problemDefines.problemDefineInfos.Count - 1; i >= 0 ; i--)
+            {
+                if(!problemDefines.problemDefineInfos[i].Resetted)
+                    problemDefines.problemDefineInfos.RemoveAt(i);
+            }
+            SetProblemDefines(problemDefines);
+        }
+
+        private static ProblemDefines GetProblemDefines()
+        {
+            string jsonString = EditorPrefs.GetString(PreviousUnsuccessfulDefines, "");
+            ProblemDefines problemDefines = JsonUtility.FromJson<ProblemDefines>(jsonString);
+            if(problemDefines == null)
+                problemDefines = new ProblemDefines();
+            return problemDefines;
+        }
+
+        private static void SetProblemDefines(ProblemDefines problemDefines)
+        {
+            string jsonString = JsonUtility.ToJson(problemDefines);
+            EditorPrefs.SetString(PreviousUnsuccessfulDefines, jsonString);
         }
 
         private static void Initialize()

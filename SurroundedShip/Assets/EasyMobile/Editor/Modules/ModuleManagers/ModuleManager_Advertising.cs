@@ -101,6 +101,11 @@ namespace EasyMobile.Editor
                 symbols.Add(EM_ScriptingSymbols.UnityAds);
             }
 
+            if (EM_ExternalPluginManager.IsUnityAd4Enabled())
+            {
+                symbols.Add(EM_ScriptingSymbols.UnityAds4);
+            }
+
             // Vungle
             if (EM_ExternalPluginManager.IsVungleAvail())
             {
@@ -128,6 +133,7 @@ namespace EasyMobile.Editor
                     EM_ScriptingSymbols.TapJoy,
                     EM_ScriptingSymbols.UnityMonetization,
                     EM_ScriptingSymbols.UnityAds,
+                    EM_ScriptingSymbols.UnityAds4,
                     EM_ScriptingSymbols.Vungle
                 });
         }

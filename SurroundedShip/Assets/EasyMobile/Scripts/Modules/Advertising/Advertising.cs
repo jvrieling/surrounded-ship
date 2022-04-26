@@ -1457,7 +1457,7 @@ namespace EasyMobile
                 case AdNetwork.TapJoy:
                     return TapjoyClientImpl.CreateClient();
                 case AdNetwork.UnityAds:
-                    return UnityAdsClientImpl.CreateClient();
+                    return UnityAdsClientImpl.CreateClient();//TODO switch client here
                 case AdNetwork.None:
                     return NoOpClientImpl.CreateClient();
                 case AdNetwork.Vungle:

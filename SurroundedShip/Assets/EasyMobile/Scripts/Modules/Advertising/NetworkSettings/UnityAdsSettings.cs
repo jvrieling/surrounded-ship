@@ -82,6 +82,15 @@ namespace EasyMobile
             get { return mEnableTestMode; }
             set { mEnableTestMode = value; }
         }
+
+        /// <summary>
+        /// Enables unity ad 4 client implementation or legacy implementation
+        /// </summary>
+        public bool UseUnityAd4Client
+        {
+            get {return mUseUnityAd4Client; }
+            set {mUseUnityAd4Client = value;}
+        }
         
         public const string DEFAULT_INTERSTITIAL_ID_ANDROID = "Interstitial_Android";
         public const string DEFAULT_INTERSTITIAL_ID_IOS = "Interstitial_iOS";
@@ -106,6 +115,8 @@ namespace EasyMobile
         private Dictionary_AdPlacement_AdId mCustomRewardedAdIds;
         [SerializeField]
         private bool mEnableTestMode;
+        [SerializeField]
+        private bool mUseUnityAd4Client;
 
         public UnityAdsSettings()
         {

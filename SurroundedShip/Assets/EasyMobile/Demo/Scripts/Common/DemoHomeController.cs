@@ -1,27 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using EasyMobile.Internal;
 
 namespace EasyMobile.Demo
 {
     public class DemoHomeController : MonoBehaviour
     {
-        [Header("Object References")]
-        public Text installationTime;
-
         void Awake()
         {
             // Initialize EM runtime.
             if (!RuntimeManager.IsInitialized())
                 RuntimeManager.Init();
-        }
-
-        void Start()
-        {
-            var installTime = RuntimeHelper.GetAppInstallationTime();
-            installationTime.text = "Install Date: " + installTime.ToShortDateString() + " " + installTime.ToShortTimeString();
         }
 
         void Update()

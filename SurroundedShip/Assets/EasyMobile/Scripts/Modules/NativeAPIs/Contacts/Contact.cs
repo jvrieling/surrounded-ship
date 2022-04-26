@@ -44,7 +44,7 @@ namespace EasyMobile
         public string Id
         {
             get { return id; }
-            internal set { id = value; }
+            set { id = value; }
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace EasyMobile
         public string FirstName
         {
             get { return firstName; }
-            internal set { firstName = value; }
+            set { firstName = value; }
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace EasyMobile
         public string MiddleName
         {
             get { return middleName; }
-            internal set { middleName = value; }
+            set { middleName = value; }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace EasyMobile
         public string LastName
         {
             get { return lastName; }
-            internal set { lastName = value; }
+            set { lastName = value; }
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace EasyMobile
         public string Company
         {
             get { return company; }
-            internal set { company = value; }
+            set { company = value; }
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace EasyMobile
                 return birthday;
             }
 
-            internal set
+            set
             {
                 birthday = value != null ? value.Value : default(DateTime);
             }
@@ -120,7 +120,7 @@ namespace EasyMobile
                 return pairs.ToArray();
             }
 
-            internal set
+            set
             {
                 if (value == null)
                 {
@@ -156,7 +156,7 @@ namespace EasyMobile
                 return pairs.ToArray();
             }
 
-            internal set
+            set
             {
                 if (value == null)
                 {
@@ -190,7 +190,7 @@ namespace EasyMobile
                 return photo;
             }
 
-            internal set { photo = value; }
+            set { photo = value; }
         }
 
         /// <summary>
