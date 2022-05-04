@@ -189,12 +189,12 @@ namespace EasyMobile
 #endif
 
 #elif UNITY_ANDROID && EM_GPGS
-            PlayGamesClientConfiguration.Builder gpgsConfigBuilder = new PlayGamesClientConfiguration.Builder();
+            //PlayGamesClientConfiguration.Builder gpgsConfigBuilder = new PlayGamesClientConfiguration.Builder();
 #if EASY_MOBILE_PRO
             // Enable Saved Games.
             if (EM_Settings.GameServices.IsSavedGamesEnabled)
             {
-                gpgsConfigBuilder.EnableSavedGames();
+                //gpgsConfigBuilder.EnableSavedGames();
             }
 
 #if EM_OBSOLETE_GPGS
@@ -209,19 +209,19 @@ namespace EasyMobile
             // Add the OAuth scopes if any.
             if (EM_Settings.GameServices.GpgsOauthScopes != null && EM_Settings.GameServices.GpgsOauthScopes.Length > 0)
             {
-                foreach (string scope in EM_Settings.GameServices.GpgsOauthScopes)
-                    gpgsConfigBuilder.AddOauthScope(scope);
+                //foreach (string scope in EM_Settings.GameServices.GpgsOauthScopes)
+                    //gpgsConfigBuilder.AddOauthScope(scope);
             }
 
             // Request ServerAuthCode if needed.
-            if (EM_Settings.GameServices.GpgsShouldRequestServerAuthCode)
-                gpgsConfigBuilder.RequestServerAuthCode(EM_Settings.GameServices.GpgsForceRefreshServerAuthCode);
+            //if (EM_Settings.GameServices.GpgsShouldRequestServerAuthCode)
+                //gpgsConfigBuilder.RequestServerAuthCode(EM_Settings.GameServices.GpgsForceRefreshServerAuthCode);
 
             // Build the config
-            PlayGamesClientConfiguration gpgsConfig = gpgsConfigBuilder.Build();
+            //PlayGamesClientConfiguration gpgsConfig = gpgsConfigBuilder.Build();
 
             // Initialize PlayGamesPlatform
-            PlayGamesPlatform.InitializeInstance(gpgsConfig);
+            //PlayGamesPlatform.InitializeInstance(gpgsConfig);
 
             // Enable logging if required
             PlayGamesPlatform.DebugLogEnabled = EM_Settings.GameServices.GgpsDebugLogEnabled;
@@ -649,9 +649,10 @@ namespace EasyMobile
             {
                 return string.Empty;
             }
+            return "";
 
 #if UNITY_ANDROID && EM_GPGS
-            return PlayGamesPlatform.Instance.GetServerAuthCode();
+            //return PlayGamesPlatform.Instance.GetServerAuthCode();
 #elif UNITY_ANDROID && !EM_GPGS
             Debug.LogError("SDK missing. Please import Google Play Games plugin for Unity.");
             return string.Empty;
@@ -672,9 +673,9 @@ namespace EasyMobile
             {
                 return;
             }
-
+            return;
 #if UNITY_ANDROID && EM_GPGS
-            PlayGamesPlatform.Instance.GetAnotherServerAuthCode(reAuthenticateIfNeeded, callback);
+            //PlayGamesPlatform.Instance.GetAnotherServerAuthCode(reAuthenticateIfNeeded, callback);
 #elif UNITY_ANDROID && !EM_GPGS
             Debug.LogError("SDK missing. Please import Google Play Games plugin for Unity.");
 #else
@@ -693,7 +694,7 @@ namespace EasyMobile
             }
 
 #if UNITY_ANDROID && EM_GPGS
-            PlayGamesPlatform.Instance.SignOut();
+            //PlayGamesPlatform.Instance.SignOut();
 #elif UNITY_ANDROID && !EM_GPGS
             Debug.LogError("SDK missing. Please import Google Play Games plugin for Unity.");
 #else
@@ -896,7 +897,7 @@ namespace EasyMobile
 
                 // Set GPGS popup gravity, this needs to be done after authentication.
 #if UNITY_ANDROID && EM_GPGS
-                PlayGamesPlatform.Instance.SetGravityForPopups(ToGpgsGravity(EM_Settings.GameServices.GpgsPopupGravity));
+                //PlayGamesPlatform.Instance.SetGravityForPopups(ToGpgsGravity(EM_Settings.GameServices.GpgsPopupGravity));
 #endif
                 StorageUtil.SetInt(USER_CALLED_LOG_OUT_IN_PREVIOUS_SESSION, 0);
                 StorageUtil.Save();
@@ -925,22 +926,22 @@ namespace EasyMobile
         #region Helpers
 
 #if UNITY_ANDROID && EM_GPGS
-        static Gravity ToGpgsGravity(GameServicesSettings.GpgsGravity gravity)
+        static void ToGpgsGravity(GameServicesSettings.GpgsGravity gravity)
         {
             switch (gravity)
             {
                 case GameServicesSettings.GpgsGravity.Top:
-                    return Gravity.TOP;
+                    return;
                 case GameServicesSettings.GpgsGravity.Bottom:
-                    return Gravity.BOTTOM;
+                    return;
                 case GameServicesSettings.GpgsGravity.Left:
-                    return Gravity.LEFT;
+                    return;
                 case GameServicesSettings.GpgsGravity.Right:
-                    return Gravity.RIGHT;
+                    return;
                 case GameServicesSettings.GpgsGravity.CenterHorizontal:
-                    return Gravity.CENTER_HORIZONTAL;
+                    return;
                 default:
-                    return Gravity.TOP;
+                    return;
             }
         }
 
