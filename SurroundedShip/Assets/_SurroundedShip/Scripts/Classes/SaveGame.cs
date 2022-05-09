@@ -51,6 +51,7 @@ public class SaveGame
 
     public bool showTutorial = true;
     public bool firstGameCompleted;
+    public bool saveToCloud = false;
 
     public SaveGame()
     {
@@ -96,6 +97,7 @@ public class SaveGame
         if(!firstGameCompleted)
         {
             Debug.Log("First game completed");
+            firstGameCompleted = true;
             dateStarted = DateTime.Now;
             //unlock the first day at sea achievement. 
             GPGSAchievements.AchieveFirstDayAtSea();

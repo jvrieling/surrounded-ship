@@ -80,6 +80,9 @@ public class OptionsHolder : MonoBehaviour
         gameSaveLocation = Application.persistentDataPath + "/balls.gcsav";
 
         StartCoroutine(WaitForLogin());
+
+        IngameDebugConsole.DebugLogConsole.AddCommand("els", "Erases the local save file", () => { File.Delete(gameSaveLocation); });
+
     }
 
     public IEnumerator WaitForLogin()
@@ -93,6 +96,8 @@ public class OptionsHolder : MonoBehaviour
         statusText.text = "Loading...";
         Debug.Log("Loading...");
         if (FileSystemEnabled) LoadFromFile();
+
+        GPGEnabled = localSave.saveToCloud;
 
         //////////////
         /// WAIT FOR GPG LOGIN

@@ -9,12 +9,27 @@ public class GPGLoginButton : MonoBehaviour
     public Text usernameText;
 
     public GameObject signInPanel;
+    public GameObject signInPrompt;
     public Text statusText;
+
+    public Image iconImage;
+    public Color notSignedInColour = Color.red;
 
     // Update is called once per frame
     void Update()
     {
-        usernameText.text = (Social.localUser.authenticated) ? Social.localUser.userName : "Not logged in!";
+        if (Social.localUser.authenticated)
+        {
+            usernameText.text = Social.localUser.userName;
+            iconImage.color = Color.white;
+            signInPrompt.SetActive(false);
+        }
+        else
+        {
+            usernameText.text = "Not logged in!";
+            iconImage.color = notSignedInColour;
+            signInPrompt.SetActive(true);
+        }
     }
 
     public void OnClick()
@@ -30,7 +45,12 @@ public class GPGLoginButton : MonoBehaviour
             OptionsHolder.Reload(statusText, () =>
             {
                 signInPanel.SetActive(false);
+                OptionsHolder.instance.save.saveToCloud = true;
             });
+        } else
+        {
+            signInPanel.SetActive(false);
+            Debug.Log("User is already signed in!");
         }
     }
 }
