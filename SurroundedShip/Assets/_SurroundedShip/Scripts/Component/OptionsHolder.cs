@@ -45,6 +45,12 @@ public class OptionsHolder : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            instance.Awake();
+            Destroy(gameObject);
+        }
+
         if (Application.platform == RuntimePlatform.Android) GPGEnabled = true;
         else GPGEnabled = false;
 
@@ -60,12 +66,14 @@ public class OptionsHolder : MonoBehaviour
 
         statusText.text = "waking up";
 
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         if (save.name != "test")
             save = new SaveGame();
-
-        DontDestroyOnLoad(gameObject);
 
         save.name = "DefaultSave";
         savedGameName = "sss";
@@ -95,11 +103,10 @@ public class OptionsHolder : MonoBehaviour
             while (!GameServices.IsInitialized() && !cancelGPG)
             {
                 statusText.text = "Logging in...";
-                Debug.Log("Logging in...");
 
                 //Wait for game services to initialize. If it takes too long just give up and move on.
                 timeSpent += Time.deltaTime;
-                if (timeSpent > 3)
+                if (timeSpent > 4)
                 {
                     cancelGPG = true;
                     GPGEnabled = false;
@@ -342,9 +349,36 @@ public class OptionsHolder : MonoBehaviour
             }
         });
     }
+
     public void GiveGold()
     {
         save.totalGold += 1000;
     }
 
+    public static void Reload(Text status, System.Action callback)
+    {
+        status.text = "Loading from device...";
+        instance.LoadFromFile();
+        status.text = "Loading from cloud...";
+        instance.LoadFromGPG();
+
+        if (instance.localSave != null)
+        {
+            if (GPGEnabled && instance.GPGSave != null)
+            {
+                Debug.Log("Comparing GPG with local save, choosing more recent.");
+
+                instance.save = SaveGame.CompareLastSaved(instance.localSave, instance.GPGSave);
+                InfoPane.log += " using " + ((instance.save == instance.localSave) ? "local save." : "GPG save.");
+            }
+            else
+            {
+                InfoPane.log += " just using local save. GPGEnabled: " + GPGEnabled + " and FSEnabled: " + FileSystemEnabled + " GPGSave: " + ((instance.GPGSave != null) ? instance.GPGSave.name : "Null");
+                Debug.Log("Using local save.");
+                instance.save = instance.localSave;
+            }
+        }
+
+        callback.Invoke();
+    }
 }

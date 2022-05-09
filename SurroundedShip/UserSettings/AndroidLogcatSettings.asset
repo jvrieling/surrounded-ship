@@ -1,5 +1,5 @@
 {
-    "m_SelectedDeviceId": "",
+    "m_SelectedDeviceId": "4659345143583398",
     "m_SelectedPackage": {
         "deviceId": "",
         "name": "",
@@ -7,7 +7,14 @@
         "exited": false
     },
     "m_SelectedPriority": 0,
-    "m_KnownPackagesForSerialization": [],
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "4659345143583398",
+            "name": "com.teslacoilsw.launcher",
+            "processId": 18436,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
