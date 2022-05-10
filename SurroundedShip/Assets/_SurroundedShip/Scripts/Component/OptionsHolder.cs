@@ -79,10 +79,24 @@ public class OptionsHolder : MonoBehaviour
         savedGameName = "sss";
         gameSaveLocation = Application.persistentDataPath + "/balls.gcsav";
 
+        //Set the GPGEnabled boolean based on the user login success.
+        GameServices.UserLoginSucceeded += () => { UserLogin(true); };
+        GameServices.UserLoginFailed += () => { UserLogin(false); };
+
+        GPGEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("GPGEnabled", 0));
         StartCoroutine(WaitForLogin());
 
         IngameDebugConsole.DebugLogConsole.AddCommand("els", "Erases the local save file", () => { File.Delete(gameSaveLocation); });
+        IngameDebugConsole.DebugLogConsole.AddCommand("egpg", "Enables Google Play Games Cloud saves", () => { PlayerPrefs.SetInt("GPGEnabled", 1); GPGEnabled = true; });
+        IngameDebugConsole.DebugLogConsole.AddCommand("dgpg", "Disables Google Play Games Cloud saves", () => { PlayerPrefs.SetInt("GPGEnabled", 0); GPGEnabled = false; });
+        IngameDebugConsole.DebugLogConsole.AddCommand("ggpg", "Gets Google Play Games Cloud saves enable state", () => { Debug.Log(PlayerPrefs.GetInt("GPGEnabled", 0)); });
+    }
 
+    public void UserLogin(bool success)
+    {
+        Debug.Log("User login success: " + success);
+        GPGEnabled = success;
+        PlayerPrefs.SetInt("GPGEnabled", Convert.ToInt32(success));
     }
 
     public IEnumerator WaitForLogin()
@@ -97,14 +111,16 @@ public class OptionsHolder : MonoBehaviour
         Debug.Log("Loading...");
         if (FileSystemEnabled) LoadFromFile();
 
-        GPGEnabled = localSave.saveToCloud;
-
         //////////////
         /// WAIT FOR GPG LOGIN
         //////////////
         if (GPGEnabled)
         {
             InfoPane.log += " Logging into GPG -";
+            if (!GameServices.IsInitialized())
+            {
+                GameServices.Init();
+            }
             while (!GameServices.IsInitialized() && !cancelGPG)
             {
                 statusText.text = "Logging in...";

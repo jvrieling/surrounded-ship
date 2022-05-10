@@ -284,7 +284,7 @@ MonoBehaviour:
         minimumDiskSpaceForAds: 50000000
         disableHardwareId: 0
   mGameServiceSettings:
-    mAutoInit: 1
+    mAutoInit: 0
     mAutoInitAfterUserLogout: 0
     mAutoInitDelay: 0
     mAndroidMaxLoginRequests: 0

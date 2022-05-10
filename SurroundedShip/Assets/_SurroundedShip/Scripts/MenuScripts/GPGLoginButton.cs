@@ -45,7 +45,7 @@ public class GPGLoginButton : MonoBehaviour
             OptionsHolder.Reload(statusText, () =>
             {
                 signInPanel.SetActive(false);
-                OptionsHolder.instance.save.saveToCloud = true;
+                OptionsHolder.GPGEnabled = true;
             });
         } else
         {

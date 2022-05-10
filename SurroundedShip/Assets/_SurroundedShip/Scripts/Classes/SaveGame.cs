@@ -51,7 +51,6 @@ public class SaveGame
 
     public bool showTutorial = true;
     public bool firstGameCompleted;
-    public bool saveToCloud = false;
 
     public SaveGame()
     {
@@ -147,7 +146,7 @@ public class SaveGame
     public string GetSummary()
     {
         return "Save Game: " + name
-            + "\nRounds Played: " + gamesPlayed + " First Game Completed: " + firstGameCompleted
+            + "\nRounds Played: " + gamesPlayed
             + "\nHighest... difficulty: " + recordDifficulty + " Score: " + highScore + " Kills: " + highKills
             + "\n"
             + "\n Time Played: " + TimeSpan.FromSeconds(totalTimePlayed)

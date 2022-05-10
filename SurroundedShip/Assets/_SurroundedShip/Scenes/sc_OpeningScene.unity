@@ -1238,7 +1238,6 @@ MonoBehaviour:
     lastSaveGameVersion: 
     showTutorial: 1
     firstGameCompleted: 0
-    saveToCloud: 0
   onLoadEvent:
     m_PersistentCalls:
       m_Calls:
