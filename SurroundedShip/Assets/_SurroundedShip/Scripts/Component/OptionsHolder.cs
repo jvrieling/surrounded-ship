@@ -43,6 +43,9 @@ public class OptionsHolder : MonoBehaviour
     public static bool GPGEnabled, FileSystemEnabled = true;
     public static string errorCode;
 
+    public enum ConflicResolution { undefined, useRemote, useLocal };
+    public static ConflicResolution resolution = ConflicResolution.undefined;
+
     private void Awake()
     {
         if (instance != null)
@@ -236,7 +239,7 @@ public class OptionsHolder : MonoBehaviour
     }
     public void LoadFromGPG()
     {
-        Debug.Log("Opening file at " + gameSaveLocation + "!");
+        Debug.Log("Loading from GPG!");
 
         if (GPGEnabled)
         {
@@ -245,7 +248,7 @@ public class OptionsHolder : MonoBehaviour
             {
                 if (string.IsNullOrEmpty(error))
                 {
-                    statusText.text = "Opened game!\nLoading data...";
+                    Debug.Log("Opened game!\nLoading data...");
                     savedGame = openedGame;
                     GameServices.SavedGames.ReadSavedGameData(savedGame, (game, data, readingError) =>
                     {
@@ -253,7 +256,7 @@ public class OptionsHolder : MonoBehaviour
                         {
                             if (data.Length > 0)
                             {
-                                statusText.text = "Almost done!";
+                                Debug.Log("Almost done!");
                                 GPGSave = Utils.ObjectSerializationExtension.Deserialize<SaveGame>(data);
                                 InfoPane.log += "GPG save loaded -";
                             }
@@ -264,7 +267,7 @@ public class OptionsHolder : MonoBehaviour
                         }
                         else
                         {
-                            statusText.text = "Failed to load data due to error: " + readingError;
+                            Debug.Log("Failed to load data due to error: " + readingError);
                             Debug.LogException(new Exception("Failed to load data from GPG due to error: " + readingError));
                             GPGEnabled = false;
                         }
@@ -376,30 +379,80 @@ public class OptionsHolder : MonoBehaviour
         save.totalGold += 1000;
     }
 
-    public static void Reload(Text status, System.Action callback)
+    public static IEnumerator Reload(GameObject conflictPanel, Text status, Text localSummary, Text remoteSummary, System.Action callback)
     {
-        status.text = "Loading from device...";
-        instance.LoadFromFile();
-        status.text = "Loading from cloud...";
-        instance.LoadFromGPG();
+        instance.GPGSave = null;
+        GPGEnabled = true;
+        GameServices.Init();
 
-        if (instance.localSave != null)
+        float timeSpent = 0;
+        bool cancelGPG = false;
+
+        status.text = "Logging in...";
+
+        InfoPane.log += " Logging into GPG -";
+        if (!GameServices.IsInitialized())
         {
-            if (GPGEnabled && instance.GPGSave != null)
+            GameServices.Init();
+        }
+        while (!GameServices.IsInitialized() && !cancelGPG)
+        {
+            //Wait for game services to initialize. If it takes too long just give up and move on.
+            timeSpent += Time.deltaTime;
+            if (timeSpent > 4)
             {
-                Debug.Log("Comparing GPG with local save, choosing more recent.");
-
-                instance.save = SaveGame.CompareLastSaved(instance.localSave, instance.GPGSave);
-                InfoPane.log += " using " + ((instance.save == instance.localSave) ? "local save." : "GPG save.");
+                cancelGPG = true;
+                GPGEnabled = false;
+                Debug.LogException(new Exception("Game Services initialization timed out!"));
+                InfoPane.log += " GPG timeout! -";
             }
-            else
-            {
-                InfoPane.log += " just using local save. GPGEnabled: " + GPGEnabled + " and FSEnabled: " + FileSystemEnabled + " GPGSave: " + ((instance.GPGSave != null) ? instance.GPGSave.name : "Null");
-                Debug.Log("Using local save.");
-                instance.save = instance.localSave;
-            }
+            yield return null;
         }
 
+        status.text = "Loading...";
+        instance.LoadFromGPG();
+
+        while (instance.GPGSave == null)
+        {
+            Debug.Log("Still loading cloud save!");
+            yield return null;
+        }
+
+        if (!instance.GPGSave.firstGameCompleted)
+        {
+            //The cloud data is empty. Save the current data to the cloud.
+            instance.WriteSave();
+            Debug.Log("Using local save - remote is empty.");
+        }
+        else if (!instance.save.firstGameCompleted)
+        {
+            //The local save is empty. Use remote automatically.
+            instance.save = instance.GPGSave;
+            Debug.Log("Using remote save - local is empty.");
+        }
+        else if (instance.GPGSave.firstGameCompleted && instance.save.firstGameCompleted)
+        {
+            Debug.Log("Both saves are used! Opening user choice window.");
+            conflictPanel.SetActive(true);
+            localSummary.text = instance.save.GetPlayerSummary();
+            remoteSummary.text = instance.GPGSave.GetPlayerSummary();
+
+            while(resolution == ConflicResolution.undefined)
+            {
+                yield return null;
+            }
+
+            if(resolution == ConflicResolution.useRemote)
+            {
+                instance.save = instance.GPGSave;
+            } else if (resolution == ConflicResolution.useLocal)
+            {
+                instance.WriteSave();
+            }
+
+            conflictPanel.SetActive(false);
+        }
+        resolution = ConflicResolution.undefined;
         callback.Invoke();
     }
 }

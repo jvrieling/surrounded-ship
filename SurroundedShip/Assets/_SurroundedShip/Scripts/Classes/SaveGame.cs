@@ -143,6 +143,13 @@ public class SaveGame
 
     }
 
+    public string GetPlayerSummary()
+    {
+        return "Level: " + recordDifficulty.ToString("0.0");
+            + "\nGold: " + totalGold
+            + "\nTime Played: " + TimeSpan.FromSeconds(totalTimePlayed);
+    }
+
     public string GetSummary()
     {
         return "Save Game: " + name

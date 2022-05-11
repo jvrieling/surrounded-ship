@@ -8,9 +8,9 @@ public class GPGLoginButton : MonoBehaviour
 {
     public Text usernameText;
 
-    public GameObject signInPanel;
+    public GameObject signInPanel, conflictPanel;
     public GameObject signInPrompt;
-    public Text statusText;
+    public Text statusText, localSaveSummary, remoteSaveSummary;
 
     public Image iconImage;
     public Color notSignedInColour = Color.red;
@@ -38,19 +38,28 @@ public class GPGLoginButton : MonoBehaviour
         Debug.Log("Clicked GPG button");
         if (!(GameServices.IsInitialized() && Social.localUser.authenticated))
         {
-            GameServices.Init();
             Debug.Log("Signing in as per user request");
             InfoPane.log += "\n user manual sign in";
 
-            OptionsHolder.Reload(statusText, () =>
+            StartCoroutine(OptionsHolder.Reload(conflictPanel, statusText, localSaveSummary, remoteSaveSummary, () =>
             {
                 signInPanel.SetActive(false);
-                OptionsHolder.GPGEnabled = true;
-            });
+            }));
         } else
         {
             signInPanel.SetActive(false);
             Debug.Log("User is already signed in!");
         }
+    }
+
+    public void OverwriteCloud()
+    {
+        Debug.Log("User chose to overwrite cloud!");
+        OptionsHolder.resolution = OptionsHolder.ConflicResolution.useLocal;
+    }
+    public void OverwriteLocal()
+    {
+        Debug.Log("User chose to overwrite local!");
+        OptionsHolder.resolution = OptionsHolder.ConflicResolution.useRemote;
     }
 }
