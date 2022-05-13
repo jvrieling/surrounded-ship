@@ -43,6 +43,11 @@ public class EnemyController : MonoBehaviour
             ParticleSystem.MainModule psmain = i.main;
             psmain.startSpeed = (moveSpeed * 0.04f);
         }
+
+        if (Mathf.Abs(transform.rotation.eulerAngles.z) == 180)
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
+        }
     }
 
     // Update is called once per frame
