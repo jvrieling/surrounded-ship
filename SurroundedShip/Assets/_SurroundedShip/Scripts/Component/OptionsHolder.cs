@@ -408,7 +408,13 @@ public class OptionsHolder : MonoBehaviour
             }
             yield return null;
         }
-
+        if (cancelGPG)
+        {
+            status.text = "Login timed out! Please try again.";
+            yield return new WaitForSeconds(1.4f);
+            callback.Invoke();
+            yield break;
+        }
         status.text = "Loading...";
         instance.LoadFromGPG();
 
