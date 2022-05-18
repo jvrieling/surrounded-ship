@@ -86,7 +86,22 @@ public class OptionsHolder : MonoBehaviour
         GameServices.UserLoginSucceeded += () => { UserLogin(true); };
         GameServices.UserLoginFailed += () => { UserLogin(false); };
 
-        GPGEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("GPGEnabled", 0));
+        //If this is a fresh update, check if the app has been run previously. If so, enable GPG and thus try to log in. If not, disable GPG as normal.
+        if (!PlayerPrefs.HasKey("GPGEnabled") && PlayerPrefs.HasKey("EM_APP_INSTALLATION_TIMESTAMP"))
+        {
+            Debug.Log("Fresh install, but the app has been run before! Enabling GPG...");
+            if (Application.platform != RuntimePlatform.Android)
+            {
+                GPGEnabled = true;
+                PlayerPrefs.SetInt("GPGEnabled", 1);
+            }
+        }
+        else
+        {
+            GPGEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("GPGEnabled", 0));
+        }
+
+
         StartCoroutine(WaitForLogin());
 
         //IngameDebugConsole.DebugLogConsole.AddCommand("els", "Erases the local save file", () => { File.Delete(gameSaveLocation); });
