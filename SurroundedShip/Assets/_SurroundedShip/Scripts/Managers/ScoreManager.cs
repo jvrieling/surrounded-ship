@@ -111,9 +111,10 @@ public class ScoreManager : MonoBehaviour
         if (hp <= 0)
         {
             BannerAd.showBannerAd = true;
-            if (difficulty % 20 == 0)
+
+            if (System.MathF.Round(difficulty, 1) % 20 == 0)
             {
-                difficulty -= 0.2f;
+                difficulty -= 0.5f;
             }
             OptionsHolder.instance.save.CompleteRound(difficulty, kills, gold, roundDuration);
             OptionsHolder.instance.save.CheckHighScore(score);
@@ -128,7 +129,6 @@ public class ScoreManager : MonoBehaviour
                 {"gold_earned", gold },
                 {"time_survived", roundDuration }
             });
-            Debug.Log("Sent analytic on game played! " + analytic);
 
             SceneManager.LoadScene("sc_EndScreen");
         }

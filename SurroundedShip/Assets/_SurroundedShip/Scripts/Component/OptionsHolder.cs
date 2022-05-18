@@ -89,10 +89,10 @@ public class OptionsHolder : MonoBehaviour
         GPGEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("GPGEnabled", 0));
         StartCoroutine(WaitForLogin());
 
-        IngameDebugConsole.DebugLogConsole.AddCommand("els", "Erases the local save file", () => { File.Delete(gameSaveLocation); });
-        IngameDebugConsole.DebugLogConsole.AddCommand("egpg", "Enables Google Play Games Cloud saves", () => { PlayerPrefs.SetInt("GPGEnabled", 1); GPGEnabled = true; });
-        IngameDebugConsole.DebugLogConsole.AddCommand("dgpg", "Disables Google Play Games Cloud saves", () => { PlayerPrefs.SetInt("GPGEnabled", 0); GPGEnabled = false; });
-        IngameDebugConsole.DebugLogConsole.AddCommand("ggpg", "Gets Google Play Games Cloud saves enable state", () => { Debug.Log(PlayerPrefs.GetInt("GPGEnabled", 0)); });
+        //IngameDebugConsole.DebugLogConsole.AddCommand("els", "Erases the local save file", () => { File.Delete(gameSaveLocation); });
+        //IngameDebugConsole.DebugLogConsole.AddCommand("egpg", "Enables Google Play Games Cloud saves", () => { PlayerPrefs.SetInt("GPGEnabled", 1); GPGEnabled = true; });
+        //IngameDebugConsole.DebugLogConsole.AddCommand("dgpg", "Disables Google Play Games Cloud saves", () => { PlayerPrefs.SetInt("GPGEnabled", 0); GPGEnabled = false; });
+        //IngameDebugConsole.DebugLogConsole.AddCommand("ggpg", "Gets Google Play Games Cloud saves enable state", () => { Debug.Log(PlayerPrefs.GetInt("GPGEnabled", 0)); });
     }
 
     public void UserLogin(bool success)
@@ -119,7 +119,6 @@ public class OptionsHolder : MonoBehaviour
         //////////////
         if (GPGEnabled)
         {
-            InfoPane.log += " Logging into GPG -";
             if (!GameServices.IsInitialized())
             {
                 GameServices.Init();
@@ -134,15 +133,10 @@ public class OptionsHolder : MonoBehaviour
                 {
                     cancelGPG = true;
                     GPGEnabled = false;
-                    Debug.LogException(new Exception("Game Services initialization timed out!"));
-                    InfoPane.log += " GPG timeout! -";
+                    Debug.LogError("Game Services initialization timed out!");
                 }
                 yield return null;
             }
-        }
-        else
-        {
-            InfoPane.log += " GPG Disabled -";
         }
 
         //////////////
@@ -168,8 +162,6 @@ public class OptionsHolder : MonoBehaviour
             }
         }
 
-        InfoPane.log += " login tried for " + timeSpent + " seconds - GPG save load took " + loadTimeSpent + " seconds -";
-
         //////////////
         /// USE THE LATEST SAVE
         //////////////
@@ -185,11 +177,9 @@ public class OptionsHolder : MonoBehaviour
             else
             {
                 InfoPane.log += " just using local save. GPGEnabled: " + GPGEnabled + " and FSEnabled: " + FileSystemEnabled + " GPGSave: " + ((GPGSave != null) ? GPGSave.name : "Null");
-                Debug.Log("Using local save.");
+                InfoPane.log += "Using local save.";
                 save = localSave;
             }
-
-            if (Time.unscaledTime < 4) InfoPane.log += "\nWaiting a sec because loading went too fast!";
 
             //Make sure the logo shows for at least a second!
             if (Time.unscaledTime < 4) yield return new WaitForSeconds(4 - Time.unscaledTime);
@@ -204,7 +194,6 @@ public class OptionsHolder : MonoBehaviour
             string scene = SceneManager.GetActiveScene().name;
             if (scene == "sc_MainMenu" || scene == "sc_Settings" || scene == "sc_Upgrades")
             {
-                Debug.Log("Saving game before closing! scene is " + scene);
                 WriteSave();
             }
         }
@@ -222,7 +211,6 @@ public class OptionsHolder : MonoBehaviour
                 else
                     localSave = new SaveGame();
                 Debug.Log("Read from the file system! " + gameSaveLocation);
-                InfoPane.log += "\nread from file -";
             }
             catch (IOException e)
             {
@@ -234,7 +222,6 @@ public class OptionsHolder : MonoBehaviour
         {
             localSave = new SaveGame();
             File.Create(gameSaveLocation);
-            InfoPane.log += "\ncreated new file -";
         }
     }
     public void LoadFromGPG()
@@ -258,7 +245,6 @@ public class OptionsHolder : MonoBehaviour
                             {
                                 Debug.Log("Almost done!");
                                 GPGSave = Utils.ObjectSerializationExtension.Deserialize<SaveGame>(data);
-                                InfoPane.log += "GPG save loaded -";
                             }
                             else
                             {
@@ -267,7 +253,6 @@ public class OptionsHolder : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("Failed to load data due to error: " + readingError);
                             Debug.LogException(new Exception("Failed to load data from GPG due to error: " + readingError));
                             GPGEnabled = false;
                         }
@@ -390,7 +375,6 @@ public class OptionsHolder : MonoBehaviour
 
         status.text = "Logging in...";
 
-        InfoPane.log += " Logging into GPG -";
         if (!GameServices.IsInitialized())
         {
             GameServices.Init();
@@ -403,8 +387,8 @@ public class OptionsHolder : MonoBehaviour
             {
                 cancelGPG = true;
                 GPGEnabled = false;
-                Debug.LogException(new Exception("Game Services initialization timed out!"));
-                InfoPane.log += " GPG timeout! -";
+                Debug.LogError("Game Services initialization timed out!");
+                InfoPane.log += " GPG timeout! ";
             }
             yield return null;
         }
@@ -420,7 +404,6 @@ public class OptionsHolder : MonoBehaviour
 
         while (instance.GPGSave == null)
         {
-            Debug.Log("Still loading cloud save!");
             yield return null;
         }
 
@@ -443,15 +426,16 @@ public class OptionsHolder : MonoBehaviour
             localSummary.text = instance.save.GetPlayerSummary();
             remoteSummary.text = instance.GPGSave.GetPlayerSummary();
 
-            while(resolution == ConflicResolution.undefined)
+            while (resolution == ConflicResolution.undefined)
             {
                 yield return null;
             }
 
-            if(resolution == ConflicResolution.useRemote)
+            if (resolution == ConflicResolution.useRemote)
             {
                 instance.save = instance.GPGSave;
-            } else if (resolution == ConflicResolution.useLocal)
+            }
+            else if (resolution == ConflicResolution.useLocal)
             {
                 instance.WriteSave();
             }
