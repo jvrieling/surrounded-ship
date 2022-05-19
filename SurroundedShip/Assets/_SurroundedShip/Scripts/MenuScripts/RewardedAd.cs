@@ -24,7 +24,7 @@ public class RewardedAd : MonoBehaviour
     void RewardedAdCompletedHandler(RewardedAdNetwork network, AdPlacement location)
     {
         Debug.Log("Rewarded ad has completed. The user should be rewarded now.");
-        OptionsHolder.instance.save.totalGold += Mathf.RoundToInt(100 + (OptionsHolder.instance.save.difficulty/1.5f));
+        OptionsHolder.instance.save.totalGold += Mathf.RoundToInt(100 + (OptionsHolder.instance.save.recordDifficulty/1.5f));
     }
 
     // Event handler called when a rewarded ad has been skipped
