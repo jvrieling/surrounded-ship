@@ -77,7 +77,7 @@ public class ShooterController : MonoBehaviour
 
 
                 temp.GetComponent<BulletController>().InstantiateBullet(direction, bulletVelocity, bulletDamage);
-                temp.GetComponent<BulletController>().tagsToIgnore = new string[] { transform.parent.tag, temp.tag};
+                temp.GetComponent<BulletController>().tagsToIgnore = new string[] { transform.parent.tag, temp.tag, "Chest"};
                 temp.transform.SetParent(ManagerManager.shooterManager.bulletHolder.transform);
             }
         }

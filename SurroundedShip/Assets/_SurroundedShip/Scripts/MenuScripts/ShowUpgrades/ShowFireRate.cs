@@ -42,7 +42,7 @@ public class ShowFireRate : MonoBehaviour
                 acc = OptionsHolder.instance.save.gun2.timeBetweenShots - 0.1f;
                 accdiff = Mathf.RoundToInt((0.65f - acc) / 0.05f);
                 txt.text = accdiff + "/" + max;
-                if (accdiff == 5)
+                if (accdiff == 13)
                 {
                     btn.interactable = false;
                     btn.GetComponentInChildren<Text>().text = "MAXED";
@@ -52,7 +52,7 @@ public class ShowFireRate : MonoBehaviour
                 acc = OptionsHolder.instance.save.gun3.timeBetweenShots - 0.1f;
                 accdiff = Mathf.RoundToInt((0.65f - acc) / 0.05f);
                 txt.text = accdiff + "/" + max;
-                if (accdiff == 5)
+                if (accdiff == 13)
                 {
                     btn.interactable = false;
                     btn.GetComponentInChildren<Text>().text = "MAXED";
@@ -62,7 +62,7 @@ public class ShowFireRate : MonoBehaviour
                 acc = OptionsHolder.instance.save.gun4.timeBetweenShots - 0.1f;
                 accdiff = Mathf.RoundToInt((0.65f - acc) / 0.05f);
                 txt.text = accdiff + "/" + max;
-                if (accdiff == 5)
+                if (accdiff == 13)
                 {
                     btn.interactable = false;
                     btn.GetComponentInChildren<Text>().text = "MAXED";

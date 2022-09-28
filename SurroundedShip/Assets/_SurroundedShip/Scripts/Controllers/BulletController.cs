@@ -38,19 +38,16 @@ public class BulletController : MonoBehaviour
     {
         rb.velocity = direction * velocity;
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        bool clear = false;
         foreach(string i in tagsToIgnore)
         {
-            if (other.gameObject.tag == i) clear = true;
+            if (other.gameObject.tag == i) return;
         }
-        if (!clear)
-        {
-            Instantiate(collisionPrefab, transform.position, Quaternion.identity);
-            RuntimeManager.PlayOneShot(hitSound);
-            Destroy(gameObject);
-        }
+        Instantiate(collisionPrefab, transform.position, Quaternion.identity);
+        RuntimeManager.PlayOneShot(hitSound);
+        Destroy(gameObject);
     }
 
     public void InstantiateBullet(Vector3 newDirection, float newVelocity, float newDamage)
@@ -59,6 +56,4 @@ public class BulletController : MonoBehaviour
         velocity = newVelocity;
         bulletDamage = newDamage;
     }
-
-   
 }

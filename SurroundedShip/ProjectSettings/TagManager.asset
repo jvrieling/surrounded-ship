@@ -9,6 +9,7 @@ TagManager:
   - Water
   - Spawner
   - Boss
+  - Chest
   layers:
   - Default
   - TransparentFX

@@ -10324,6 +10324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -10831,15 +10832,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 15
-  enemyPrefab: {fileID: 2248511023568747089, guid: 62ff11945a31d0949927914efc706709,
-    type: 3}
-  bossPrefabs:
-  - {fileID: 2225653007965479181, guid: a710212383c82024a824d27a43ef4cc0, type: 3}
-  - {fileID: 210782596420310573, guid: 265040d631c349746aedd3236d8b711b, type: 3}
-  - {fileID: 7997808059733216721, guid: 98fd8a10a1f892448a879090d568ce75, type: 3}
-  - {fileID: 7557456044630553930, guid: b5264a83aabf2264d9cdb866548ffc47, type: 3}
   timeBetweenSpawns: 1
   lockUI: {fileID: 45510093}
+  enemyPrefab: {fileID: 2248511023568747089, guid: 62ff11945a31d0949927914efc706709,
+    type: 3}
   enemies:
   - {fileID: 11400000, guid: d96c5f6993c06f242b0078bef371849c, type: 2}
   - {fileID: 11400000, guid: d6283c0d3b347ef479133d39cfe12fe0, type: 2}
@@ -10847,6 +10843,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a3f7b1b126cc56a47a86ce5afd5c3f32, type: 2}
   - {fileID: 11400000, guid: 0193d5b5832c2fc4f9ceb599735fb0ec, type: 2}
   - {fileID: 11400000, guid: c6d449a0336ad784a93345f0219bd56b, type: 2}
+  bossPrefabs:
+  - {fileID: 2225653007965479181, guid: a710212383c82024a824d27a43ef4cc0, type: 3}
+  - {fileID: 210782596420310573, guid: 265040d631c349746aedd3236d8b711b, type: 3}
+  - {fileID: 7997808059733216721, guid: 98fd8a10a1f892448a879090d568ce75, type: 3}
+  - {fileID: 7557456044630553930, guid: b5264a83aabf2264d9cdb866548ffc47, type: 3}
+  chestPrefab: {fileID: 1333735550488809467, guid: ee45e6021812ac94d906ed7f11f2fc81,
+    type: 3}
+  chestSpawnTime: {x: 45, y: 110}
 --- !u!1 &490175280
 GameObject:
   m_ObjectHideFlags: 0

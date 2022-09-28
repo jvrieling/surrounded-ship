@@ -12,20 +12,26 @@ using UnityEngine;
 /// </summary>
 public class CircleSpawner : MonoBehaviour
 {
+    private static int bossIndex;
+    public static bool bossActive;
+
     public float radius = 5;
-
-    public GameObject enemyPrefab;
-    public GameObject[] bossPrefabs;
-
     public float timeBetweenSpawns = 1;
-    private float spawnTimer;
-
     public GameObject lockUI;
 
+    [Header("Enemies")]
+    public GameObject enemyPrefab;
     public List<Enemy> enemies = new List<Enemy>();
 
-    public static bool bossActive;
-    private static int bossIndex;
+    public GameObject[] bossPrefabs;
+
+    [Header("Chests")]
+    public GameObject chestPrefab;
+    public Vector2 chestSpawnTime;
+
+    private float spawnTimer;
+    private float chestTime;
+    private float chestTimer;
 
     public void Start()
     {
@@ -38,6 +44,8 @@ public class CircleSpawner : MonoBehaviour
             IncrementIndex();
             diff -= 20;
         }
+
+        chestTime = GetNewChestTime();
     }
 
     private void Update()
@@ -50,6 +58,14 @@ public class CircleSpawner : MonoBehaviour
         {
             spawnTimer = 0;
             SpawnEnemy();
+        }
+
+        chestTimer += Time.deltaTime;
+        if(chestTimer >= chestTime)
+        {
+            chestTimer = 0;
+            chestTime = GetNewChestTime();
+            SpawnChest();
         }
     }
 
@@ -90,6 +106,7 @@ public class CircleSpawner : MonoBehaviour
         }
         SpawnEnemy(selectedEnemy);
     }
+
     public void SpawnEnemy(Enemy selectedEnemy)
     {
         Vector3 center = transform.position;
@@ -117,5 +134,20 @@ public class CircleSpawner : MonoBehaviour
     {
         bossIndex++;
         if (bossIndex >= bossPrefabs.Length) bossIndex = 0;
+    }
+
+    [ContextMenu("Spawn Chest")]
+    private void SpawnChest()
+    {
+        Vector3 dir = (transform.position - RandomCircle(transform.position, radius)).normalized;
+        float distance = Random.Range(3, radius - 2);
+        Vector3 pos = transform.position + (dir * distance);
+
+        Instantiate(chestPrefab, pos, Quaternion.identity);
+    }
+
+    private float GetNewChestTime()
+    {
+        return Random.Range(chestSpawnTime.x, chestSpawnTime.y);
     }
 }

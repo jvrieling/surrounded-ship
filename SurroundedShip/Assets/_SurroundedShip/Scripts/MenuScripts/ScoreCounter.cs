@@ -29,16 +29,11 @@ public class ScoreCounter : MonoBehaviour
     public string coinStashSound;
 
     public SaveGame debugSave;
-    private SaveGame save;
+    
+    private SaveGame save => OptionsHolder.instance.save;
+
     void Start()
     {
-        if(OptionsHolder.instance == null)
-        {
-            save = debugSave;
-        } else
-        {
-            save = OptionsHolder.instance.save;
-        }
         StartCoroutine(CountScores());
         StartCoroutine(ForceMenuButton());
     }
@@ -85,5 +80,10 @@ public class ScoreCounter : MonoBehaviour
         diffText.text = save.difficulty.ToString("0.0");
 
         menuButton.interactable = true;
+    }
+
+    public void SetGoldDoubled()
+    {
+        goldText.text = (save.gold * 2).ToString();
     }
 }
