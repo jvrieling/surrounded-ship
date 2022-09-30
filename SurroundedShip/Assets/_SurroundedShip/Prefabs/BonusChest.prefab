@@ -867,7 +867,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 35
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5286,5 +5286,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42241353, y: 0.46043214, z: 0.36524755}
-  m_Center: {x: 0.0034915903, y: 0.18944411, z: 0.012096224}
+  m_Size: {x: 0.42241353, y: 0.37336156, z: 0.36524755}
+  m_Center: {x: 0.0034915903, y: 0.23297946, z: 0.012096224}
