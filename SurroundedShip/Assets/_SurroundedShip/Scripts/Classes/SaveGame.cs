@@ -4,10 +4,7 @@
 ///////////////////////////////
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 /// <summary>
 /// SaveGame handles the data for the current instance of the game. It's a serialized object so it can be easily written to a file in binary.
@@ -21,7 +18,7 @@ public class SaveGame
 
     public float difficulty;
     public float recordDifficulty;
-
+    
     public int score;
     public int highScore;
 
@@ -30,6 +27,8 @@ public class SaveGame
 
     public int gold;
     public int totalGold;
+
+    public int totalPearls;
 
     public ShooterData gun1;
     public ShooterData gun2;
@@ -51,6 +50,9 @@ public class SaveGame
 
     public bool showTutorial = true;
     public bool firstGameCompleted;
+
+    public int currentMap;
+    public int currentMapIndex;
 
     public SaveGame()
     {
@@ -76,6 +78,7 @@ public class SaveGame
         highKills = 0;
         gold = 0;
         totalGold = 0;
+        totalPearls = 0;
         lastSaved = DateTime.MinValue;
         dateStarted = DateTime.Now;
         totalTimePlayed = 0;

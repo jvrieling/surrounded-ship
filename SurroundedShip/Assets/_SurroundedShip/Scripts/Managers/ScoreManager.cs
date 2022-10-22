@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using System;
 
 /// <summary>
 /// Manages the scores for the current game, then sends them over to the save game to be saved to a file.
@@ -16,6 +17,12 @@ using UnityEngine.Analytics;
 public class ScoreManager : MonoBehaviour
 {
     const float MIN_TIME_BETWEEN_SPAWNS = 0.15f;
+
+    public static Action<int> OnGoldEarned;
+    public static Action<int> OnScoreEarned;
+    public static Action<int> OnKillEarned;
+    public static Action<int> OnDamageTaken;
+    public static Action<float> OnDifficultyIncrease;
 
     public int score;
     public int hp = 100;
@@ -31,7 +38,6 @@ public class ScoreManager : MonoBehaviour
     public GameObject spawner;
 
     public float timeBetweenSpawns = 1;
-
 
     private void Awake()
     {
@@ -88,6 +94,7 @@ public class ScoreManager : MonoBehaviour
             {
                 difficultyIncrementTimer = 0;
                 difficulty += difficultyIncrement;
+                OnDifficultyIncrease?.Invoke(difficultyIncrement);
                 if ((Mathf.Round(difficulty * 10) / 10) % 20 == 0)
                 {
                     spawner.GetComponent<CircleSpawner>().SpawnBoss();
@@ -98,15 +105,17 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
+        OnScoreEarned?.Invoke(amount);
     }
     public void AddGold(int amount)
     {
         gold += amount;
+        OnGoldEarned?.Invoke(amount);
     }
     public void ReduceHealth(int amount)
     {
         hp -= amount;
-
+        OnDamageTaken?.Invoke(amount);
 
         if (hp <= 0)
         {
@@ -136,6 +145,7 @@ public class ScoreManager : MonoBehaviour
     public void AddKill()
     {
         kills++;
+        OnKillEarned?.Invoke(1);
     }
 
     public void ForceGameEnd()
