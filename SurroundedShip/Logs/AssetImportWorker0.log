@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2021.3/staging' branch; Version is '2021.3.6f1 (7da38d85baf6) revision 8233869'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 10  (10.0.19043) 64bit Core' Language: 'en' Physical Memory: 16345 MB
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'en' Physical Memory: 16345 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -15,7 +15,7 @@ X:/Unity/Projects/Surrounded-Ship/SurroundedShip
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50923
+50206
 Successfully changed project path to: X:/Unity/Projects/Surrounded-Ship/SurroundedShip
 X:/Unity/Projects/Surrounded-Ship/SurroundedShip
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ X:/Unity/Projects/Surrounded-Ship/SurroundedShip
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 210.08 ms, found 6 plugins.
+Refreshing native plugins compatible for Editor in 220.91 ms, found 6 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.6f1 (7da38d85baf6)
 [Subsystems] Discovering subsystems at path X:/Unity/Installs/2021.3.6f1/Editor/Data/Resources/UnitySubsystems
@@ -63,46 +63,538 @@ Initialize mono
 Mono path[0] = 'X:/Unity/Installs/2021.3.6f1/Editor/Data/Managed'
 Mono path[1] = 'X:/Unity/Installs/2021.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'X:/Unity/Installs/2021.3.6f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56572
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56376
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: X:/Unity/Installs/2021.3.6f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: X:/Unity/Installs/2021.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.005011 seconds.
+Registered in 0.006884 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 85.02 ms, found 6 plugins.
+Refreshing native plugins compatible for Editor in 134.12 ms, found 6 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.907 seconds
+- Completed reload, in  1.564 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1908ms)
-		BeginReloadAssembly (229ms)
+	ReloadAssembly (1565ms)
+		BeginReloadAssembly (455ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (2ms)
-		EndReloadAssembly (1199ms)
-			LoadAssemblies (233ms)
+			CreateAndSetChildDomain (10ms)
+		EndReloadAssembly (923ms)
+			LoadAssemblies (446ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (664ms)
+			SetupTypeCache (226ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (42ms)
-			SetupLoadedEditorAssemblies (408ms)
+			RebuildScriptCaches (50ms)
+			SetupLoadedEditorAssemblies (549ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (102ms)
+				InitializePlatformSupportModulesInManaged (137ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (86ms)
+				RefreshPlugins (135ms)
 				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (144ms)
-				ProcessInitializeOnLoadMethodAttributes (74ms)
+				ProcessInitializeOnLoadAttributes (192ms)
+				ProcessInitializeOnLoadMethodAttributes (83ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.019954 seconds.
-Android Extension - Scanning For ADB Devices 5105 ms
+Registered in 0.021292 seconds.
 Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 114.81 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+GPGSUpgrader start
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+GooglePlayGames.Editor.GPGSUpgrader:.cctor () (at Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs:38)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs Line: 38)
+
+GPGSUpgrader done
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+GooglePlayGames.Editor.GPGSUpgrader:.cctor () (at Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs:57)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs Line: 57)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  2.605 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2606ms)
+		BeginReloadAssembly (303ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (9ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (153ms)
+		EndReloadAssembly (2089ms)
+			LoadAssemblies (158ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (440ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (364ms)
+			SetupLoadedEditorAssemblies (1040ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (21ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (115ms)
+				BeforeProcessingInitializeOnLoad (146ms)
+				ProcessInitializeOnLoadAttributes (576ms)
+				ProcessInitializeOnLoadMethodAttributes (173ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Refreshing native plugins compatible for Editor in 2.65 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3722 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 195 unused Assets / (358.8 KB). Loaded Objects now: 4034.
+Memory consumption went from 138.8 MB to 138.4 MB.
+Total: 8.458000 ms (FindLiveObjects: 0.502400 ms CreateObjectMapping: 0.371900 ms MarkObjects: 7.333400 ms  DeleteObjects: 0.248900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 15718.628497 seconds.
+  path: Assets/_SurroundedShip/Scenes/sc_MainMenu.unity
+  artifactKey: Guid(1d2e2d3ef72ee694a9d9a53aca8780a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Scenes/sc_MainMenu.unity using Guid(1d2e2d3ef72ee694a9d9a53aca8780a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18965df00639cf88a4c949eea98b08ab') in 0.017240 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1367.213794 seconds.
+  path: Assets/_SurroundedShip/Prefabs/Maps/TreasureMapScreen.prefab
+  artifactKey: Guid(9e9300c194c326847a67f822724d3757) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/Maps/TreasureMapScreen.prefab using Guid(9e9300c194c326847a67f822724d3757) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b64dba458e6379a686e4b65a2f76751') in 0.177064 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.017669 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 3.15 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+GPGSUpgrader start
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+GooglePlayGames.Editor.GPGSUpgrader:.cctor () (at Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs:38)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs Line: 38)
+
+GPGSUpgrader done
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+GooglePlayGames.Editor.GPGSUpgrader:.cctor () (at Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs:57)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs Line: 57)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  2.368 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2368ms)
+		BeginReloadAssembly (182ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (58ms)
+		EndReloadAssembly (2054ms)
+			LoadAssemblies (125ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (567ms)
+			ReleaseScriptCaches (11ms)
+			RebuildScriptCaches (137ms)
+			SetupLoadedEditorAssemblies (1093ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (47ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (4ms)
+				BeforeProcessingInitializeOnLoad (187ms)
+				ProcessInitializeOnLoadAttributes (702ms)
+				ProcessInitializeOnLoadMethodAttributes (144ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (1ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (14ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 28.31 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3695 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 189 unused Assets / (333.4 KB). Loaded Objects now: 4037.
+Memory consumption went from 138.2 MB to 137.9 MB.
+Total: 6.378400 ms (FindLiveObjects: 0.337100 ms CreateObjectMapping: 0.298800 ms MarkObjects: 5.573700 ms  DeleteObjects: 0.167500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 406.436677 seconds.
+  path: Assets/_SurroundedShip/Prefabs/Maps/TreasureMapScreen.prefab
+  artifactKey: Guid(9e9300c194c326847a67f822724d3757) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/Maps/TreasureMapScreen.prefab using Guid(9e9300c194c326847a67f822724d3757) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5bc8f5399fa0537a7626a681de3d389') in 0.081586 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 26.434269 seconds.
+  path: Assets/_SurroundedShip/Prefabs/Maps/Map 1.prefab
+  artifactKey: Guid(ac594f55563b87b4596198396d91de0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/Maps/Map 1.prefab using Guid(ac594f55563b87b4596198396d91de0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3351c1a0f61213a64c18c5c7e779b882') in 0.027369 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/_SurroundedShip/Prefabs/Maps/Map.prefab
+  artifactKey: Guid(f5d0831024d369e4c9c24929596db632) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/Maps/Map.prefab using Guid(f5d0831024d369e4c9c24929596db632) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '28aa5c00fa906742cb4d4248b08b022b') in 0.022369 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.180499 seconds.
+  path: Assets/_SurroundedShip/Prefabs/Maps/Map 1.prefab
+  artifactKey: Guid(ac594f55563b87b4596198396d91de0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/Maps/Map 1.prefab using Guid(ac594f55563b87b4596198396d91de0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3d565374d852ad1b3e4219122e1c490') in 0.014010 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/_SurroundedShip/Prefabs/Maps/Map.prefab
+  artifactKey: Guid(f5d0831024d369e4c9c24929596db632) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/Maps/Map.prefab using Guid(f5d0831024d369e4c9c24929596db632) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cbabd7ef84844ed0aa8ab9979afd22e5') in 0.013580 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 233.693087 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/PlayButton.prefab
+  artifactKey: Guid(5ecb680495d75a04b87f7c26f11a11cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/PlayButton.prefab using Guid(5ecb680495d75a04b87f7c26f11a11cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f72dfb11c9dd011917d960ad5328adf') in 0.052514 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21.764147 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Button_Base.prefab
+  artifactKey: Guid(5ecb680495d75a04b87f7c26f11a11cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Button_Base.prefab using Guid(5ecb680495d75a04b87f7c26f11a11cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f45bec32b3078ef4df29c7b1f7c310f9') in 0.039118 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 33.776383 seconds.
+  path: Assets/_SurroundedShip/Sprites/UI/2.png
+  artifactKey: Guid(c6e9a08cf34abc5448533afd4e4465e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/UI/2.png using Guid(c6e9a08cf34abc5448533afd4e4465e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11c69fc98b665c428f133e9244627b22') in 0.125355 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.012556 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Button_Base.prefab
+  artifactKey: Guid(5ecb680495d75a04b87f7c26f11a11cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Button_Base.prefab using Guid(5ecb680495d75a04b87f7c26f11a11cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94b488ec7678037576dcdf91299a7637') in 0.012648 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 427.506197 seconds.
+  path: Assets/_SurroundedShip/Sprites/UI/bg 1.png
+  artifactKey: Guid(18e957ec4d3494c4285bc94b6e734656) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/UI/bg 1.png using Guid(18e957ec4d3494c4285bc94b6e734656) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50495c6c83cdb7aeb40ec751d0daabe0') in 0.151686 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.422268 seconds.
+  path: Assets/_SurroundedShip/Sprites/UI/bg 1.png
+  artifactKey: Guid(18e957ec4d3494c4285bc94b6e734656) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/UI/bg 1.png using Guid(18e957ec4d3494c4285bc94b6e734656) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12b261565c92581b6c627f893a0c2c54') in 0.284419 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.454149 seconds.
+  path: Assets/_SurroundedShip/Sprites/UI/2.png
+  artifactKey: Guid(c6e9a08cf34abc5448533afd4e4465e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/UI/2.png using Guid(c6e9a08cf34abc5448533afd4e4465e4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c6c723a4fd93a8e615cb470c2220fb4') in 0.117849 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 56.971144 seconds.
+  path: Assets/_SurroundedShip/Sprites/UI/table 1.png
+  artifactKey: Guid(56ec51e716b057647b683f0d4aab1513) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/UI/table 1.png using Guid(56ec51e716b057647b683f0d4aab1513) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '696ced33117d0b609f55f2895b75fea6') in 0.052868 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.783618 seconds.
+  path: Assets/_SurroundedShip/Sprites/UI/table 1.png
+  artifactKey: Guid(56ec51e716b057647b683f0d4aab1513) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/UI/table 1.png using Guid(56ec51e716b057647b683f0d4aab1513) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '068cf18028c3700e9f5ba1ff429c6ddb') in 0.086114 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1137.245702 seconds.
+  path: Assets/_SurroundedShip/Sprites/video-57-64.png
+  artifactKey: Guid(3a3a19b6e7a444d44986677bb434767b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/video-57-64.png using Guid(3a3a19b6e7a444d44986677bb434767b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4045b6a7b690c1d6a0d103a30ba5aab') in 0.022146 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.751447 seconds.
+  path: Assets/_SurroundedShip/Sprites/video-57-64.png
+  artifactKey: Guid(3a3a19b6e7a444d44986677bb434767b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/video-57-64.png using Guid(3a3a19b6e7a444d44986677bb434767b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '702ff2f640ab59015fc1c09d468994c3') in 0.026164 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 106.657602 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Text.prefab
+  artifactKey: Guid(5d9adad23d73c9341a9280f9206979da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Text.prefab using Guid(5d9adad23d73c9341a9280f9206979da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0bcf13aa56770398064b2ca6eb21cb0') in 0.016660 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 23.092181 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Text.prefab
+  artifactKey: Guid(5d9adad23d73c9341a9280f9206979da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Text.prefab using Guid(5d9adad23d73c9341a9280f9206979da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3b8e7fecc31e5ad0600a37a6671531c') in 0.011192 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 245.120585 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Text.prefab
+  artifactKey: Guid(5d9adad23d73c9341a9280f9206979da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Text.prefab using Guid(5d9adad23d73c9341a9280f9206979da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '354e0b21b5337f4ddcf5eb6dc9ed5a60') in 0.014802 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 16.757607 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Quest 1.prefab
+  artifactKey: Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Quest 1.prefab using Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e2b34c04bea114f6d6fd7187bdeb1cc') in 0.015939 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.587317 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Quest.prefab
+  artifactKey: Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Quest.prefab using Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '91b0f873d7c93d7414df64c19c5c3779') in 0.017460 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 105.051616 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Quest.prefab
+  artifactKey: Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Quest.prefab using Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dd8a670109f2e2b34ce68ad08e3dc64') in 0.011884 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 178.086858 seconds.
+  path: Assets/_SurroundedShip/Sprites/pearl-clipart-lg.png
+  artifactKey: Guid(c45ea55aa83adeb4ba71f8ea6f1b54d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/pearl-clipart-lg.png using Guid(c45ea55aa83adeb4ba71f8ea6f1b54d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f6b48d6902111a599d8102750e412d4') in 0.046579 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.149630 seconds.
+  path: Assets/_SurroundedShip/Sprites/pearl-clipart-lg.png
+  artifactKey: Guid(c45ea55aa83adeb4ba71f8ea6f1b54d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/pearl-clipart-lg.png using Guid(c45ea55aa83adeb4ba71f8ea6f1b54d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9847a9c347bc2297fc66cc5bc6cc20b5') in 0.172102 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.056281 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/PearlIcon.prefab
+  artifactKey: Guid(fa88b0aad52b09f4cb0ea6e5d41279a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/PearlIcon.prefab using Guid(fa88b0aad52b09f4cb0ea6e5d41279a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef3051f2a77c7c58cd46687653ea02c5') in 0.019439 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.620871 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Quest.prefab
+  artifactKey: Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Quest.prefab using Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac53a7a5fe4b31198d11330b414df2cb') in 0.009189 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.367802 seconds.
+  path: Assets/_SurroundedShip/Sprites/Pearl.png
+  artifactKey: Guid(c45ea55aa83adeb4ba71f8ea6f1b54d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Sprites/Pearl.png using Guid(c45ea55aa83adeb4ba71f8ea6f1b54d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '559a044063726a255215e824c05de14c') in 0.150963 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.139871 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Bottle.prefab
+  artifactKey: Guid(a80078fc389950946868ebf08d57d14f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Bottle.prefab using Guid(a80078fc389950946868ebf08d57d14f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc12f0dd96e337205889bc9dbd3df0e1') in 0.069529 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Pirate2.prefab
+  artifactKey: Guid(87e38b30c56314a438ae1827fe6b7d37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Pirate2.prefab using Guid(87e38b30c56314a438ae1827fe6b7d37) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90d4029f874e56c0d44b0aa9bb30537f') in 0.034595 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Pirate1.prefab
+  artifactKey: Guid(3e3bbad0d3bc2f540bea5a8860749fe5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Pirate1.prefab using Guid(3e3bbad0d3bc2f540bea5a8860749fe5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34caa3f27c14c32a5dc8dd824b01ea59') in 0.035159 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Bottle3.prefab
+  artifactKey: Guid(417f1b63bfbb2f043abbe68d1c0be178) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Bottle3.prefab using Guid(417f1b63bfbb2f043abbe68d1c0be178) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33ff9b6004900924e07b1f95316a5e58') in 0.046866 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_WoodDebris.prefab
+  artifactKey: Guid(7fb188c92b8b6f8459e894f84a9e2430) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_WoodDebris.prefab using Guid(7fb188c92b8b6f8459e894f84a9e2430) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00d35b8e95fcced9c6fc934cff3ae561') in 0.033119 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Pirate3.prefab
+  artifactKey: Guid(f5ee7cbeb29c54141bf93f26693c3c5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_Pirate3.prefab using Guid(f5ee7cbeb29c54141bf93f26693c3c5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c6e885ae435318fb02b2ad20199fe23') in 0.029230 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_WoodDebris2.prefab
+  artifactKey: Guid(32be6567d56ba894fb54d438a223ed3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_WoodDebris2.prefab using Guid(32be6567d56ba894fb54d438a223ed3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abd5bb8cf77830d63db2e79722d8932c') in 0.030811 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_DebrisSpawner.prefab
+  artifactKey: Guid(466ee65db52396c488e8dd6dcacef446) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_DebrisSpawner.prefab using Guid(466ee65db52396c488e8dd6dcacef446) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db6a3619910803543eb455e44b28eff3') in 0.020472 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_WoodFlyingParticle.prefab
+  artifactKey: Guid(385faa34d59402e40bdde8adf376dcd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_WoodFlyingParticle.prefab using Guid(385faa34d59402e40bdde8adf376dcd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb52436dc4b7fd6db8deb0cd26f70c2e') in 0.034937 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_CannonballHitParticle.prefab
+  artifactKey: Guid(beb7cc1655553dc48859a4ab5c30d2af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/pre_CannonballHitParticle.prefab using Guid(beb7cc1655553dc48859a4ab5c30d2af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5621a5ee9a30abc654a4117342c64fb4') in 0.022338 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/_SurroundedShip/Prefabs/ParticlePrefabs/StunParticle.prefab
+  artifactKey: Guid(cd19fb07e517fe34c80911bf7d174799) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/ParticlePrefabs/StunParticle.prefab using Guid(cd19fb07e517fe34c80911bf7d174799) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2cc5a6cde491b8c77a90d79700812435') in 0.022367 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/PearlIcon.prefab
+  artifactKey: Guid(fa88b0aad52b09f4cb0ea6e5d41279a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/PearlIcon.prefab using Guid(fa88b0aad52b09f4cb0ea6e5d41279a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '340ec58de2f8b47f9ee1494daa5ea779') in 0.006245 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Quest.prefab
+  artifactKey: Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Quest.prefab using Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '816ed88d232495c8953771d056c61fd8') in 0.006666 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 57.775886 seconds.
+  path: Assets/_SurroundedShip/Prefabs/UI/Quest.prefab
+  artifactKey: Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Prefabs/UI/Quest.prefab using Guid(7da9ea8ad3d1a964f82c3a53e5113cd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15186218c389a99d5745803bf6f84372') in 0.007846 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 579.456974 seconds.
+  path: Assets/_SurroundedShip/Scripts/Maps/QuestHolder.cs
+  artifactKey: Guid(058ca032ad3c57848a560d17173c0a68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_SurroundedShip/Scripts/Maps/QuestHolder.cs using Guid(058ca032ad3c57848a560d17173c0a68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb3497da8e69eb7228d43ffc8abe7281') in 0.144981 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.014406 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 1.74 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+GPGSUpgrader start
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+GooglePlayGames.Editor.GPGSUpgrader:.cctor () (at Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs:38)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs Line: 38)
+
+GPGSUpgrader done
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+GooglePlayGames.Editor.GPGSUpgrader:.cctor () (at Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs:57)
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+(Filename: Assets/GooglePlayGames/com.google.play.games/Editor/GPGSUpgrader.cs Line: 57)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  2.243 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2244ms)
+		BeginReloadAssembly (494ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (14ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (121ms)
+		EndReloadAssembly (1577ms)
+			LoadAssemblies (328ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (369ms)
+			ReleaseScriptCaches (3ms)
+			RebuildScriptCaches (223ms)
+			SetupLoadedEditorAssemblies (668ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (27ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (110ms)
+				ProcessInitializeOnLoadAttributes (430ms)
+				ProcessInitializeOnLoadMethodAttributes (94ms)
+				AfterProcessingInitializeOnLoad (5ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 29.06 ms, found 6 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3696 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 190 unused Assets / (334.0 KB). Loaded Objects now: 4061.
+Memory consumption went from 142.7 MB to 142.4 MB.
+Total: 4.350400 ms (FindLiveObjects: 0.508800 ms CreateObjectMapping: 0.204400 ms MarkObjects: 3.397200 ms  DeleteObjects: 0.238800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

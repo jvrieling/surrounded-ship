@@ -54,7 +54,9 @@ public class MapController : MonoBehaviour
 
         chosenMap = chosenMap != null ? chosenMap : possibleMapPrefabs[0];
 
-        currentMap = Instantiate(chosenMap, Vector3.zero, Quaternion.identity, panel.transform);
+        Vector2 position = new Vector2(Screen.width / 2, Screen.height / 2);
+
+        currentMap = Instantiate(chosenMap, position, Quaternion.identity, panel.transform);
     }
 
     private Map GetRandomMap()
